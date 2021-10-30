@@ -1,4 +1,4 @@
-package com.project.ccc_shop.entity;
+package com.project.ccc_shop.product.entity;
 
 import java.util.UUID;
 
@@ -10,8 +10,5 @@ public class Product {
     private int price;
     private Category category;
     private String pictureURL;
-
-
-
 
 }
