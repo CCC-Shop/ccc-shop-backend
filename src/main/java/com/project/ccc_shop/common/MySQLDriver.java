@@ -8,19 +8,19 @@ public class MySQLDriver {
     private final String url;
     private final String user;
     private final String password;
-//    private final String driver;
+    private final String driver;
 
     public MySQLDriver() {
-//        this.url = "jdbc:mysql://127.0.0.1:3306/ccc_shop?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true";
-        this.url = "jdbc:mariadb://localhost:5000/ccc_shop";
+        this.url = "jdbc:mariadb://127.0.0.1:3306/ccc_shop?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true";
+//        this.url = "jdbc:mariadb://localhost:3306/ccc_shop";
         this.user = "root";
         this.password = "root";
-//        this.driver = "org.mariadb.jdbc.Driver";
-//        try {
-//            Class.forName(driver);
-//        } catch (ClassNotFoundException e){
-//            e.printStackTrace();
-//        }
+        this.driver = "org.mariadb.jdbc.Driver";
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     public Connection getConnection() throws SQLException {

@@ -23,11 +23,6 @@ public class CreateProductUseCase implements UseCase<CreateProductInput, CreateP
     public void execute(CreateProductInput input, CreateProductOutput output) {
         id = UUID.randomUUID().toString();
         try(Connection connection = this.mySQLDriver.getConnection()) {
-            Statement s = connection.createStatement();
-            String sql = "CREATE DATABASE ccc_shop";
-            s.executeUpdate(sql);
-            System.out.println("Database created successfully...");
-
             try (PreparedStatement stmt = connection.prepareStatement(
                     "INSERT `product` (`id`, `name`, `quantity`, `category`, `size`, `price`, `description`, `pictureURL` )" +
                             " VALUES (?,?,?,?,?,?,?)"
