@@ -25,33 +25,30 @@ public class CreateProductUseCase implements UseCase<CreateProductInput, CreateP
 
 
         try(Connection connection = this.mySQLDriver.getConnection()) {
-            try (PreparedStatement stmt = connection.prepareStatement(
-                    "CREATE TABLE IF NOT EXISTS `product` (" +
-                            "  `id` int(6) NOT NULL," +
+            try {
+                Statement stmt = connection.createStatement();
+
+                String sql = "CREATE TABLE IF NOT EXISTS `product` (" +
+                            "  `id` varchar(100) NOT NULL," +
                             "  `name` varchar(100) NOT NULL," +
                             "  `quantity` int(11) NOT NULL," +
                             "  `category` varchar(100) NOT NULL," +
-                            "  `size` varchar(5) NOT NULL," +
                             "  `price` float NOT NULL," +
                             "  `description` varchar(100) DEFAULT NULL," +
                             "  `pictureURL` varchar(500) DEFAULT NULL," +
                             "  PRIMARY KEY (`id`)," +
                             "  UNIQUE KEY `id_UNIQUE` (`id`)" +
-                            ");"
-            )) {
-                stmt.setString(1, id);
-                stmt.setString(2, input.getName());
-                stmt.setInt(3, input.getQuantity());
-                stmt.setString(4, input.getCategory().toString());
-                stmt.setInt(5, input.getPrice());
-                stmt.setString(6, input.getDescription());
-                stmt.setString(7, input.getPictureURL());
+                            ");";
 
-                stmt.executeUpdate();
+                stmt.executeUpdate(sql);
+                System.out.println("Created table in given database...");
+            } catch(SQLException e){
+                //Handle errors for JDBC
+                e.printStackTrace();
             }
 
             try (PreparedStatement stmt = connection.prepareStatement(
-                    "INSERT `product` (`id`, `name`, `quantity`, `category`, `size`, `price`, `description`, `pictureURL` )" +
+                    "INSERT `product` (`id`, `name`, `quantity`, `category`, `price`, `description`, `pictureURL` )" +
                             " VALUES (?,?,?,?,?,?,?)"
             )) {
                 stmt.setString(1, id);
@@ -64,6 +61,7 @@ public class CreateProductUseCase implements UseCase<CreateProductInput, CreateP
 
                 stmt.executeUpdate();
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
