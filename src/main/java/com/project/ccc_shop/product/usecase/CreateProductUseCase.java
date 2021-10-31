@@ -23,7 +23,6 @@ public class CreateProductUseCase implements UseCase<CreateProductInput, CreateP
     public void execute(CreateProductInput input, CreateProductOutput output) {
         id = UUID.randomUUID().toString();
 
-
         try(Connection connection = this.mySQLDriver.getConnection()) {
             try {
                 Statement stmt = connection.createStatement();
@@ -41,7 +40,7 @@ public class CreateProductUseCase implements UseCase<CreateProductInput, CreateP
                             ");";
 
                 stmt.executeUpdate(sql);
-                System.out.println("Created table in given database...");
+                System.out.println("Created table in ccc_shop");
             } catch(SQLException e){
                 //Handle errors for JDBC
                 e.printStackTrace();

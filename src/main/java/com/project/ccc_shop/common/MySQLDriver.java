@@ -11,7 +11,13 @@ public class MySQLDriver {
     private final String driver;
 
     public MySQLDriver() {
-        this.url = "jdbc:mariadb://127.0.0.1:3306/ccc_shop?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true";
+        this.url = "jdbc:mariadb://127.0.0.1:3306/ccc_shop" +
+                "?useUnicode=true" +
+                "&useJDBCCompliantTimezoneShift=true" +
+                "&useLegacyDatetimeCode=false" +
+                "&serverTimezone=UTC" +
+                "&characterEncoding=UTF-8" +
+                "&createDatabaseIfNotExist=true";
 //        this.url = "jdbc:mariadb://localhost:3306/ccc_shop";
         this.user = "root";
         this.password = "root";
