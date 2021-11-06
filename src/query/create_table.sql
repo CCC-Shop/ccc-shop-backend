@@ -2,34 +2,36 @@
 CREATE DATABASE IF NOT EXISTS ccc_shop;
 USE ccc_shop;
 
-# -- Table structure for table `user`
-# CREATE TABLE IF NOT EXISTS `user` (
-#  `id` int(6) NOT NULL AUTO_INCREMENT,
-#  `password` varchar(100) NOT NULL,
-#  `fullname` varchar(100) NOT NULL,
-#  `username` varchar(100) NOT NULL,
-#  `birthday` varchar(10) NOT NULL,
-#  `address` varchar(100) NOT NULL,
-#  `phoneNumber` varchar(10) NOT NULL,
-#  `email` varchar(100) NOT NULL,
-#  PRIMARY KEY(`id`),
-#  UNIQUE KEY `id_UNIQUE` (`id`),
-#  UNIQUE KEY `username_UNIQUE` (`username`)
-# );
+-- Table structure for table `user`
+CREATE TABLE IF NOT EXISTS `user` (
+    `id` int(6) NOT NULL AUTO_INCREMENT,
+    `username` varchar(30) NOT NULL,
+    `identity` varchar(20) NOT NULL,
+    `password` varchar(30) NOT NULL,
+    `fullname` varchar(100) NOT NULL,
+    `phone` int(6) NOT NULL,
+    `email` varchar(100) NOT NULL,
+    `credit_card` int(20),
+    `address` varchar(100) NOT NULL,
+    PRIMARY KEY(`id`),
+    UNIQUE KEY `id_UNIQUE` (`id`),
+    UNIQUE KEY `username_UNIQUE` (`username`)
+);
 
-# -- Table structure for table `product`
-# CREATE TABLE IF NOT EXISTS `product` (
-#   `id` int(6) NOT NULL AUTO_INCREMENT,
-#   `name` varchar(100) NOT NULL,
-#   `quantity` int(11) NOT NULL,
-#   `category` varchar(100) NOT NULL,
-#   `size` varchar(5) NOT NULL,
-#   `price` float NOT NULL,
-#   `description` varchar(100) DEFAULT NULL,
-#   `pictureURL` varchar(500) DEFAULT NULL,
-#   PRIMARY KEY (`id`),
-#   UNIQUE KEY `id_UNIQUE` (`id`)
-# );
+-- Table structure for table `product`
+CREATE TABLE IF NOT EXISTS `product` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL,
+  `category` varchar(5) NOT NULL,
+  `price` int(20) NOT NULL,
+  `stock` int(6) NOT NULL,
+  `warehouse_address` varchar(100) NOT NULL,
+  `description` varchar(500) DEFAULT NULL,
+  `pictureURL` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`product_id`)
+--  UNIQUE KEY `id_UNIQUE` (`id`)
+);
+
 --
 -- -- Table structure for table `discount`
 -- CREATE TABLE IF NOT EXISTS `discount` (
