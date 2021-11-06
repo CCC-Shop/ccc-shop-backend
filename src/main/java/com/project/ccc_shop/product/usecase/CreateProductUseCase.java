@@ -23,31 +23,11 @@ public class CreateProductUseCase implements UseCase<CreateProductInput, CreateP
     public void execute(CreateProductInput input, CreateProductOutput output) {
 
         try(Connection connection = this.mySQLDriver.getConnection()) {
-//            try {
-//                Statement stmt = connection.createStatement();
-//
-//                String sql = "CREATE TABLE IF NOT EXISTS `product` (" +
-//                            "  `id` varchar(100) NOT NULL," +
-//                            "  `name` varchar(100) NOT NULL," +
-//                            "  `quantity` int(11) NOT NULL," +
-//                            "  `category` varchar(100) NOT NULL," +
-//                            "  `price` float NOT NULL," +
-//                            "  `description` varchar(100) DEFAULT NULL," +
-//                            "  `pictureURL` varchar(500) DEFAULT NULL," +
-//                            "  PRIMARY KEY (`id`)," +
-//                            "  UNIQUE KEY `id_UNIQUE` (`id`)" +
-//                            ");";
-//
-//                stmt.executeUpdate(sql);
-//                System.out.println("Created table in ccc_shop");
-//            } catch(SQLException e){
-//                //Handle errors for JDBC
-//                e.printStackTrace();
-//            }
-            try (PreparedStatement stmt = connection.prepareStatement(
+
+            PreparedStatement stmt = connection.prepareStatement(
                     "INSERT `product` (`name`, `user_id`, `category`, `price`, `stock`, `warehouse_address`, `description`, `pictureURL` )" +
-                            " VALUES (?,?,?,?,?,?,?,?)"
-            )) {
+                            " VALUES (?,?,?,?,?,?,?,?)");
+
                 stmt.setString(1, input.getName());
                 stmt.setInt(2, input.getUserId());
                 stmt.setString(3, input.getCategory().toString());
@@ -58,7 +38,6 @@ public class CreateProductUseCase implements UseCase<CreateProductInput, CreateP
                 stmt.setString(8, input.getPictureURL());
 
                 stmt.executeUpdate();
-            }
 
         } catch (SQLException e) {
             e.printStackTrace();
