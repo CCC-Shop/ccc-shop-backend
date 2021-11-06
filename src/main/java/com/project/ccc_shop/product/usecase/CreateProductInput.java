@@ -5,9 +5,10 @@ import com.project.ccc_shop.product.entity.Category;
 
 public class CreateProductInput implements Input {
     private String name;
-    private int quantity;
     private Category category;
     private int price;
+    private int stock;
+    private String warehouseAddress;
     private String description;
     private String pictureURL;
 
@@ -17,14 +18,6 @@ public class CreateProductInput implements Input {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public Category getCategory() {
@@ -41,6 +34,22 @@ public class CreateProductInput implements Input {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public String getWarehouseAddress() {
+        return warehouseAddress;
+    }
+
+    public void setWarehouseAddress(String warehouseAddress) {
+        this.warehouseAddress = warehouseAddress;
     }
 
     public String getDescription() {

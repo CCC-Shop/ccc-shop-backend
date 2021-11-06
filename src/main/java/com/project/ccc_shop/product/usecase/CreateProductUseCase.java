@@ -21,40 +21,38 @@ public class CreateProductUseCase implements UseCase<CreateProductInput, CreateP
 
     @Override
     public void execute(CreateProductInput input, CreateProductOutput output) {
-        id = UUID.randomUUID().toString();
 
         try(Connection connection = this.mySQLDriver.getConnection()) {
-            try {
-                Statement stmt = connection.createStatement();
-
-                String sql = "CREATE TABLE IF NOT EXISTS `product` (" +
-                            "  `id` varchar(100) NOT NULL," +
-                            "  `name` varchar(100) NOT NULL," +
-                            "  `quantity` int(11) NOT NULL," +
-                            "  `category` varchar(100) NOT NULL," +
-                            "  `price` float NOT NULL," +
-                            "  `description` varchar(100) DEFAULT NULL," +
-                            "  `pictureURL` varchar(500) DEFAULT NULL," +
-                            "  PRIMARY KEY (`id`)," +
-                            "  UNIQUE KEY `id_UNIQUE` (`id`)" +
-                            ");";
-
-                stmt.executeUpdate(sql);
-                System.out.println("Created table in ccc_shop");
-            } catch(SQLException e){
-                //Handle errors for JDBC
-                e.printStackTrace();
-            }
-
+//            try {
+//                Statement stmt = connection.createStatement();
+//
+//                String sql = "CREATE TABLE IF NOT EXISTS `product` (" +
+//                            "  `id` varchar(100) NOT NULL," +
+//                            "  `name` varchar(100) NOT NULL," +
+//                            "  `quantity` int(11) NOT NULL," +
+//                            "  `category` varchar(100) NOT NULL," +
+//                            "  `price` float NOT NULL," +
+//                            "  `description` varchar(100) DEFAULT NULL," +
+//                            "  `pictureURL` varchar(500) DEFAULT NULL," +
+//                            "  PRIMARY KEY (`id`)," +
+//                            "  UNIQUE KEY `id_UNIQUE` (`id`)" +
+//                            ");";
+//
+//                stmt.executeUpdate(sql);
+//                System.out.println("Created table in ccc_shop");
+//            } catch(SQLException e){
+//                //Handle errors for JDBC
+//                e.printStackTrace();
+//            }
             try (PreparedStatement stmt = connection.prepareStatement(
-                    "INSERT `product` (`id`, `name`, `quantity`, `category`, `price`, `description`, `pictureURL` )" +
+                    "INSERT `product` (`name`, `category`, `price`, `stock`, `warehouse_address`, `description`, `pictureURL` )" +
                             " VALUES (?,?,?,?,?,?,?)"
             )) {
-                stmt.setString(1, id);
-                stmt.setString(2, input.getName());
-                stmt.setInt(3, input.getQuantity());
-                stmt.setString(4, input.getCategory().toString());
-                stmt.setInt(5, input.getPrice());
+                stmt.setString(1, input.getName());
+                stmt.setString(2, input.getCategory().toString());
+                stmt.setInt(3, input.getPrice());
+                stmt.setInt(4, input.getStock());
+                stmt.setString(5, input.getWarehouseAddress());
                 stmt.setString(6, input.getDescription());
                 stmt.setString(7, input.getPictureURL());
 
@@ -64,7 +62,6 @@ public class CreateProductUseCase implements UseCase<CreateProductInput, CreateP
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        output.setId(id);
         output.setName(input.getName());
     }
 }

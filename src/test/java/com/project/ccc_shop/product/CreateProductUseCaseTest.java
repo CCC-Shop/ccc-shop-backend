@@ -7,8 +7,6 @@ import com.project.ccc_shop.product.usecase.CreateProductOutput;
 import com.project.ccc_shop.product.usecase.CreateProductUseCase;
 import org.junit.jupiter.api.Test;
 
-import java.util.UUID;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -21,11 +19,11 @@ public class CreateProductUseCaseTest {
         CreateProductInput input = new CreateProductInput();
         CreateProductOutput output = new CreateProductOutput();
 
-        UUID projectId = UUID.randomUUID();
         input.setName("ipad");
-        input.setQuantity(3);
         input.setCategory(Category.TABLET);
         input.setPrice(20000);
+        input.setStock(3);
+        input.setWarehouseAddress("台北市大安區忠孝東路xxx號");
         input.setDescription("great product in your life");
         input.setPictureURL("https://picsum.photos/200");
 

@@ -4,32 +4,30 @@ USE ccc_shop;
 
 -- Table structure for table `user`
 CREATE TABLE IF NOT EXISTS `user` (
-    `id` int(6) NOT NULL AUTO_INCREMENT,
-    `username` varchar(30) NOT NULL,
-    `identity` varchar(20) NOT NULL,
-    `password` varchar(30) NOT NULL,
-    `fullname` varchar(100) NOT NULL,
-    `phone` int(6) NOT NULL,
+    `id` int(10) PRIMARY KEY AUTO_INCREMENT,
+    `username` varchar(255) NOT NULL,
+    `identity` varchar(30) NOT NULL,
+    `password` varchar(255) NOT NULL,
+    `fullname` varchar(30) NOT NULL,
+    `phone` varchar(30) NOT NULL,
     `email` varchar(100) NOT NULL,
     `credit_card` int(20),
-    `address` varchar(100) NOT NULL,
-    PRIMARY KEY(`id`),
-    UNIQUE KEY `id_UNIQUE` (`id`),
-    UNIQUE KEY `username_UNIQUE` (`username`)
+    `address` varchar(255) NOT NULL,
+    CONSTRAINT `username_UNIQUE` UNIQUE (`username`)
 );
 
 -- Table structure for table `product`
 CREATE TABLE IF NOT EXISTS `product` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) NOT NULL,
-  `category` varchar(5) NOT NULL,
-  `price` int(20) NOT NULL,
-  `stock` int(6) NOT NULL,
-  `warehouse_address` varchar(100) NOT NULL,
-  `description` varchar(500) DEFAULT NULL,
-  `pictureURL` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`product_id`)
---  UNIQUE KEY `id_UNIQUE` (`id`)
+    `id` int(10) PRIMARY KEY AUTO_INCREMENT,
+    `user_id` int(10) NOT NULL,
+    `name` varchar(255) NOT NULL,
+    `category` varchar(255) NOT NULL,
+    `price` int(20) NOT NULL,
+    `stock` int(6) NOT NULL,
+    `warehouse_address` varchar(100) NOT NULL,
+    `description` varchar(500) DEFAULT NULL,
+    `pictureURL` varchar(500) DEFAULT NULL,
+    CONSTRAINT `user_id` FOREIGN KEY (user_id) REFERENCES `user` (`id`)
 );
 
 --
