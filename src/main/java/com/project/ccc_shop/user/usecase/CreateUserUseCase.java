@@ -1,27 +1,24 @@
-package com.project.ccc_shop.product.usecase;
+package com.project.ccc_shop.user.usecase;
 
 import com.project.ccc_shop.common.MySQLDriver;
 import com.project.ccc_shop.common.UseCase;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.UUID;
 
-@Service
-public class CreateProductUseCase implements UseCase<CreateProductInput, CreateProductOutput> {
-
+public class CreateUserUseCase implements UseCase<CreateUserInput, CreateUserOutput> {
+    @Autowired
     private MySQLDriver mySQLDriver;
+    private String id;
 
-    public CreateProductUseCase(MySQLDriver mySQLDriver) {
+    public CreateUserUseCase(MySQLDriver mySQLDriver) {
         this.mySQLDriver = mySQLDriver;
     }
 
     @Override
-    public void execute(CreateProductInput input, CreateProductOutput output) {
+    public void execute(CreateUserInput input, CreateUserOutput output) {
 
         try(Connection connection = this.mySQLDriver.getConnection()) {
 

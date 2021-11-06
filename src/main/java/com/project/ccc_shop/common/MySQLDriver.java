@@ -1,9 +1,12 @@
 package com.project.ccc_shop.common;
 
+import org.springframework.stereotype.Service;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+@Service
 public class MySQLDriver {
     private final String url;
     private final String user;
