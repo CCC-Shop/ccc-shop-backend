@@ -20,6 +20,7 @@ public class CreateProductUseCaseTest {
         CreateProductOutput output = new CreateProductOutput();
 
         input.setName("ipad");
+        input.setUserId(1);
         input.setCategory(Category.TABLET);
         input.setPrice(20000);
         input.setStock(3);

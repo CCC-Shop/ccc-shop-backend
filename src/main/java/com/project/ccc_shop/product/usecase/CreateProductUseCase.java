@@ -45,16 +45,17 @@ public class CreateProductUseCase implements UseCase<CreateProductInput, CreateP
 //                e.printStackTrace();
 //            }
             try (PreparedStatement stmt = connection.prepareStatement(
-                    "INSERT `product` (`name`, `category`, `price`, `stock`, `warehouse_address`, `description`, `pictureURL` )" +
-                            " VALUES (?,?,?,?,?,?,?)"
+                    "INSERT `product` (`name`, `user_id`, `category`, `price`, `stock`, `warehouse_address`, `description`, `pictureURL` )" +
+                            " VALUES (?,?,?,?,?,?,?,?)"
             )) {
                 stmt.setString(1, input.getName());
-                stmt.setString(2, input.getCategory().toString());
-                stmt.setInt(3, input.getPrice());
-                stmt.setInt(4, input.getStock());
-                stmt.setString(5, input.getWarehouseAddress());
-                stmt.setString(6, input.getDescription());
-                stmt.setString(7, input.getPictureURL());
+                stmt.setInt(2, input.getUserId());
+                stmt.setString(3, input.getCategory().toString());
+                stmt.setInt(4, input.getPrice());
+                stmt.setInt(5, input.getStock());
+                stmt.setString(6, input.getWarehouseAddress());
+                stmt.setString(7, input.getDescription());
+                stmt.setString(8, input.getPictureURL());
 
                 stmt.executeUpdate();
             }

@@ -8,11 +8,10 @@ CREATE TABLE IF NOT EXISTS `user` (
     `username` varchar(255) NOT NULL,
     `identity` varchar(30) NOT NULL,
     `password` varchar(255) NOT NULL,
-    `fullname` varchar(30) NOT NULL,
     `phone` varchar(30) NOT NULL,
     `email` varchar(100) NOT NULL,
-    `credit_card` int(20),
-    `address` varchar(255) NOT NULL,
+    `credit_card` int(20) DEFAULT NULL,
+    `address` varchar(255) DEFAULT NULL,
     CONSTRAINT `username_UNIQUE` UNIQUE (`username`)
 );
 
