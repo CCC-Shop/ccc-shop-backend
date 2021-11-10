@@ -15,7 +15,7 @@ public class CreateProductUseCaseTest {
     public void create_product_use_case() {
         MySQLDriver mySQLDriver = new MySQLDriver();
 
-        CreateProductUseCase createProductBacklogUseCase = new CreateProductUseCase(mySQLDriver);
+        CreateProductUseCase createProductUseCase = new CreateProductUseCase(mySQLDriver);
         CreateProductInput input = new CreateProductInput();
         CreateProductOutput output = new CreateProductOutput();
 
@@ -28,7 +28,7 @@ public class CreateProductUseCaseTest {
         input.setDescription("great product in your life");
         input.setPictureURL("https://picsum.photos/200");
 
-        createProductBacklogUseCase.execute(input, output);
+        createProductUseCase.execute(input, output);
 
         assertNotNull(output.getName());
         assertEquals("ipad", output.getName());

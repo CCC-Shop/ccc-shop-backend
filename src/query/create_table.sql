@@ -10,9 +10,9 @@ CREATE TABLE IF NOT EXISTS `user` (
     `password` varchar(255) NOT NULL,
     `phone` varchar(30) NOT NULL,
     `email` varchar(100) NOT NULL,
-    `credit_card` int(20) DEFAULT NULL,
-    `address` varchar(255) DEFAULT NULL,
-    CONSTRAINT `username_UNIQUE` UNIQUE (`username`)
+    `credit_card` varchar(20) DEFAULT NULL,
+    `address` varchar(255) DEFAULT NULL
+#     CONSTRAINT `username_UNIQUE` UNIQUE (`username`)
 );
 
 -- Table structure for table `product`
@@ -29,19 +29,18 @@ CREATE TABLE IF NOT EXISTS `product` (
     CONSTRAINT `user_id` FOREIGN KEY (user_id) REFERENCES `user` (`id`)
 );
 
---
--- -- Table structure for table `discount`
--- CREATE TABLE IF NOT EXISTS `discount` (
---  `id` int(6) NOT NULL AUTO_INCREMENT,
---  `value` float NOT NULL,
---  `code` varchar(5) NOT NULL,
---  `name` varchar(100) NOT NULL,
---  `startDate` datetime NOT NULL,
---  `endDate` datetime NOT NULL,
---  PRIMARY KEY (`id`),
---  UNIQUE KEY `id_UNIQUE` (`id`),
---  UNIQUE KEY `code_UNIQUE` (`code`)
--- );
+-- Table structure for table `discount`
+# CREATE TABLE IF NOT EXISTS `discount` (
+#     `id` int(6) NOT NULL AUTO_INCREMENT,
+#     `value` float NOT NULL,
+#     `code` varchar(5) NOT NULL,
+#     `name` varchar(100) NOT NULL,
+#     `startDate` datetime NOT NULL,
+#     `endDate` datetime NOT NULL,
+#     PRIMARY KEY (`id`),
+#     UNIQUE KEY `id_UNIQUE` (`id`),
+#     UNIQUE KEY `code_UNIQUE` (`code`)
+# );
 --
 -- -- Table structure for table `like`
 -- CREATE TABLE IF NOT EXISTS `like` (

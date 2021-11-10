@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.UUID;
 
 public class CreateUserUseCase implements UseCase<CreateUserInput, CreateUserOutput> {
     @Autowired
     private MySQLDriver mySQLDriver;
-    private String id;
 
     public CreateUserUseCase(MySQLDriver mySQLDriver) {
         this.mySQLDriver = mySQLDriver;
@@ -23,23 +23,23 @@ public class CreateUserUseCase implements UseCase<CreateUserInput, CreateUserOut
         try(Connection connection = this.mySQLDriver.getConnection()) {
 
             PreparedStatement stmt = connection.prepareStatement(
-                    "INSERT `product` (`name`, `user_id`, `category`, `price`, `stock`, `warehouse_address`, `description`, `pictureURL` )" +
-                            " VALUES (?,?,?,?,?,?,?,?)");
+                    "INSERT `user` (`username`, `identity`, `password`, `phone`, `email`, `credit_card`, `address` )" +
+                            " VALUES (?,?,?,?,?,?,?)");
+            stmt.setString(1, UUID.randomUUID().toString());
 
-                stmt.setString(1, input.getName());
-                stmt.setInt(2, input.getUserId());
-                stmt.setString(3, input.getCategory().toString());
-                stmt.setInt(4, input.getPrice());
-                stmt.setInt(5, input.getStock());
-                stmt.setString(6, input.getWarehouseAddress());
-                stmt.setString(7, input.getDescription());
-                stmt.setString(8, input.getPictureURL());
+                stmt.setString(1, input.getUsername());
+                stmt.setString(2, input.getIdentity().toString());
+                stmt.setString(3, input.getPassword());
+                stmt.setString(4, input.getPhone());
+                stmt.setString(5, input.getEmail());
+                stmt.setString(6, input.getCreditCard());
+                stmt.setString(7, input.getAddress());
 
                 stmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        output.setName(input.getName());
+        output.setUsername(input.getUsername());
     }
 }

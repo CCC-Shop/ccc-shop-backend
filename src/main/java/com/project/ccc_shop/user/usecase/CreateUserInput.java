@@ -1,79 +1,70 @@
 package com.project.ccc_shop.user.usecase;
 
 import com.project.ccc_shop.common.Input;
-import com.project.ccc_shop.product.entity.Category;
+import com.project.ccc_shop.user.usecase.entity.Identity;
 
 public class CreateUserInput implements Input {
-    private String name;
-    private int userId;
-    private Category category;
-    private int price;
-    private int stock;
-    private String warehouseAddress;
-    private String description;
-    private String pictureURL;
+    private String username;
+    private Identity identity;
+    private String password;
+    private String phone;
+    private String email;
+    private String creditCard;
+    private String address;
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public int getUserId() {
-        return userId;
+    public Identity getIdentity() {
+        return identity;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setIdentity(Identity identity) {
+        this.identity = identity;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public int getPrice() {
-        return price;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public int getStock() {
-        return stock;
+    public String getEmail() {
+        return email;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getWarehouseAddress() {
-        return warehouseAddress;
+    public String getCreditCard() {
+        return creditCard;
     }
 
-    public void setWarehouseAddress(String warehouseAddress) {
-        this.warehouseAddress = warehouseAddress;
+    public void setCreditCard(String creditCard) {
+        this.creditCard = creditCard;
     }
 
-    public String getDescription() {
-        return description;
+    public String getAddress() {
+        return address;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getPictureURL() {
-        return pictureURL;
-    }
-
-    public void setPictureURL(String pictureURL) {
-        this.pictureURL = pictureURL;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

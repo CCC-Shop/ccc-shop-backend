@@ -1,6 +1,5 @@
 package com.project.ccc_shop.product.adapter;
 
-
 import com.project.ccc_shop.product.usecase.CreateProductInput;
 import com.project.ccc_shop.product.usecase.CreateProductOutput;
 import com.project.ccc_shop.product.usecase.CreateProductUseCase;
@@ -35,6 +34,7 @@ public class CreateProductController {
         input.setPrice(requestBody.getPrice());
         input.setDescription(requestBody.getDescription());
         input.setPictureURL(requestBody.getPictureURL());
+        input.setWarehouseAddress(requestBody.getWarehouseAddress());
 
         try {
             this.createProductUseCase.execute(input, output);
