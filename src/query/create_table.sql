@@ -30,17 +30,17 @@ CREATE TABLE IF NOT EXISTS `product` (
 );
 
 -- Table structure for table `discount`
-# CREATE TABLE IF NOT EXISTS `discount` (
-#     `id` int(6) NOT NULL AUTO_INCREMENT,
-#     `value` float NOT NULL,
-#     `code` varchar(5) NOT NULL,
-#     `name` varchar(100) NOT NULL,
-#     `startDate` datetime NOT NULL,
-#     `endDate` datetime NOT NULL,
-#     PRIMARY KEY (`id`),
-#     UNIQUE KEY `id_UNIQUE` (`id`),
-#     UNIQUE KEY `code_UNIQUE` (`code`)
-# );
+--# CREATE TABLE IF NOT EXISTS `discount` (
+--#     `id` int(6) NOT NULL AUTO_INCREMENT,
+--#     `value` float NOT NULL,
+--#     `code` varchar(5) NOT NULL,
+--#     `name` varchar(100) NOT NULL,
+--#     `startDate` datetime NOT NULL,
+--#     `endDate` datetime NOT NULL,
+--#     PRIMARY KEY (`id`),
+--#     UNIQUE KEY `id_UNIQUE` (`id`),
+--#     UNIQUE KEY `code_UNIQUE` (`code`)
+--# );
 --
 -- -- Table structure for table `like`
 -- CREATE TABLE IF NOT EXISTS `like` (
@@ -49,27 +49,34 @@ CREATE TABLE IF NOT EXISTS `product` (
 --  CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `user` (`id`),
 --  CONSTRAINT `itemID` FOREIGN KEY (`itemID`) REFERENCES `item` (`id`)
 -- );
---
--- -- Table structure for table `order`
--- CREATE TABLE IF NOT EXISTS `order` (
---  `id` int(6) NOT NULL AUTO_INCREMENT,
---  `orderDate` datetime NOT NULL,
---  `status` int(11) NOT NULL,
---  `discountID` int(6) DEFAULT 1,
---  `orderUserID` int(6) NOT NULL,
---  PRIMARY KEY (`id`),
---  UNIQUE KEY `id_UNIQUE` (`id`),
+
+ -- Table structure for table `order`
+ CREATE TABLE IF NOT EXISTS `order` (
+  `id`               int(10)     PRIMARY KEY AUTO_INCREMENT,
+  `customer_id`      int(10)     NOT NULL,
+  `shipping_fee`     int(5)      NOT NULL,
+  `recipient_name`   varchar(20) NOT NULL,
+  `shipping_address` varchar(255)NOT NULL,
+  `status`           varchar(20) NOT NULL,
+  `payment_method`   varchar(20) NOT NULL,
+  `credit_card_id`   varchar(20) DEFAULT NULL,
+  `order_time`       TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `shipping_time`    TIMESTAMP   NULL ON UPDATE CURRENT_TIMESTAMP,
+  `delivery_time`    TIMESTAMP   NULL ON UPDATE CURRENT_TIMESTAMP,
+  `seasoning_discount_code` int(6)    DEFAULT NULL,
+  `shipping_discount_code`  int(6)    DEFAULT NULL
 --  CONSTRAINT `discountID` FOREIGN KEY (`discountID`) REFERENCES `discount` (`id`),
 --  CONSTRAINT `orderUserID` FOREIGN KEY (`orderUserID`) REFERENCES `user` (`id`)
--- );
--- -- Table structure for table `itemlist`
--- CREATE TABLE IF NOT EXISTS `itemlist` (
---  `orderItemID` int(6) NOT NULL,
---  `orderID` int(6) NOT NULL,
---  `amount` int(11) NOT NULL,
+ );
+
+ -- Table structure for table `order_items`
+ CREATE TABLE IF NOT EXISTS `order_items` (
+  `order_id`    int(10) NOT NULL,
+  `product_id`  int(10) NOT NULL,
+  `quantity`    int(6)  NOT NULL
 --  CONSTRAINT `orderID` FOREIGN KEY (`orderID`) REFERENCES `order` (`id`),
 --  CONSTRAINT `orderItemID` FOREIGN KEY (`orderItemID`) REFERENCES `item` (`id`)
--- );
+ );
 --
 -- -- Table structure for table `rate`
 -- CREATE TABLE IF NOT EXISTS `rate` (

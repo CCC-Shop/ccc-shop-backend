@@ -2,14 +2,8 @@ package com.project.ccc_shop.product.usecase;
 
 import com.project.ccc_shop.common.MySQLDriver;
 import com.project.ccc_shop.common.UseCase;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.UUID;
+import java.sql.*;
 
 @Service
 public class CreateProductUseCase implements UseCase<CreateProductInput, CreateProductOutput> {
