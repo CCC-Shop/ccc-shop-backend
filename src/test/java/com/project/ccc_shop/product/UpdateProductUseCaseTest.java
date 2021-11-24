@@ -2,9 +2,9 @@ package com.project.ccc_shop.product;
 
 import com.project.ccc_shop.common.MySQLDriver;
 import com.project.ccc_shop.product.entity.Category;
-import com.project.ccc_shop.product.usecase.UpdateProductInput;
-import com.project.ccc_shop.product.usecase.UpdateProductOutput;
-import com.project.ccc_shop.product.usecase.UpdateProductUseCase;
+import com.project.ccc_shop.product.usecase.update.UpdateProductInput;
+import com.project.ccc_shop.product.usecase.update.UpdateProductOutput;
+import com.project.ccc_shop.product.usecase.update.UpdateProductUseCase;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

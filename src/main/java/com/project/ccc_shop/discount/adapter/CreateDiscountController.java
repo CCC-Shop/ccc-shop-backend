@@ -37,9 +37,9 @@ public class CreateDiscountController {
 
         try {
             this.createDiscountUseCase.execute(input, output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(output);
     }
 }

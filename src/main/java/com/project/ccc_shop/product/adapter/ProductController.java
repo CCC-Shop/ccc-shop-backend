@@ -1,11 +1,11 @@
 package com.project.ccc_shop.product.adapter;
 
-import com.project.ccc_shop.product.usecase.CreateProductInput;
-import com.project.ccc_shop.product.usecase.CreateProductOutput;
-import com.project.ccc_shop.product.usecase.CreateProductUseCase;
-import com.project.ccc_shop.product.usecase.UpdateProductInput;
-import com.project.ccc_shop.product.usecase.UpdateProductOutput;
-import com.project.ccc_shop.product.usecase.UpdateProductUseCase;
+import com.project.ccc_shop.product.usecase.create.CreateProductInput;
+import com.project.ccc_shop.product.usecase.create.CreateProductOutput;
+import com.project.ccc_shop.product.usecase.create.CreateProductUseCase;
+import com.project.ccc_shop.product.usecase.update.UpdateProductInput;
+import com.project.ccc_shop.product.usecase.update.UpdateProductOutput;
+import com.project.ccc_shop.product.usecase.update.UpdateProductUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/seller")
+@RequestMapping("/api/product")
 public class ProductController {
 
     CreateProductUseCase createProductUseCase;
@@ -31,7 +31,7 @@ public class ProductController {
         this.updateProductUseCase = updateProductUseCase;
     }
 
-    @PostMapping(value = "/add/product")
+    @PostMapping(value = "/add")
     public ResponseEntity<CreateProductOutput> addProduct(@RequestBody CreateProductInput requestBody) {
         CreateProductInput input = new CreateProductInput();
         CreateProductOutput output = new CreateProductOutput();
@@ -47,13 +47,14 @@ public class ProductController {
 
         try {
             this.createProductUseCase.execute(input, output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(output);
     }
 
-    @PostMapping(value = "/update/product")
+    @PostMapping(value = "/update")
     public ResponseEntity<UpdateProductOutput> updateProduct(@RequestBody UpdateProductInput requestBody) {
         UpdateProductInput input = new UpdateProductInput();
         UpdateProductOutput output = new UpdateProductOutput();
@@ -70,10 +71,10 @@ public class ProductController {
 
         try {
             this.updateProductUseCase.execute(input, output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(output);
     }
 
 }

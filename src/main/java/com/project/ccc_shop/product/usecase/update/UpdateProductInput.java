@@ -1,9 +1,10 @@
-package com.project.ccc_shop.product.usecase;
+package com.project.ccc_shop.product.usecase.update;
 
 import com.project.ccc_shop.common.Input;
 import com.project.ccc_shop.product.entity.Category;
 
-public class CreateProductInput implements Input {
+public class UpdateProductInput implements Input {
+    private int id;
     private String name;
     private int userId;
     private Category category;
@@ -12,6 +13,14 @@ public class CreateProductInput implements Input {
     private String warehouseAddress;
     private String description;
     private String pictureURL;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
