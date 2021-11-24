@@ -1,4 +1,4 @@
-package com.project.ccc_shop.product.usecase;
+package com.project.ccc_shop.product.usecase.update;
 
 import com.project.ccc_shop.common.Output;
 

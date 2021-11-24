@@ -55,8 +55,8 @@ CREATE TABLE IF NOT EXISTS `product` (
 --  FOREIGN KEY (order_id) REFERENCES `order` (`id`),
  );
 
----- Table structure for table `order`
---CREATE TABLE IF NOT EXISTS `order` (
+-- Table structure for table `order`
+-- CREATE TABLE IF NOT EXISTS `order` (
 --    `id` int(10) PRIMARY KEY AUTO_INCREMENT,
 --    `customer_id` int(10) NOT NULL,
 --    `total_amount` int(6) NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `product` (
 --    `shipping_time` TIMESTAMP DEFAULT '0000-00-00 00:00:00',
 --    `delivery_time` TIMESTAMP DEFAULT '0000-00-00 00:00:00',
 --    FOREIGN KEY (customer_id) REFERENCES `user` (`id`)
---);
+-- );
 
 -- Table structure for table `shopping_cart`
 CREATE TABLE IF NOT EXISTS `shopping_cart` (
@@ -82,15 +82,15 @@ CREATE TABLE IF NOT EXISTS `shopping_cart` (
     FOREIGN KEY (customer_id) REFERENCES `user` (`id`)
 );
 
----- Table structure for table `order_item`
---CREATE TABLE IF NOT EXISTS `order_item` (
+-- -- Table structure for table `order_item`
+-- CREATE TABLE IF NOT EXISTS `order_item` (
 --    `order_id` int(10),
 --    `product_id` int(10),
 --    `quantity` int(6) NOT NULL,
 --    PRIMARY KEY (order_id, product_id),
 --    FOREIGN KEY (order_id) REFERENCES `order` (`id`),
 --    FOREIGN KEY (product_id) REFERENCES `product` (`id`)
---);
+-- );
 
 -- Table structure for table `manage_order`
 CREATE TABLE IF NOT EXISTS `manage_order` (
@@ -105,6 +105,8 @@ CREATE TABLE IF NOT EXISTS `manage_order` (
 CREATE TABLE IF NOT EXISTS `valuation` (
     `customer_id` int(10),
     `product_id` int(10),
+    `comment` varchar(500) NOT NULL,
+    `rating` int(1) NOT NULL,
     PRIMARY KEY (customer_id, product_id),
     FOREIGN KEY (customer_id) REFERENCES `user` (`id`)
 );

@@ -1,10 +1,8 @@
 package com.project.ccc_shop.user.usecase.adapter;
 
-import com.project.ccc_shop.product.usecase.*;
 import com.project.ccc_shop.user.usecase.CreateUserInput;
 import com.project.ccc_shop.user.usecase.CreateUserOutput;
 import com.project.ccc_shop.user.usecase.CreateUserUseCase;
-import com.project.ccc_shop.user.usecase.entity.Identity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,10 +37,11 @@ public class UserController {
 
         try {
             this.createUserUseCase.execute(input, output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(output);
     }
 
 }

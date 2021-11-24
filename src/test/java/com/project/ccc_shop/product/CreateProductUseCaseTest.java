@@ -2,9 +2,9 @@ package com.project.ccc_shop.product;
 
 import com.project.ccc_shop.common.MySQLDriver;
 import com.project.ccc_shop.product.entity.Category;
-import com.project.ccc_shop.product.usecase.CreateProductInput;
-import com.project.ccc_shop.product.usecase.CreateProductOutput;
-import com.project.ccc_shop.product.usecase.CreateProductUseCase;
+import com.project.ccc_shop.product.usecase.create.CreateProductInput;
+import com.project.ccc_shop.product.usecase.create.CreateProductOutput;
+import com.project.ccc_shop.product.usecase.create.CreateProductUseCase;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,7 +24,7 @@ public class CreateProductUseCaseTest {
         input.setCategory(Category.TABLET);
         input.setPrice(20000);
         input.setStock(3);
-        input.setWarehouseAddress("台北市大安區忠孝東路xxx號");
+        input.setWarehouseAddress("address");
         input.setDescription("great product in your life");
         input.setPictureURL("https://picsum.photos/200");
 

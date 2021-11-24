@@ -27,21 +27,21 @@ public class CreateUserUseCase implements UseCase<CreateUserInput, CreateUserOut
             PreparedStatement stmt = connection.prepareStatement(
                     "INSERT `user` (`username`, `identity`, `password`, `phone`, `email`, `credit_card`, `address` )" +
                             " VALUES (?,?,?,?,?,?,?)");
-            stmt.setString(1, UUID.randomUUID().toString());
 
-                stmt.setString(1, input.getUsername());
-                stmt.setString(2, input.getIdentity().toString());
-                stmt.setString(3, input.getPassword());
-                stmt.setString(4, input.getPhone());
-                stmt.setString(5, input.getEmail());
-                stmt.setString(6, input.getCreditCard());
-                stmt.setString(7, input.getAddress());
+            stmt.setString(1, input.getUsername());
+            stmt.setString(2, input.getIdentity().toString());
+            stmt.setString(3, input.getPassword());
+            stmt.setString(4, input.getPhone());
+            stmt.setString(5, input.getEmail());
+            stmt.setString(6, input.getCreditCard());
+            stmt.setString(7, input.getAddress());
 
-                stmt.executeUpdate();
+            stmt.executeUpdate();
+
+            output.setUsername(input.getUsername());
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        output.setUsername(input.getUsername());
     }
 }
