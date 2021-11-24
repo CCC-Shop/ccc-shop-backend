@@ -1,15 +1,15 @@
-package com.project.ccc_shop.discount.entity;
+package com.project.ccc_shop.seasonings_discount.entity;
 
 import com.project.ccc_shop.product.entity.Category;
 
 import java.sql.Timestamp;
 
-public class Discount {
-    private String discountCode;
+public class SeasoningsDiscount {
+//    private String discountCode;
     private String policyDescription;
     private Timestamp startTime;
     private Timestamp endTime;
     private double discountRate;
-    private int targetPrice;
-    private Category category;
+//    private int targetPrice;
+//    private Category category;
 }
