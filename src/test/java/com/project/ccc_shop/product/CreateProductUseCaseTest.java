@@ -24,7 +24,7 @@ public class CreateProductUseCaseTest {
         input.setCategory(Category.TABLET);
         input.setPrice(20000);
         input.setStock(3);
-        input.setWarehouseAddress("台北市大安區忠孝東路xxx號");
+        input.setWarehouseAddress("address");
         input.setDescription("great product in your life");
         input.setPictureURL("https://picsum.photos/200");
 

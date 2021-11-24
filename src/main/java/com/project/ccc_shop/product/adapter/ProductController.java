@@ -3,6 +3,12 @@ package com.project.ccc_shop.product.adapter;
 import com.project.ccc_shop.product.usecase.create.CreateProductInput;
 import com.project.ccc_shop.product.usecase.create.CreateProductOutput;
 import com.project.ccc_shop.product.usecase.create.CreateProductUseCase;
+import com.project.ccc_shop.product.usecase.delete.DeleteProductInput;
+import com.project.ccc_shop.product.usecase.delete.DeleteProductOutput;
+import com.project.ccc_shop.product.usecase.delete.DeleteProductUseCase;
+import com.project.ccc_shop.product.usecase.get.GetProductInput;
+import com.project.ccc_shop.product.usecase.get.GetProductOutput;
+import com.project.ccc_shop.product.usecase.get.GetProductUseCase;
 import com.project.ccc_shop.product.usecase.update.UpdateProductInput;
 import com.project.ccc_shop.product.usecase.update.UpdateProductOutput;
 import com.project.ccc_shop.product.usecase.update.UpdateProductUseCase;
@@ -20,6 +26,8 @@ public class ProductController {
 
     CreateProductUseCase createProductUseCase;
     UpdateProductUseCase updateProductUseCase;
+    DeleteProductUseCase deleteProductUseCase;
+    GetProductUseCase getProductUseCase;
 
     @Autowired
     public void setCreateProductUseCase(CreateProductUseCase createProductUseCase){
@@ -29,6 +37,16 @@ public class ProductController {
     @Autowired
     public void setUpdateProductUseCase(UpdateProductUseCase updateProductUseCase){
         this.updateProductUseCase = updateProductUseCase;
+    }
+
+    @Autowired
+    public void setDeleteProductUseCase(DeleteProductUseCase deleteProductUseCase){
+        this.deleteProductUseCase = deleteProductUseCase;
+    }
+
+    @Autowired
+    public void getDeleteProductUseCase(GetProductUseCase getProductUseCase){
+        this.getProductUseCase = getProductUseCase;
     }
 
     @PostMapping(value = "/add")
@@ -71,6 +89,36 @@ public class ProductController {
 
         try {
             this.updateProductUseCase.execute(input, output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+    }
+
+    @PostMapping(value = "/delete")
+    public ResponseEntity<DeleteProductOutput> deleteProduct(@RequestBody DeleteProductInput requestBody) {
+        DeleteProductInput input = new DeleteProductInput();
+        DeleteProductOutput output = new DeleteProductOutput();
+
+        input.setId(requestBody.getId());
+
+        try {
+            this.deleteProductUseCase.execute(input, output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+    }
+
+    @PostMapping(value = "/get")
+    public ResponseEntity<GetProductOutput> getProduct(@RequestBody GetProductInput requestBody) {
+        GetProductInput input = new GetProductInput();
+        GetProductOutput output = new GetProductOutput();
+
+        input.setId(requestBody.getId());
+
+        try {
+            this.getProductUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
