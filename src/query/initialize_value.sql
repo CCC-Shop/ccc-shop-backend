@@ -1,75 +1,51 @@
 USE ccc_shop;
 
-INSERT `user` (`username`, `identity`, `password`,`phone`, `email`, `address`) VALUES
-('admin', 'admin', 'admin','0912312345', 'admin@gmail.com', 'home'),
-('staff1', 'staff', 'staff1', '0912345678', 'staff1@gmail.com', '台北市大安區忠孝東路xxx號5F'),
-('staff2', 'staff', 'staff2', '0966477382', 'staff2@gmail.com', '台北市大安區忠孝東路xxx號5F'),
-('customer1', 'customer', 'customer1', '0918537624', 'customer1@gmail.com', '台北市大安區忠孝東路xxx號5F'),
-('customer2', 'customer', 'customer2', '0987654321', 'customer2@gmail.com', '台北市大安區忠孝東路xxx號5F');
---
--- INSERT `discount` (`value`,`code` ,`name` ,`startDate`,`endDate`) VALUES
--- (0,0,0,0,0),
--- (0.8,"NY001", "New Year Sale 20% OFF","2021-01-01", "2021-01-30"),
--- (0.5,"CT001", "Christmast Gift 50% OFF","2020-12-15", "2020-12-30");
---
--- INSERT `item`(`name`,`quantity`,`category`,`size`,`price`,`description`,`pictureURL`) VALUES
--- ("Jolie Jeans Jacket In Green",10,"Jacket","F",1000,"Jacket which is ready to coloring your day by day","./img/clothes/Jacket/JolieJeansJacketInGreen.jpg"),
--- ("Jolie Jeans Jacket In Nude",10,"Jacket","F",1000,"Jacket which is ready to coloring your day by day","./img/clothes/Jacket/JolieJeansJacketInNude.jpg"),
--- ("Jolie Jeans Jacket In Red",10,"Jacket","F",1000,"Jacket which is ready to coloring your day by day","./img/clothes/Jacket/JolieJeansJacketInRed.jpg"),
--- ("Jolie Jeans Jacket In Apricot",10,"Jacket","F",1000,"Jacket which is ready to coloring your day by day","./img/clothes/Jacket/JolieJeansJacketInApricot.jpg"),
--- ("Jolie Jeans Jacket In Baby Blue",10,"Jacket","F",1000,"Jacket which is ready to coloring your day by day","./img/clothes/Jacket/JolieJeansJacketInBabyBlue.jpg"),
--- ("Jolie Jeans Jacket In Yellow",10,"Jacket","F",1000,"Jacket which is ready to coloring your day by day","./img/clothes/Jacket/JolieJeansJacketInYellow.jpg"),
--- ("Hettie Dress",10,"Dresses","F",790,"Breezy and fuss-free","./img/clothes/Dress/HettieDress.jpg"),
--- ("Calla Dress",10,"Dresses","F",890,"Never bend your head.","./img/clothes/Dress/CallaDress.jpg"),
--- ("Aria Dress",10,"Dresses","F",820,"Look the world straight in the eye","./img/clothes/Dress/AriaDress.jpg"),
--- ("Avellyn Dress",10,"Dresses","F",850,"Everyone’s favorite ","./img/clothes/Dress/AvellynDress.jpg"),
--- ("Vessa Dress",10,"Dresses","F",880,"You can wear the frontside back or the backside front, anything you want","./img/clothes/Dress/VessaDress.jpg"),
--- ("Dacia Dress",10,"Dresses","F",8000,"From our freshly launched","./img/clothes/Dress/DaciaDress.jpg"),
--- ("Adiel Top In White",10,"Tops","F",8000,"Beauty begins","./img/clothes/Tops/AdielTopInWhite.jpg"),
--- ("Mikha Top",10,"Tops","F",8000,"All you need in this life","./img/clothes/Tops/MikhaTop.jpg"),
--- ("Shauna Top",10,"Tops","F",8000,"Success is sure","./img/clothes/Tops/ShaunaTop.jpg"),
--- ("Flor Top",10,"Tops","F",8000,"Pair with straight pant","./img/clothes/Tops/FlorTop.jpg"),
--- ("Sali Top",10,"Tops","F",8000,"Puffy off shoulder sleeve","./img/clothes/Tops/SaliTop.jpg"),
--- ("Braza Top",10,"Tops","F",8000,"Burnt orange Braza","./img/clothes/Tops/BrazaTop.jpg"),
--- ("Printed Blue Bini Skirt",10,"Bottom","F",8000,"Still looks good to wear for go to hangout","./img/clothes/Bottom/PrintedBlueBiniSkirt.jpg"),
--- ("Printed Beige Goza Skirt",10,"Bottom","F",8000,"Stunning, fancy, yet so comfy","./img/clothes/Bottom/PrintedBeigeGozaSkirt.jpg"),
--- ("Pleated Oversize Cardigan In Grey",10,"Jacket","F",860,"Fit that looks good on all","./img/clothes/Jacket/PleatedOversizeCardiganInGrey.jpg"),
--- ("Pleated Oversize Cardigan In Maroon",10,"Jacket","F",860,"In the mood for Maroon ♥️","./img/clothes/Jacket/PleatedOversizeCardiganInMaroon.jpg"),
--- ("Pleated Oversize Cardigan In White",10,"Jacket","F",860,"Perfect for the morning coffee run","./img/clothes/Jacket/PleatedOversizeCardiganInWhite.jpg"),
--- ("Classic Cheongsam In Pastel",10,"Dresses","F",1100,"Pretty in every Color","./img/clothes/Dress/ClassicCheongsamInPastel.jpg"),
--- ("Qi Dress",10,"Dresses","F",1160,"New Chinese Classic C0llection","./img/clothes/Dress/QiDress.jpg"),
--- ("Shuang Xi Dress",10,"Dresses","F",1200,"All good things fullfil your new year","./img/clothes/Dress/ShuangXiDress.jpg"),
--- ("Huo Yan Top",10,"Tops","F",800,"Pairing with a scarf","./img/clothes/Tops/HuoYanTop.jpg"),
--- ("Feng Fu Top",10,"Tops","F",790,"Lift your style and your mood","./img/clothes/Tops/FengFuTop.jpg"),
--- ("Fang Fang Top",10,"Tops","F",750,"Feminine and flowy","./img/clothes/Tops/FangFangTop.jpg"),
--- ("Hui Ling Pant",10,"Bottom","F",700,"Wise Jade","./img/clothes/Bottom/HuiLingPants.jpg"),
--- ("Mei Rong Pant",10,"Bottom","F",720,"Simple but elegant ","./img/clothes/Bottom/MeiRongPants.jpg"),
--- ("Jin Pant",10,"Bottom","F",750,"little ordinary","./img/clothes/Bottom/JinPants.jpg");
---
--- INSERT `like` VALUES
--- (1,1),
--- (1,3),
--- (2,2),
--- (2,1),
--- (2,4);
---
--- INSERT `rate` VALUES
--- (1,1,"good",5),
--- (1,2,"bad quality",1),
--- (1,3,"good service",4);
---
--- -- status code 0 = new order,  2 = shipout, 3 = arrived(done) default 0
--- INSERT `order`(`orderDate`,`status`,`orderUserID`) VALUES
--- ("2020-12-16", 0, 1),
--- ("2020-12-15", 3, 1);
---
--- INSERT `itemlist` VALUES
--- (2,1,2),
--- (1,1,1),
--- (3,1,1),
--- (4,2,2),
--- (3,2,3);
---
---
---
---
+INSERT `user` (`username`, `identity`, `password`,`phone`, `email`, `credit_card`, `address`) VALUES
+('admin', 'admin', 'admin','0912312345', 'admin@gmail.com', '0000111-2222333', 'home'),
+('staff1', 'staff', 'staff1', '0912345678', 'staff1@gmail.com', '1111222-3333444', '台北市大安區忠孝東路xxx號5F'),
+('staff2', 'staff', 'staff2', '0966477382', 'staff2@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F'),
+('customer1', 'customer', 'customer1', '0918537624', 'customer1@gmail.com', '2222333-4444555', '台北市大安區忠孝東路xxx號5F'),
+('customer2', 'customer', 'customer2', '0987654321', 'customer2@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F');
+
+INSERT `product` (`vendor_id`, `name`, `category`, `price`, `stock`, `warehouse_address`, `description`, `pictureURL`) VALUES
+(2, 'computer1', 'COMPUTER', 50000, 1000, 'XX市XX區XX路XX號XX樓', 'one of computer', 'https://xxx.xxx'),
+(2, 'notebook1', 'NOTEBOOK', 30000, 300, 'XX市XX區XX路XX號OO樓', 'one of notebook', 'https://xxx.xxo'),
+(3, 'tablet1', 'TABLET', 8000, 150, 'XX市XX區XX路OO號XX樓', 'one of tablet', 'https://xxx.xox'),
+(3, 'phone1', 'PHONE', 10000, 20, 'XX市XX區OO路XX號XX樓', 'one of phone', 'https://xxx.oxx'),
+(3, 'computer2', 'COMPUTER', 60000, 50, 'XX市OO區XX路XX號XX樓', 'one of computerXDDDD', 'https://xxo.xxx');
+
+INSERT `order` (`customer_id`, `shipping_fee`, `recipient_name`, `shipping_address`, `status`, `payment_method`, `credit_card_id`, `order_time`, `shipping_time`, `delivery_time`, `seasoning_discount_code`, `shipping_discount_code`) VALUES
+(4, 200, 'customer1', '台北市大安區忠孝東路xxx號5F', 'ORDER', 'CASH', NULL, '2021-11-24 20:34:30', '2021-11-25 20:34:30', '2021-11-26 20:34:30', NULL, NULL),
+(4, 100, 'customer?', '台北市大安區忠孝東路OOO號5F', 'SHIPPING', 'CREDIT_CARD', '2222333-4444555', '2021-11-26 20:34:30', NULL, NULL, 1, NULL),
+(5, 300, 'customer2', '台北市大安區忠孝東路xxx號5F', 'DELIVERED', 'CASH', '3333444-5555666', '2021-11-24 20:34:30', '2021-11-25 20:34:30', '2021-11-26 20:34:30', NULL, 1),
+(5, 80, 'customer2', '台北市大安區忠孝東路xxx號5F', 'RECEIVED', 'CREDIT_CARD', '3333444-5555666', '2021-11-25 20:34:30', '2021-11-26 20:34:30', NULL, 1, NULL),
+(5, 250, 'customer?', '台北市大安區忠孝東路OOO號5F', 'ORDER', 'MOBILE', NULL, '2021-11-26 20:34:30', NULL, NULL, NULL, 1);
+
+INSERT `order_items` (`order_id`, `product_id`, `quantity`) VALUES
+(1, 5, 2),
+(2, 4, 10),
+(3, 5, 1),
+(4, 2, 5),
+(5, 1, 3);
+
+INSERT `shopping_cart` (`product_id`, `customer_id`, `quantity`) VALUES
+(2, 4, 3),
+(3, 5, 6),
+(5, 5, 10),
+(1, 4, 1),
+(4, 5, 5);
+
+INSERT `manage_order` (`order_id`, `vendor_id`) VALUES
+(1, 3),
+(2, 3),
+(3, 3),
+(4, 2),
+(5, 2);
+
+INSERT `valuation` (`customer_id`, `product_id`, `comment`, `rating`) VALUES
+(4, 1, 'good', 4),
+(5, 2, 'normal', 3),
+(5, 5, 'bad', 1),
+(4, 3, 'nice', 5),
+(5, 4, 'well', 2);
+

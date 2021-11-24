@@ -105,6 +105,8 @@ CREATE TABLE IF NOT EXISTS `manage_order` (
 CREATE TABLE IF NOT EXISTS `valuation` (
     `customer_id` int(10),
     `product_id` int(10),
+    `comment` varchar(500) NOT NULL,
+    `rating` int(1) NOT NULL,
     PRIMARY KEY (customer_id, product_id),
     FOREIGN KEY (customer_id) REFERENCES `user` (`id`)
 );
