@@ -24,8 +24,8 @@ CREATE TABLE IF NOT EXISTS `product` (
     `stock` int(6) NOT NULL,
     `warehouse_address` varchar(100) NOT NULL,
     `description` varchar(500) DEFAULT NULL,
-    `pictureURL` varchar(500) DEFAULT NULL,
-    FOREIGN KEY (vendor_id) REFERENCES `user` (`id`)
+    `pictureURL` varchar(500) DEFAULT NULL
+--    FOREIGN KEY (vendor_id) REFERENCES `user` (`id`)
 );
 
  -- Table structure for table `order`
@@ -43,8 +43,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `delivery_time`    TIMESTAMP   NULL ON UPDATE CURRENT_TIMESTAMP,
   `seasoning_discount_code` int(6)    DEFAULT NULL,
   `shipping_discount_code`  int(6)    DEFAULT NULL
---  CONSTRAINT `discountID` FOREIGN KEY (`discountID`) REFERENCES `discount` (`id`),
---  CONSTRAINT `orderUserID` FOREIGN KEY (`orderUserID`) REFERENCES `user` (`id`)
+--  FOREIGN KEY (customer_id) REFERENCES `user` (`id`)
  );
 
  -- Table structure for table `order_items`
@@ -52,8 +51,8 @@ CREATE TABLE IF NOT EXISTS `product` (
   `order_id`    int(10) NOT NULL,
   `product_id`  int(10) NOT NULL,
   `quantity`    int(6)  NOT NULL
---  CONSTRAINT `orderID` FOREIGN KEY (`orderID`) REFERENCES `order` (`id`),
---  CONSTRAINT `orderItemID` FOREIGN KEY (`orderItemID`) REFERENCES `item` (`id`)
+--  PRIMARY KEY (order_id, product_id),
+--  FOREIGN KEY (order_id) REFERENCES `order` (`id`),
  );
 
 ---- Table structure for table `order`

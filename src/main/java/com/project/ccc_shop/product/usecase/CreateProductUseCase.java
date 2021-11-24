@@ -20,7 +20,7 @@ public class CreateProductUseCase implements UseCase<CreateProductInput, CreateP
         try(Connection connection = this.mySQLDriver.getConnection()) {
 
             PreparedStatement stmt = connection.prepareStatement(
-                    "INSERT `product` (`name`, `user_id`, `category`, `price`, `stock`, `warehouse_address`, `description`, `pictureURL` )" +
+                    "INSERT `product` (`name`, `vendor_id`, `category`, `price`, `stock`, `warehouse_address`, `description`, `pictureURL` )" +
                             " VALUES (?,?,?,?,?,?,?,?)");
 
                 stmt.setString(1, input.getName());
