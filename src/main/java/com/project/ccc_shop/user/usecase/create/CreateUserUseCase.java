@@ -1,4 +1,4 @@
-package com.project.ccc_shop.user.usecase;
+package com.project.ccc_shop.user.usecase.create;
 
 import com.project.ccc_shop.common.MySQLDriver;
 import com.project.ccc_shop.common.UseCase;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.UUID;
 
 @Service
 public class CreateUserUseCase implements UseCase<CreateUserInput, CreateUserOutput> {

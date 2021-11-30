@@ -1,11 +1,10 @@
 package com.project.ccc_shop.user;
 
 import com.project.ccc_shop.common.MySQLDriver;
-import com.project.ccc_shop.product.entity.Category;
-import com.project.ccc_shop.user.usecase.CreateUserInput;
-import com.project.ccc_shop.user.usecase.CreateUserOutput;
-import com.project.ccc_shop.user.usecase.CreateUserUseCase;
-import com.project.ccc_shop.user.usecase.entity.Identity;
+import com.project.ccc_shop.user.entity.Identity;
+import com.project.ccc_shop.user.usecase.create.CreateUserInput;
+import com.project.ccc_shop.user.usecase.create.CreateUserOutput;
+import com.project.ccc_shop.user.usecase.create.CreateUserUseCase;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
