@@ -4,7 +4,6 @@ import com.project.ccc_shop.common.MySQLDriver;
 import com.project.ccc_shop.common.UseCase;
 import org.springframework.stereotype.Service;
 import java.sql.*;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -50,7 +49,7 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
                 stmt.executeUpdate();
                 int orderId = getOrderId(connection, input.getCustomerId(), input.getOrderTime());
 
-                createOrderItems(connection, orderId, input.getOrderItemIds(), input.getOrderItems());
+                createOrderItems(connection, orderId,input.getOrderItems());
 
                 output.setId(orderId);
         } catch (SQLException e) {
@@ -74,23 +73,22 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
         throw new RuntimeException("Order not found, where customer_id=" + customerId + ", order_time=" + orderTime + ".");
     }
 
-    private void createOrderItems(Connection connection, int orderId, List<Integer> orderItemIds, Map<Integer, Integer> orderItems) {
-        orderItemIds.forEach(productId -> {
+    private void createOrderItems(Connection connection, int orderId, Map<Integer, Integer> orderItems) {
+
+        orderItems.keySet().forEach(productId -> {
             try (PreparedStatement stmt = connection.prepareStatement(
                     "INSERT `order_items` (`order_id`, " +
                             "`product_id`, " +
                             "`quantity`)" +
                             " VALUES (?,?,?)")) {
-
                 stmt.setInt(1, orderId);
                 stmt.setInt(2, productId);
                 stmt.setInt(3, orderItems.get(productId));
 
                 stmt.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        );
+        });
     }
 }

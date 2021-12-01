@@ -21,20 +21,16 @@ public class CreateSeasoningsDiscountUseCase implements UseCase<CreateSeasonings
         try(Connection connection = this.mySQLDriver.getConnection()) {
 
             PreparedStatement stmt = connection.prepareStatement(
-                    "INSERT `seasonings_discount` (`order_id`, `vender_id`, `policy_description`, `start_time`, `end_time`, `discount_rate`)" +
-                            " VALUES (?,?,?,?,?,?)");
-//                    "INSERT `discount` (`discount_code`, `policy_description`, `start_time`, `end_time`, `discount_rate`, `target_price`, `category` )" +
-//                            " VALUES (?,?,?,?,?,?,?)");
+                    "INSERT `seasonings_discount` (`vender_id`, `policy_description`, `start_time`, `end_time`, `discount_rate`)" +
+                            " VALUES (?,?,?,?,?)");
 
 //            stmt.setString(1, input.getDiscountCode());
-            stmt.setInt(1, input.getOrderId());
-            stmt.setInt(2, input.getVenderId());
-            stmt.setString(3, input.getPolicyDescription());
-            stmt.setTimestamp(4, input.getStartTime());
-            stmt.setTimestamp(5, input.getEndTime());
-            stmt.setDouble(6, input.getDiscountRate());
+            stmt.setInt(1, input.getVenderId());
+            stmt.setString(2, input.getPolicyDescription());
+            stmt.setTimestamp(3, input.getStartTime());
+            stmt.setTimestamp(4, input.getEndTime());
+            stmt.setDouble(5, input.getDiscountRate());
 //                stmt.setInt(6, input.getTargetPrice());
-//                stmt.setString(7, input.getCategory().toString());
 
             stmt.executeUpdate();
 

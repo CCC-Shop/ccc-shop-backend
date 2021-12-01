@@ -1,37 +1,46 @@
-//package com.project.ccc_shop.order.adapter;
-//
-//import com.project.ccc_shop.order.entity.Payment;
-//import com.project.ccc_shop.order.entity.Status;
-//import com.project.ccc_shop.order.usecase.CreateOrderInput;
-//import com.project.ccc_shop.order.usecase.CreateOrderOutput;
-//import com.project.ccc_shop.order.usecase.CreateOrderUseCase;
-//import org.json.JSONArray;
-//import org.json.JSONException;
-//import org.json.JSONObject;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RestController;
-//
-//import java.sql.Timestamp;
-//
-//@RestController
-//@RequestMapping("/api/customer")
-//public class OrderController {
-//
-//    CreateOrderUseCase createOrderUseCase;
-//
-//    @Autowired
-//    public void setCreateOrderUseCase(CreateOrderUseCase createOrderUseCase){
-//        this.createOrderUseCase = createOrderUseCase;
-//    }
-//
-//    @PostMapping(value = "/add/order")
-//    public ResponseEntity<CreateOrderOutput> addOrder(@RequestBody String orderInfo) {
-//
+package com.project.ccc_shop.order.adapter;
+
+import com.project.ccc_shop.order.usecase.CreateOrderInput;
+import com.project.ccc_shop.order.usecase.CreateOrderOutput;
+import com.project.ccc_shop.order.usecase.CreateOrderUseCase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/order")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+public class OrderController {
+
+    CreateOrderUseCase createOrderUseCase;
+
+    @Autowired
+    public void setCreateOrderUseCase(CreateOrderUseCase createOrderUseCase) {
+        this.createOrderUseCase = createOrderUseCase;
+    }
+
+    @PostMapping(value = "/add")
+    public ResponseEntity<CreateOrderOutput> addOrder(@RequestBody CreateOrderInput orderInfo) {
+
+        CreateOrderInput input = new CreateOrderInput();
+        CreateOrderOutput output = new CreateOrderOutput();
+        try {
+            input.setCustomerId(orderInfo.getCustomerId());
+            input.setShippingFee(orderInfo.getShippingFee());
+            input.setRecipientName(orderInfo.getRecipientName());
+            input.setShippingAddress(orderInfo.getShippingAddress());
+            input.setStatus(orderInfo.getStatus());
+            input.setPaymentMethod(orderInfo.getPaymentMethod());
+            input.setOrderTime(orderInfo.getOrderTime());
+            input.setOrderItems(orderInfo.getOrderItems());
+
+            this.createOrderUseCase.execute(input, output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+
 //        CreateOrderInput input = new CreateOrderInput();
 //        CreateOrderOutput output = new CreateOrderOutput();
 //        try {
@@ -53,5 +62,5 @@
 //        } catch (JSONException e) {
 //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
 //        }
-//    }
-//}
+    }
+}

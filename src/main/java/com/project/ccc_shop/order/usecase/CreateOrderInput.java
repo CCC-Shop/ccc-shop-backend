@@ -4,7 +4,6 @@ import com.project.ccc_shop.common.Input;
 import com.project.ccc_shop.order.entity.Payment;
 import com.project.ccc_shop.order.entity.Status;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Map;
 
 public class CreateOrderInput implements Input {
@@ -20,7 +19,6 @@ public class CreateOrderInput implements Input {
     private Timestamp deliveryTime;
     private int seasoningDiscountCode;
     private int shippingDiscountCode;
-    private List<Integer> orderItemIds;
     private Map<Integer, Integer> orderItems;
 
     public int getCustomerId() {
@@ -117,14 +115,6 @@ public class CreateOrderInput implements Input {
 
     public void setShippingDiscountCode(int shippingDiscountCode) {
         this.shippingDiscountCode = shippingDiscountCode;
-    }
-
-    public List<Integer> getOrderItemIds() {
-        return orderItemIds;
-    }
-
-    public void setOrderItemIds(List<Integer> orderItemIds) {
-        this.orderItemIds = orderItemIds;
     }
 
     public Map<Integer, Integer> getOrderItems() {

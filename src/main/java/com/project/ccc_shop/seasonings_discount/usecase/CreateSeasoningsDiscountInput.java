@@ -7,22 +7,12 @@ import java.sql.Timestamp;
 
 public class CreateSeasoningsDiscountInput implements Input {
 //    private String discountCode;
-    private int orderId;
     private int venderId;
     private String policyDescription;
     private Timestamp startTime;
     private Timestamp endTime;
     private double discountRate;
 //    private int targetPrice;
-//    private Category category;
-
-    public int getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
 
     public int getVenderId() {
         return venderId;
@@ -64,12 +54,11 @@ public class CreateSeasoningsDiscountInput implements Input {
         this.discountRate = discountRate;
     }
 
-//    {
-//        "orderId": 123,
-//            "venderId": 456,
-//            "policyDescription": "policy description post",
-//            "startTime": "2021-11-22T13:47:58.212+00:00",
-//            "endTime": "2021-11-24T13:47:58.212+00:00",
-//            "discountRate": 0.5
-//    }
+//{
+//    "venderId": 456,
+//    "policyDescription": "policy description post",
+//    "startTime": "2021-11-22T13:47:58.212+00:00",
+//    "endTime": "2021-11-24T13:47:58.212+00:00",
+//    "discountRate": 0.5
+//}
 }

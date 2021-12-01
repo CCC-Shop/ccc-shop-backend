@@ -1,11 +1,11 @@
-package com.project.ccc_shop.user.usecase;
+package com.project.ccc_shop.user.usecase.login;
 
-import com.project.ccc_shop.common.Input;
-import com.project.ccc_shop.user.usecase.entity.Identity;
+import com.project.ccc_shop.common.Output;
+import com.project.ccc_shop.user.entity.Identity;
 
-public class CreateUserInput implements Input {
+public class LoginUserOutput implements Output {
     private String username;
-    private Identity identity;
+    private String identity;
     private String password;
     private String phone;
     private String email;
@@ -20,11 +20,11 @@ public class CreateUserInput implements Input {
         this.username = username;
     }
 
-    public Identity getIdentity() {
+    public String getIdentity() {
         return identity;
     }
 
-    public void setIdentity(Identity identity) {
+    public void setIdentity(String identity) {
         this.identity = identity;
     }
 

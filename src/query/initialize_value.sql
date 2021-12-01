@@ -49,3 +49,23 @@ INSERT `valuation` (`customer_id`, `product_id`, `comment`, `rating`) VALUES
 (4, 3, 'nice', 5),
 (5, 4, 'well', 2);
 
+INSERT `shipping_discount` (`vendor_id`, `policy_description`, `start_time`, `end_time`, `target_price`) VALUES
+(2, 'using for xxx', '2021-01-01 00:00:00', '2021-12-31 23:59:59', 500),
+(2, 'not using for xxx', '2021-07-01 00:00:00', '2021-08-31 23:59:59', 1000),
+(3, 'using for ooo', '2021-01-01 00:00:00', '2021-06-30 23:59:59', 2000),
+(3, 'not use for ooo', '2021-07-01 00:00:00', '2021-12-31 23:59:59', 200),
+(3, 'xxx ooo', '2021-10-01 00:00:00', '2021-12-31 23:59:59', 5000);
+
+INSERT `seasonings_discount` (`vendor_id`, `policy_description`, `start_time`, `end_time`, `discount_rate`) VALUES
+(2, 'using for xxx', '2021-01-01 00:00:00', '2021-12-31 23:59:59', 0.5),
+(2, 'not using for xxx', '2021-07-01 00:00:00', '2021-08-31 23:59:59', 0.75),
+(3, 'using for ooo', '2021-01-01 00:00:00', '2021-06-30 23:59:59', 0.9),
+(3, 'not use for ooo', '2021-07-01 00:00:00', '2021-12-31 23:59:59', 0.8),
+(3, 'xxx ooo', '2021-10-01 00:00:00', '2021-12-31 23:59:59', 0.1);
+
+INSERT `special_discount` (`product_id`, `vendor_id`, `policy_description`, `start_time`, `end_time`, `category`) VALUES
+(5, 3, 'using for xxx', '2021-01-01 00:00:00', '2021-12-31 23:59:59', 'Computer'),
+(4, 3, 'not using for xxx', '2021-07-01 00:00:00', '2021-08-31 23:59:59', 'PHONE'),
+(1, 2, 'using for ooo', '2021-01-01 00:00:00', '2021-06-30 23:59:59', 'Computer'),
+(2, 2, 'not use for ooo', '2021-07-01 00:00:00', '2021-12-31 23:59:59', 'NOTEBOOK'),
+(3, 3, 'xxx ooo', '2021-10-01 00:00:00', '2021-12-31 23:59:59', 'TABLET');
