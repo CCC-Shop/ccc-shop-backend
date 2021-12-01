@@ -23,8 +23,7 @@ public class UpdateProductUseCase implements UseCase<UpdateProductInput, UpdateP
         try (Connection connection = this.mySQLDriver.getConnection()) {
 
             PreparedStatement stmt = connection.prepareStatement(
-                    "UPDATE `product` SET `name`=?, `vender_id`=?, `category`=?, `price`=?, `stock`=?, `warehouse_address`=?, `description`=?, `pictureURL`=?" +
-                    " WHERE `id`=?");
+                    "UPDATE `product` SET `name`=?, `vender_id`=?, `category`=?, `price`=?, `stock`=?, `warehouse_address`=?, `description`=?, `pictureURL`=?" +                             " WHERE `id`=?");
 
             stmt.setString(1, input.getName());
             stmt.setInt(2, input.getUserId());

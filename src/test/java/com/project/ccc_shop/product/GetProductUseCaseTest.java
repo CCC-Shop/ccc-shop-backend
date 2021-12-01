@@ -22,7 +22,14 @@ public class GetProductUseCaseTest {
         getProductUseCase.execute(input, output);
 
         assertNotNull(output.getName());
+        assertEquals(1, output.getUserId());
         assertEquals("ipad", output.getName());
+        assertEquals("TABLET", output.getCategory());
+        assertEquals(20000, output.getPrice());
+        assertEquals(3, output.getStock());
+        assertEquals("address", output.getWarehouseAddress());
+        assertEquals("great product in your life", output.getDescription());
+        assertEquals("https://picsum.photos/200", output.getPictureURL());
     }
 
 }

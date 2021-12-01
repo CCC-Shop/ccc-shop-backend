@@ -9,6 +9,8 @@ import com.project.ccc_shop.product.usecase.delete.DeleteProductUseCase;
 import com.project.ccc_shop.product.usecase.get.GetProductInput;
 import com.project.ccc_shop.product.usecase.get.GetProductOutput;
 import com.project.ccc_shop.product.usecase.get.GetProductUseCase;
+import com.project.ccc_shop.product.usecase.get_all.GetAllProductOutput;
+import com.project.ccc_shop.product.usecase.get_all.GetAllProductUseCase;
 import com.project.ccc_shop.product.usecase.update.UpdateProductInput;
 import com.project.ccc_shop.product.usecase.update.UpdateProductOutput;
 import com.project.ccc_shop.product.usecase.update.UpdateProductUseCase;
@@ -26,6 +28,7 @@ public class ProductController {
     UpdateProductUseCase updateProductUseCase;
     DeleteProductUseCase deleteProductUseCase;
     GetProductUseCase getProductUseCase;
+    GetAllProductUseCase getAllProductUseCase;
 
     @Autowired
     public void setCreateProductUseCase(CreateProductUseCase createProductUseCase){
@@ -43,12 +46,17 @@ public class ProductController {
     }
 
     @Autowired
-    public void getDeleteProductUseCase(GetProductUseCase getProductUseCase){
+    public void setGetProductUseCase(GetProductUseCase getProductUseCase){
         this.getProductUseCase = getProductUseCase;
     }
 
-    @PostMapping(value = "/add")
-    public ResponseEntity<CreateProductOutput> addProduct(@RequestBody CreateProductInput requestBody) {
+    @Autowired
+    public void setGetAllProductUseCase(GetAllProductUseCase getAllProductUseCase){
+        this.getAllProductUseCase = getAllProductUseCase;
+    }
+
+    @PostMapping(value = "/create")
+    public ResponseEntity<CreateProductOutput> createProduct(@RequestBody CreateProductInput requestBody) {
         CreateProductInput input = new CreateProductInput();
         CreateProductOutput output = new CreateProductOutput();
 
@@ -117,6 +125,18 @@ public class ProductController {
 
         try {
             this.getProductUseCase.execute(input, output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+    }
+
+    @GetMapping(value = "/getAll")
+    public ResponseEntity<GetAllProductOutput> getAllProduct() {
+        GetAllProductOutput output = new GetAllProductOutput();
+
+        try {
+            this.getAllProductUseCase.execute(output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
