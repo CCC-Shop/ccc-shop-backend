@@ -7,16 +7,10 @@ import com.project.ccc_shop.order.usecase.CreateOrderInput;
 import com.project.ccc_shop.order.usecase.CreateOrderOutput;
 import com.project.ccc_shop.order.usecase.CreateOrderUseCase;
 import org.junit.jupiter.api.Test;
-
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class CreateOrderUseCaseTest {
@@ -36,14 +30,11 @@ public class CreateOrderUseCaseTest {
         input.setPaymentMethod(Payment.CASH);
         input.setOrderTime(Timestamp.from(Instant.parse("2021-11-23T10:00:00Z")));
 //        input.setOrderTime(Timestamp.from(Instant.now()));
-        List<Integer> orderItemIds = new ArrayList<>();
-        orderItemIds.add(1);
-        orderItemIds.add(2);
-        orderItemIds.add(3);
-        input.setOrderItemIds(orderItemIds);
         // <productId, quantity>
         Map<Integer, Integer> orderItems = new HashMap<>();
-        orderItemIds.forEach(productId -> orderItems.put(productId, 2));
+        for (int i = 1; i < 4; i++){
+            orderItems.put(i, 2);
+        }
         input.setOrderItems(orderItems);
 
         createOrderUseCase.execute(input, output);
