@@ -7,7 +7,7 @@ INSERT `user` (`username`, `identity`, `password`,`phone`, `email`, `credit_card
 ('customer1', 'customer', 'customer1', '0918537624', 'customer1@gmail.com', '2222333-4444555', '台北市大安區忠孝東路xxx號5F'),
 ('customer2', 'customer', 'customer2', '0987654321', 'customer2@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F');
 
-INSERT `product` (`vendor_id`, `name`, `category`, `price`, `stock`, `warehouse_address`, `description`, `pictureURL`) VALUES
+INSERT `product` (`vender_id`, `name`, `category`, `price`, `stock`, `warehouse_address`, `description`, `pictureURL`) VALUES
 (2, 'computer1', 'COMPUTER', 50000, 1000, 'XX市XX區XX路XX號XX樓', 'one of computer', 'https://xxx.xxx'),
 (2, 'notebook1', 'NOTEBOOK', 30000, 300, 'XX市XX區XX路XX號OO樓', 'one of notebook', 'https://xxx.xxo'),
 (3, 'tablet1', 'TABLET', 8000, 150, 'XX市XX區XX路OO號XX樓', 'one of tablet', 'https://xxx.xox'),
@@ -35,7 +35,7 @@ INSERT `shopping_cart` (`product_id`, `customer_id`, `quantity`) VALUES
 (1, 4, 1),
 (4, 5, 5);
 
-INSERT `manage_order` (`order_id`, `vendor_id`) VALUES
+INSERT `manage_order` (`order_id`, `vender_id`) VALUES
 (1, 3),
 (2, 3),
 (3, 3),

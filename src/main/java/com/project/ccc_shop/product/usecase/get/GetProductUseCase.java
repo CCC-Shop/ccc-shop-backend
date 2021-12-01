@@ -33,7 +33,7 @@ public class GetProductUseCase implements UseCase<GetProductInput, GetProductOut
             resultSet.next();
 
             output.setName(resultSet.getString("name"));
-            output.setUserId(resultSet.getInt("vendor_id"));
+            output.setUserId(resultSet.getInt("vender_id"));
             output.setCategory(resultSet.getString("category"));
             output.setPrice(resultSet.getInt("price"));
             output.setStock(resultSet.getInt("stock"));

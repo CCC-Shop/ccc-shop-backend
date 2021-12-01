@@ -16,14 +16,6 @@ public class CreateSeasoningsDiscountInput implements Input {
 //    private int targetPrice;
 //    private Category category;
 
-//    public String getDiscountCode() {
-//        return discountCode;
-//    }
-//
-//    public void setDiscountCode(String discountCode) {
-//        this.discountCode = discountCode;
-//    }
-
     public int getOrderId() {
         return orderId;
     }
@@ -72,19 +64,12 @@ public class CreateSeasoningsDiscountInput implements Input {
         this.discountRate = discountRate;
     }
 
-//    public int getTargetPrice() {
-//        return targetPrice;
-//    }
-//
-//    public void setTargetPrice(int targetPrice) {
-//        this.targetPrice = targetPrice;
-//    }
-//
-//    public Category getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(Category category) {
-//        this.category = category;
+//    {
+//        "orderId": 123,
+//            "venderId": 456,
+//            "policyDescription": "policy description post",
+//            "startTime": "2021-11-22T13:47:58.212+00:00",
+//            "endTime": "2021-11-24T13:47:58.212+00:00",
+//            "discountRate": 0.5
 //    }
 }

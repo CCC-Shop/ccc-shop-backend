@@ -18,26 +18,26 @@ public class CreateSeasoningsDiscountController {
     CreateSeasoningsDiscountUseCase createSeasoningsDiscountUseCase;
 
     @Autowired
-    public void setCreateDiscountUseCase(CreateSeasoningsDiscountUseCase createSeasoningsDiscountUseCase){
+    public void setCreateDiscountUseCase(CreateSeasoningsDiscountUseCase createSeasoningsDiscountUseCase) {
         this.createSeasoningsDiscountUseCase = createSeasoningsDiscountUseCase;
     }
 
-    @PostMapping(value = "/add")
-    public ResponseEntity<CreateSeasoningsDiscountOutput> addDiscount(@RequestBody CreateSeasoningsDiscountInput requestBody) {
+    @PostMapping(value = "/create")
+    public ResponseEntity<CreateSeasoningsDiscountOutput> createSeasoningsDiscount(@RequestBody CreateSeasoningsDiscountInput requestBody) {
         CreateSeasoningsDiscountInput input = new CreateSeasoningsDiscountInput();
         CreateSeasoningsDiscountOutput output = new CreateSeasoningsDiscountOutput();
+        try {
 
 //        input.setDiscountCode(requestBody.getDiscountCode());
-        input.setOrderId(requestBody.getOrderId());
-        input.setVenderId(requestBody.getVenderId());
-        input.setPolicyDescription(requestBody.getPolicyDescription());
-        input.setStartTime(requestBody.getStartTime());
-        input.setEndTime(requestBody.getEndTime());
-        input.setDiscountRate(requestBody.getDiscountRate());
+            input.setOrderId(requestBody.getOrderId());
+            input.setVenderId(requestBody.getVenderId());
+            input.setPolicyDescription(requestBody.getPolicyDescription());
+            input.setStartTime(requestBody.getStartTime());
+            input.setEndTime(requestBody.getEndTime());
+            input.setDiscountRate(requestBody.getDiscountRate());
 //        input.setTargetPrice(requestBody.getTargetPrice());
 //        input.setCategory(requestBody.getCategory());
 
-        try {
             this.createSeasoningsDiscountUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
