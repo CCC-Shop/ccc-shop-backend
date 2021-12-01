@@ -22,29 +22,32 @@ public class LoginUserUseCase implements UseCase<LoginUserInput, LoginUserOutput
     @Override
     public void execute(LoginUserInput input, LoginUserOutput output) {
 
-        try(Connection connection = this.mySQLDriver.getConnection()) {
-            try (PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM `user` WHERE `username` = ? and `password` = ?")) {
-                stmt.setString(1, input.getUsername());
-                stmt.setString(2, input.getPassword());
+        try (Connection connection = this.mySQLDriver.getConnection()) {
 
-                try (ResultSet rs = stmt.executeQuery()) {
-                    if(rs.next()) {
-                        output.setUsername(rs.getString("username"));
-                        output.setIdentity(rs.getString("identity"));
-                        output.setPassword(rs.getString("password"));
-                        output.setPhone(rs.getString("phone"));
-                        output.setEmail(rs.getString("email"));
-                        output.setCreditCard(rs.getString("credit_card"));
-                        output.setAddress(rs.getString("address"));
-                    }else{
-                        output.setUsername("fail");
-                    }
-                }
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT * FROM `user` WHERE `username` = ? and `password` = ?");
+
+            stmt.setString(1, input.getUsername());
+            stmt.setString(2, input.getPassword());
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                output.setUsername(rs.getString("username"));
+                output.setIdentity(rs.getString("identity"));
+                output.setPassword(rs.getString("password"));
+                output.setPhone(rs.getString("phone"));
+                output.setEmail(rs.getString("email"));
+                output.setCreditCard(rs.getString("credit_card"));
+                output.setAddress(rs.getString("address"));
+            } else {
+                output.setUsername("fail");
+                throw new LoginFailedException();
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (LoginFailedException e) {
+            throw e;
         }
     }
 }
