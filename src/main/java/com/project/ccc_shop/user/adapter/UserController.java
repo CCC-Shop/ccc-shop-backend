@@ -29,8 +29,8 @@ public class UserController {
         this.loginUserUseCase = loginUserUseCase;
     }
 
-    @PostMapping(value = "/add")
-    public ResponseEntity<CreateUserOutput> addUser(@RequestBody CreateUserInput requestBody) {
+    @PostMapping(value = "/create")
+    public ResponseEntity<CreateUserOutput> createUser(@RequestBody CreateUserInput requestBody) {
         CreateUserInput input = new CreateUserInput();
         CreateUserOutput output = new CreateUserOutput();
 
@@ -44,7 +44,7 @@ public class UserController {
 
         try {
             this.createUserUseCase.execute(input, output);
-            return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Credentials: true").body(output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);

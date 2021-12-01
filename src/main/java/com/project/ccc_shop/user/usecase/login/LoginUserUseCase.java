@@ -34,7 +34,6 @@ public class LoginUserUseCase implements UseCase<LoginUserInput, LoginUserOutput
             if (rs.next()) {
                 output.setUsername(rs.getString("username"));
                 output.setIdentity(rs.getString("identity"));
-                output.setPassword(rs.getString("password"));
                 output.setPhone(rs.getString("phone"));
                 output.setEmail(rs.getString("email"));
                 output.setCreditCard(rs.getString("credit_card"));

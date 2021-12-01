@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/order")
-@CrossOrigin(origins="http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class OrderController {
 
     CreateOrderUseCase createOrderUseCase;
 
     @Autowired
-    public void setCreateOrderUseCase(CreateOrderUseCase createOrderUseCase){
+    public void setCreateOrderUseCase(CreateOrderUseCase createOrderUseCase) {
         this.createOrderUseCase = createOrderUseCase;
     }
 
