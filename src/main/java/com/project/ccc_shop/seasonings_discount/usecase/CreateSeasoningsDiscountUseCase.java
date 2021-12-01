@@ -21,7 +21,7 @@ public class CreateSeasoningsDiscountUseCase implements UseCase<CreateSeasonings
         try(Connection connection = this.mySQLDriver.getConnection()) {
 
             PreparedStatement stmt = connection.prepareStatement(
-                    "INSERT `seasonings_discount` (`order_id`, `vendor_id`, `policy_description`, `start_time`, `end_time`, `discount_rate`)" +
+                    "INSERT `seasonings_discount` (`order_id`, `vender_id`, `policy_description`, `start_time`, `end_time`, `discount_rate`)" +
                             " VALUES (?,?,?,?,?,?)");
 //                    "INSERT `discount` (`discount_code`, `policy_description`, `start_time`, `end_time`, `discount_rate`, `target_price`, `category` )" +
 //                            " VALUES (?,?,?,?,?,?,?)");

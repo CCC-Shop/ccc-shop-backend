@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Service
@@ -20,16 +21,21 @@ public class DeleteProductUseCase implements UseCase<DeleteProductInput, DeleteP
     @Override
     public void execute(DeleteProductInput input, DeleteProductOutput output) {
 
-        try(Connection connection = this.mySQLDriver.getConnection()) {
+        try (Connection connection = this.mySQLDriver.getConnection()) {
 
-            PreparedStatement stmt = connection.prepareStatement(
-                    "DELETE FROM `product` WHERE id = ?");
-
+            PreparedStatement stmt = connection.prepareStatement("SELECT `id` FROM `product` WHERE id = ?");
             stmt.setInt(1, input.getId());
+            ResultSet rs = stmt.executeQuery();
 
+            stmt = connection.prepareStatement("DELETE FROM `product` WHERE id = ?");
+            stmt.setInt(1, input.getId());
             stmt.executeUpdate();
 
-            output.check();
+            if (!rs.next()) {
+                output.setWorkCheck(false);
+            } else {
+                output.setWorkCheck(true);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -20,8 +20,8 @@ public class OrderController {
         this.createOrderUseCase = createOrderUseCase;
     }
 
-    @PostMapping(value = "/add")
-    public ResponseEntity<CreateOrderOutput> addOrder(@RequestBody CreateOrderInput orderInfo) {
+    @PostMapping(value = "/create")
+    public ResponseEntity<CreateOrderOutput> createOrder(@RequestBody CreateOrderInput orderInfo) {
 
         CreateOrderInput input = new CreateOrderInput();
         CreateOrderOutput output = new CreateOrderOutput();
