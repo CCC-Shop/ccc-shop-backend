@@ -9,13 +9,11 @@ import com.project.ccc_shop.user.usecase.login.LoginUserUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
+@CrossOrigin(origins="http://localhost:3000", allowCredentials = "true")
 public class UserController {
 
     CreateUserUseCase createUserUseCase;
@@ -46,7 +44,7 @@ public class UserController {
 
         try {
             this.createUserUseCase.execute(input, output);
-            return ResponseEntity.status(HttpStatus.OK).body(output);
+            return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Credentials: true").body(output);
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);

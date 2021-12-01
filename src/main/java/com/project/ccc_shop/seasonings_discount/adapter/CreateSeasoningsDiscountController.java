@@ -6,13 +6,11 @@ import com.project.ccc_shop.seasonings_discount.usecase.CreateSeasoningsDiscount
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/seasonings_discount")
+@CrossOrigin(origins="http://localhost:3000", allowCredentials = "true")
 public class CreateSeasoningsDiscountController {
 
     CreateSeasoningsDiscountUseCase createSeasoningsDiscountUseCase;
