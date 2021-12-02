@@ -6,7 +6,6 @@ import com.project.ccc_shop.user.entity.Identity;
 public class LoginUserOutput implements Output {
     private String username;
     private String identity;
-    private String password;
     private String phone;
     private String email;
     private String creditCard;
@@ -26,14 +25,6 @@ public class LoginUserOutput implements Output {
 
     public void setIdentity(String identity) {
         this.identity = identity;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhone() {

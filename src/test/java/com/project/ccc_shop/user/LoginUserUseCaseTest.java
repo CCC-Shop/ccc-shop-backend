@@ -24,7 +24,6 @@ public class LoginUserUseCaseTest {
 
         assertNotNull(output.getIdentity());
         assertEquals("test user", output.getUsername());
-        assertEquals("admin", output.getPassword());
         assertEquals("091234567", output.getPhone());
         assertEquals("admin@gmail.com", output.getEmail());
         assertEquals("台北市大安區忠孝東路xxx號", output.getAddress());
@@ -45,7 +44,6 @@ public class LoginUserUseCaseTest {
 
         assertEquals("fail", output.getUsername());
         assertNull(output.getIdentity());
-        assertNull(output.getPassword());
         assertNull(output.getPhone());
         assertNull(output.getEmail());
         assertNull(output.getAddress());
