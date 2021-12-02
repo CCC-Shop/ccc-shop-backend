@@ -23,7 +23,7 @@ public class MySQLDriver {
                 "&createDatabaseIfNotExist=true";
 //        this.url = "jdbc:mariadb://localhost:3306/ccc_shop";
         this.user = "root";
-        this.password = "6256";
+        this.password = "root";
         this.driver = "org.mariadb.jdbc.Driver";
         try {
             Class.forName(driver);

@@ -131,7 +131,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping(value = "/getAll")
+    @GetMapping(value = "/get-all")
     public ResponseEntity<GetAllProductOutput> getAllProduct() {
         GetAllProductOutput output = new GetAllProductOutput();
 
