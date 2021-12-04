@@ -3,8 +3,11 @@ package com.project.ccc_shop.order.usecase;
 import com.project.ccc_shop.common.MySQLDriver;
 import com.project.ccc_shop.common.UseCase;
 import org.springframework.stereotype.Service;
+
 import java.sql.*;
 import java.util.Map;
+
+import static java.sql.Types.NULL;
 
 @Service
 public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrderOutput> {
@@ -17,7 +20,7 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
 
     @Override
     public void execute(CreateOrderInput input, CreateOrderOutput output) {
-        try(Connection connection = this.mySQLDriver.getConnection()) {
+        try (Connection connection = this.mySQLDriver.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(
                     "INSERT `order` (`customer_id`, " +
                             "`shipping_fee`, " +
@@ -33,41 +36,49 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
                             "`shipping_discount_code`)" +
                             " VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
 
-                stmt.setInt(1, input.getCustomerId());
-                stmt.setInt(2, input.getShippingFee());
-                stmt.setString(3, input.getRecipientName());
-                stmt.setString(4, input.getShippingAddress());
-                stmt.setString(5, input.getStatus().toString());
-                stmt.setString(6, input.getPaymentMethod().toString());
-                stmt.setString(7, input.getCreditCardId());
-                stmt.setTimestamp(8, input.getOrderTime());
-                stmt.setTimestamp(9, input.getShippingTime());
-                stmt.setTimestamp(10, input.getDeliveryTime());
+            stmt.setInt(1, input.getCustomerId());
+            stmt.setInt(2, input.getShippingFee());
+            stmt.setString(3, input.getRecipientName());
+            stmt.setString(4, input.getShippingAddress());
+            stmt.setString(5, input.getStatus().toString());
+            stmt.setString(6, input.getPaymentMethod().toString());
+            stmt.setString(7, input.getCreditCardId());
+            stmt.setTimestamp(8, input.getOrderTime());
+            stmt.setTimestamp(9, input.getShippingTime());
+            stmt.setTimestamp(10, input.getDeliveryTime());
+            if (input.getSeasoningDiscountCode() == 0) {
+                stmt.setNull(11, NULL);
+            } else {
                 stmt.setInt(11, input.getSeasoningDiscountCode());
+            }
+            if (input.getShippingDiscountCode() == 0) {
+                stmt.setNull(12, NULL);
+            } else {
                 stmt.setInt(12, input.getShippingDiscountCode());
+            }
 
-                stmt.executeUpdate();
-                int orderId = getOrderId(connection, input.getCustomerId(), input.getOrderTime());
+            stmt.executeUpdate();
+            int orderId = getOrderId(connection, input.getCustomerId(), input.getOrderTime());
 
-                createOrderItems(connection, orderId,input.getOrderItems());
+            createOrderItems(connection, orderId, input.getOrderItems());
 
-                output.setId(orderId);
+            output.setId(orderId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private int getOrderId(Connection connection, int customerId, Timestamp orderTime){
+    private int getOrderId(Connection connection, int customerId, Timestamp orderTime) {
         try (PreparedStatement stmt = connection.prepareStatement(
                 "SELECT `id` FROM `order` WHERE `customer_id`= ? && `order_time` = ?")) {
             stmt.setString(1, Integer.toString(customerId));
             stmt.setTimestamp(2, orderTime);
             try (ResultSet rs = stmt.executeQuery()) {
-                while(rs.next()) {
+                while (rs.next()) {
                     return Integer.parseInt(rs.getString("id"));
                 }
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         throw new RuntimeException("Order not found, where customer_id=" + customerId + ", order_time=" + orderTime + ".");

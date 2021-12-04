@@ -84,8 +84,8 @@ CREATE TABLE IF NOT EXISTS `order`
     `delivery_time`           TIMESTAMP    NULL ON UPDATE CURRENT_TIMESTAMP,
     `seasoning_discount_code` int(6)                DEFAULT NULL,
     `shipping_discount_code`  int(6)                DEFAULT NULL,
-    FOREIGN KEY (seasoning_discount_code) REFERENCES `seasonings_discount` (`discount_code`),
-    FOREIGN KEY (shipping_discount_code) REFERENCES `shipping_discount` (`discount_code`),
+    FOREIGN KEY (seasoning_discount_code) REFERENCES `seasonings_discount` (`discount_code`) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (shipping_discount_code) REFERENCES `shipping_discount` (`discount_code`) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (customer_id) REFERENCES `user` (`id`)
 );
 
@@ -96,8 +96,8 @@ CREATE TABLE IF NOT EXISTS `order_items`
     `product_id` int(10),
     `quantity`   int(6) NOT NULL,
     PRIMARY KEY (order_id, product_id),
-    FOREIGN KEY (order_id) REFERENCES `order` (`id`),
-    FOREIGN KEY (product_id) REFERENCES `product` (`id`)
+    FOREIGN KEY (order_id) REFERENCES `order` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES `product` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Table structure for table `shopping_cart`
