@@ -1,4 +1,4 @@
-package com.project.ccc_shop.order.usecase;
+package com.project.ccc_shop.order.usecase.create;
 
 import com.project.ccc_shop.common.Output;
 

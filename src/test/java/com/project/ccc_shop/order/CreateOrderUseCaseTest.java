@@ -3,9 +3,9 @@ package com.project.ccc_shop.order;
 import com.project.ccc_shop.common.MySQLDriver;
 import com.project.ccc_shop.order.entity.Payment;
 import com.project.ccc_shop.order.entity.Status;
-import com.project.ccc_shop.order.usecase.CreateOrderInput;
-import com.project.ccc_shop.order.usecase.CreateOrderOutput;
-import com.project.ccc_shop.order.usecase.CreateOrderUseCase;
+import com.project.ccc_shop.order.usecase.create.CreateOrderInput;
+import com.project.ccc_shop.order.usecase.create.CreateOrderOutput;
+import com.project.ccc_shop.order.usecase.create.CreateOrderUseCase;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
@@ -30,7 +30,7 @@ public class CreateOrderUseCaseTest {
         input.setShippingAddress("台北市大安區忠孝東路xxx號");
         input.setStatus(Status.ORDER);
         input.setPaymentMethod(Payment.CASH);
-        input.setOrderTime(Timestamp.from(Instant.parse("2021-12-04T11:00:00Z")));
+        input.setOrderTime(Timestamp.from(Instant.parse("2021-12-04T10:00:00Z")));
         Map<Integer, Integer> orderItems = new HashMap<>();
         for (int i = 1; i < 4; i++) {
             orderItems.put(i, 2);
@@ -43,7 +43,7 @@ public class CreateOrderUseCaseTest {
     }
 
     @Test
-    public void create_order_with_discount_code() {
+    public void create_order_with_seasoning_discount_code() {
         MySQLDriver mySQLDriver = new MySQLDriver();
 
         CreateOrderUseCase createOrderUseCase = new CreateOrderUseCase(mySQLDriver);
@@ -61,6 +61,33 @@ public class CreateOrderUseCaseTest {
         Map<Integer, Integer> orderItems = new HashMap<>();
         for (int i = 1; i < 4; i++) {
             orderItems.put(i, 8-i);
+        }
+        input.setOrderItems(orderItems);
+
+        createOrderUseCase.execute(input, output);
+
+        assertNotNull(output.getId());
+    }
+
+    @Test
+    public void create_order_with_shipping_discount_code() {
+        MySQLDriver mySQLDriver = new MySQLDriver();
+
+        CreateOrderUseCase createOrderUseCase = new CreateOrderUseCase(mySQLDriver);
+        CreateOrderInput input = new CreateOrderInput();
+        CreateOrderOutput output = new CreateOrderOutput();
+
+        input.setCustomerId(3);
+        input.setShippingFee(80);
+        input.setRecipientName("Cindy");
+        input.setShippingAddress("some where");
+        input.setStatus(Status.ORDER);
+        input.setPaymentMethod(Payment.CASH);
+        input.setOrderTime(Timestamp.from(Instant.parse("2021-12-04T12:00:00Z")));
+        input.setShippingDiscountCode(2);
+        Map<Integer, Integer> orderItems = new HashMap<>();
+        for (int i = 1; i < 4; i++) {
+            orderItems.put(4-i, i);
         }
         input.setOrderItems(orderItems);
 

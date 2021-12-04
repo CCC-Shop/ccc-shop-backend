@@ -1,4 +1,4 @@
-package com.project.ccc_shop.order.usecase;
+package com.project.ccc_shop.order.usecase.create;
 
 import com.project.ccc_shop.common.Input;
 import com.project.ccc_shop.order.entity.Payment;
@@ -16,8 +16,6 @@ public class CreateOrderInput implements Input {
     private Payment payment;
     private String creditCardId;
     private Timestamp orderTime;
-    private Timestamp shippingTime;
-    private Timestamp deliveryTime;
     private int seasoningDiscountCode;
     private int shippingDiscountCode;
     private Map<Integer, Integer> orderItems;   // Map<productId, quantity>
@@ -84,22 +82,6 @@ public class CreateOrderInput implements Input {
 
     public void setOrderTime(Timestamp orderTime) {
         this.orderTime = orderTime;
-    }
-
-    public Timestamp getShippingTime() {
-        return shippingTime;
-    }
-
-    public void setShippingTime(Timestamp shippingTime) {
-        this.shippingTime = shippingTime;
-    }
-
-    public Timestamp getDeliveryTime() {
-        return deliveryTime;
-    }
-
-    public void setDeliveryTime(Timestamp deliveryTime) {
-        this.deliveryTime = deliveryTime;
     }
 
     public int getSeasoningDiscountCode() {

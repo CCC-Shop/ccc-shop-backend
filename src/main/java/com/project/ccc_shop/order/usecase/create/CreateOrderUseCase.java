@@ -1,4 +1,4 @@
-package com.project.ccc_shop.order.usecase;
+package com.project.ccc_shop.order.usecase.create;
 
 import com.project.ccc_shop.common.MySQLDriver;
 import com.project.ccc_shop.common.UseCase;
@@ -44,8 +44,8 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
             stmt.setString(6, input.getPaymentMethod().toString());
             stmt.setString(7, input.getCreditCardId());
             stmt.setTimestamp(8, input.getOrderTime());
-            stmt.setTimestamp(9, input.getShippingTime());
-            stmt.setTimestamp(10, input.getDeliveryTime());
+            stmt.setNull(9, NULL);
+            stmt.setNull(10, NULL);
             if (input.getSeasoningDiscountCode() == 0) {
                 stmt.setNull(11, NULL);
             } else {

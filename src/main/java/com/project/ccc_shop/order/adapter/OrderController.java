@@ -1,8 +1,8 @@
 package com.project.ccc_shop.order.adapter;
 
-import com.project.ccc_shop.order.usecase.CreateOrderInput;
-import com.project.ccc_shop.order.usecase.CreateOrderOutput;
-import com.project.ccc_shop.order.usecase.CreateOrderUseCase;
+import com.project.ccc_shop.order.usecase.create.CreateOrderInput;
+import com.project.ccc_shop.order.usecase.create.CreateOrderOutput;
+import com.project.ccc_shop.order.usecase.create.CreateOrderUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
