@@ -34,33 +34,13 @@ public class OrderController {
             input.setPaymentMethod(orderInfo.getPaymentMethod());
             input.setOrderTime(orderInfo.getOrderTime());
             input.setOrderItems(orderInfo.getOrderItems());
+            input.setSeasoningDiscountCode(orderInfo.getSeasoningDiscountCode());
+            input.setShippingDiscountCode(orderInfo.getShippingDiscountCode());
 
             this.createOrderUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
-
-//        CreateOrderInput input = new CreateOrderInput();
-//        CreateOrderOutput output = new CreateOrderOutput();
-//        try {
-//            JSONObject orderInfoJSON = new JSONObject(orderInfo);
-//            input.setCustomerId(orderInfoJSON.getInt("customerId"));
-//            input.setShippingFee(orderInfoJSON.getInt("shippingFee"));
-//            input.setRecipientName(orderInfoJSON.getString("recipientName"));
-//            input.setShippingAddress(orderInfoJSON.getString("shippingAddress"));
-//            input.setStatus(Status.valueOf(orderInfoJSON.getString("status")));
-//            input.setPaymentMethod(Payment.valueOf(orderInfoJSON.getString("paymentMethod")));
-//            input.setOrderTime(Timestamp.valueOf(orderInfoJSON.getString("orderTime")));
-//            JSONArray orderItems = orderInfoJSON.getJSONArray("orderItems");
-//
-//            input.setOrderItems();
-//
-//            this.createOrderUseCase.execute(input, output);
-//
-//            return ResponseEntity.status(HttpStatus.OK).body(output);
-//        } catch (JSONException e) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
-//        }
     }
 }
