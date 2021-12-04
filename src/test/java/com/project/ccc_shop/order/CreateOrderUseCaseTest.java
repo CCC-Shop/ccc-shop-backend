@@ -29,8 +29,6 @@ public class CreateOrderUseCaseTest {
         input.setStatus(Status.ORDER);
         input.setPaymentMethod(Payment.CASH);
         input.setOrderTime(Timestamp.from(Instant.parse("2021-11-23T10:00:00Z")));
-//        input.setOrderTime(Timestamp.from(Instant.now()));
-        // <productId, quantity>
         Map<Integer, Integer> orderItems = new HashMap<>();
         for (int i = 1; i < 4; i++){
             orderItems.put(i, 2);

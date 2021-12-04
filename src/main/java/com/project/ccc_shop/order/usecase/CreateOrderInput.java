@@ -19,7 +19,7 @@ public class CreateOrderInput implements Input {
     private Timestamp deliveryTime;
     private int seasoningDiscountCode;
     private int shippingDiscountCode;
-    private Map<Integer, Integer> orderItems;
+    private Map<Integer, Integer> orderItems;   // Map<productId, quantity>
 
     public int getCustomerId() {
         return customerId;
