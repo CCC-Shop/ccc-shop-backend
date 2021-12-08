@@ -34,24 +34,28 @@ CREATE TABLE IF NOT EXISTS `product`
 CREATE TABLE IF NOT EXISTS `shipping_discount`
 (
     `discount_code`      int(10) PRIMARY KEY AUTO_INCREMENT,
-    `vender_id`          int(10)      NOT NULL,
+    `order_id`          int(10)      NOT NULL,
+    `user_id`          int(10)      NOT NULL,
     `policy_description` varchar(500) NOT NULL,
     `start_time`         TIMESTAMP    NOT NULL,
     `end_time`           TIMESTAMP    NOT NULL,
-    `target_price`       int(20)      NOT NULL,
-    FOREIGN KEY (vender_id) REFERENCES `user` (`id`)
+    `target_price`       int(100)      NOT NULL
+--    FOREIGN KEY (order_id) REFERENCES `order` (`id`),
+--    FOREIGN KEY (user_id) REFERENCES `user` (`id`)
 );
 
 -- Table structure for table `seasonings_discount`
 CREATE TABLE IF NOT EXISTS `seasonings_discount`
 (
     `discount_code`      int(10) PRIMARY KEY AUTO_INCREMENT,
-    `vender_id`          int(10)      NOT NULL,
+    `order_id`          int(10)      NOT NULL,
+    `user_id`          int(10)      NOT NULL,
     `policy_description` varchar(500) NOT NULL,
     `start_time`         TIMESTAMP    NOT NULL,
     `end_time`           TIMESTAMP    NOT NULL,
-    `discount_rate`      double       NOT NULL,
-    FOREIGN KEY (vender_id) REFERENCES `user` (`id`)
+    `discount_rate`      double       NOT NULL
+--    FOREIGN KEY (order_id) REFERENCES `order` (`id`),
+--    FOREIGN KEY (user_id) REFERENCES `user` (`id`)
 );
 
 -- Table structure for table `special_discount`
@@ -63,9 +67,9 @@ CREATE TABLE IF NOT EXISTS `special_discount`
     `policy_description` varchar(500) NOT NULL,
     `start_time`         TIMESTAMP    NOT NULL,
     `end_time`           TIMESTAMP    NOT NULL,
-    `category`           varchar(255) NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES `product` (`id`),
-    FOREIGN KEY (vender_id) REFERENCES `user` (`id`)
+    `category`           varchar(255) NOT NULL
+--    FOREIGN KEY (product_id) REFERENCES `product` (`id`),
+--    FOREIGN KEY (vender_id) REFERENCES `user` (`id`)
 );
 
 -- Table structure for table `order`

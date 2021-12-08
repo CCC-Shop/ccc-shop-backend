@@ -10,6 +10,4 @@ public class SeasoningsDiscount {
     private Timestamp startTime;
     private Timestamp endTime;
     private double discountRate;
-//    private int targetPrice;
-//    private Category category;
 }

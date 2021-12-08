@@ -22,7 +22,8 @@ public class CreateSeasoningsDiscountUseCaseTest {
         CreateSeasoningsDiscountOutput output = new CreateSeasoningsDiscountOutput();
 
 //        input.setDiscountCode("50percentOff");
-        input.setVenderId(123);
+        input.setOrderId(123);
+        input.setUserId(123);
         input.setPolicyDescription("discount policy description test");
         input.setStartTime(Timestamp.valueOf("2021-11-23 00:00:00"));
         input.setEndTime(Timestamp.valueOf("2021-11-24 00:00:00"));

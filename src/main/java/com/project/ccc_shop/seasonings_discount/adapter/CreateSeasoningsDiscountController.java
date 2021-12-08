@@ -27,13 +27,12 @@ public class CreateSeasoningsDiscountController {
         try {
 
 //        input.setDiscountCode(requestBody.getDiscountCode());
-            input.setVenderId(requestBody.getVenderId());
+            input.setOrderId(requestBody.getOrderId());
+            input.setUserId(requestBody.getUserId());
             input.setPolicyDescription(requestBody.getPolicyDescription());
             input.setStartTime(requestBody.getStartTime());
             input.setEndTime(requestBody.getEndTime());
             input.setDiscountRate(requestBody.getDiscountRate());
-//        input.setTargetPrice(requestBody.getTargetPrice());
-//        input.setCategory(requestBody.getCategory());
 
             this.createSeasoningsDiscountUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
