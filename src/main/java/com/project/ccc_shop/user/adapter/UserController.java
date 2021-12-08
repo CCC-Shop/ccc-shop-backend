@@ -6,6 +6,9 @@ import com.project.ccc_shop.user.usecase.create.CreateUserUseCase;
 import com.project.ccc_shop.user.usecase.login.LoginUserInput;
 import com.project.ccc_shop.user.usecase.login.LoginUserOutput;
 import com.project.ccc_shop.user.usecase.login.LoginUserUseCase;
+import com.project.ccc_shop.user.usecase.delete.DeleteUserInput;
+import com.project.ccc_shop.user.usecase.delete.DeleteUserOutput;
+import com.project.ccc_shop.user.usecase.delete.DeleteUserUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ public class UserController {
 
     CreateUserUseCase createUserUseCase;
     LoginUserUseCase loginUserUseCase;
+    DeleteUserUseCase deleteUserUseCase;
 
     @Autowired
     public void setCreateUserUseCase(CreateUserUseCase createUserUseCase){
@@ -27,6 +31,11 @@ public class UserController {
     @Autowired
     public void setLoginUserUseCase(LoginUserUseCase loginUserUseCase){
         this.loginUserUseCase = loginUserUseCase;
+    }
+
+    @Autowired
+    public void setDeleteUserUseCase(DeleteUserUseCase deleteUserUseCase){
+        this.deleteUserUseCase = deleteUserUseCase;
     }
 
     @PostMapping(value = "/create")
@@ -63,6 +72,21 @@ public class UserController {
             this.loginUserUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
 
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+    }
+
+    @PostMapping(value = "/delete")
+    public ResponseEntity<DeleteUserOutput> deleteUser(@RequestBody DeleteUserInput requestBody) {
+        DeleteUserInput input = new DeleteUserInput();
+        DeleteUserOutput output = new DeleteUserOutput();
+
+        input.setId(requestBody.getId());
+
+        try {
+            this.deleteUserUseCase.execute(input, output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
