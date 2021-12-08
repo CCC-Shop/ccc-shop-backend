@@ -1,33 +1,31 @@
-package com.project.ccc_shop.seasonings_discount.usecase;
+package com.project.ccc_shop.special_discount.usecase;
 
 import com.project.ccc_shop.common.Input;
-import com.project.ccc_shop.product.entity.Category;
 
 import java.sql.Timestamp;
 
-public class CreateSeasoningsDiscountInput implements Input {
-//    private String discountCode;
-    private int orderId;
-    private int userId;
+public class CreateSpecialDiscountInput implements Input {
+    private int productId;
+    private int venderId;
     private String policyDescription;
     private Timestamp startTime;
     private Timestamp endTime;
-    private double discountRate;
+    private String category;
 
-    public int getOrderId() {
-        return orderId;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getVenderId() {
+        return venderId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setVenderId(int venderId) {
+        this.venderId = venderId;
     }
 
     public String getPolicyDescription() {
@@ -54,20 +52,20 @@ public class CreateSeasoningsDiscountInput implements Input {
         this.endTime = endTime;
     }
 
-    public double getDiscountRate() {
-        return discountRate;
+    public String getCategory() {
+        return category;
     }
 
-    public void setDiscountRate(double discountRate) {
-        this.discountRate = discountRate;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
 //{
-//    "orderId": 456,
-//    "userId": 456,
-//    "policyDescription": "policy description post",
+//    "productId": 123,
+//    "venderId": 456,
+//    "policyDescription": "policy description post bb",
 //    "startTime": "2021-11-22T13:47:58.212+00:00",
 //    "endTime": "2021-11-24T13:47:58.212+00:00",
-//    "discountRate": 0.5
+//    "category": "ipad"
 //}
 }

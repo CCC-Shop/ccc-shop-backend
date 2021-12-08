@@ -28,7 +28,7 @@ public class GetAllProductUseCase {
             List<Product> productList = new ArrayList<>();
 
             PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM `product`, `valuation` WHERE `product`." +
+                    "SELECT * FROM `product`" +
                             "ORDER BY `vender_id` ASC, `name` ASC, `stock` DESC, `price` ASC, `id` DESC");
 
             try (ResultSet rs = stmt.executeQuery()) {
