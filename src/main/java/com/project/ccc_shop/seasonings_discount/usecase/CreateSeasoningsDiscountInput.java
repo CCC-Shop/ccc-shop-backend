@@ -62,6 +62,7 @@ public class CreateSeasoningsDiscountInput implements Input {
         this.discountRate = discountRate;
     }
 
+
 //{
 //    "orderId": 456,
 //    "userId": 456,
