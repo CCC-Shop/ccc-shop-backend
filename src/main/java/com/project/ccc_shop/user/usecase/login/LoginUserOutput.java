@@ -4,12 +4,17 @@ import com.project.ccc_shop.common.Output;
 import com.project.ccc_shop.user.entity.Identity;
 
 public class LoginUserOutput extends Output {
+    private int id;
     private String username;
     private String identity;
     private String phone;
     private String email;
     private String creditCard;
     private String address;
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public String getUsername() {
         return username;
