@@ -3,6 +3,8 @@ package com.project.ccc_shop.user.adapter;
 import com.project.ccc_shop.user.usecase.create.CreateUserInput;
 import com.project.ccc_shop.user.usecase.create.CreateUserOutput;
 import com.project.ccc_shop.user.usecase.create.CreateUserUseCase;
+import com.project.ccc_shop.user.usecase.get_all.GetAllUserOutput;
+import com.project.ccc_shop.user.usecase.get_all.GetAllUserUseCase;
 import com.project.ccc_shop.user.usecase.login.LoginUserInput;
 import com.project.ccc_shop.user.usecase.login.LoginUserOutput;
 import com.project.ccc_shop.user.usecase.login.LoginUserUseCase;
@@ -16,26 +18,32 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins="http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UserController {
 
     CreateUserUseCase createUserUseCase;
     LoginUserUseCase loginUserUseCase;
     DeleteUserUseCase deleteUserUseCase;
+    GetAllUserUseCase getAllUserUseCase;
 
     @Autowired
-    public void setCreateUserUseCase(CreateUserUseCase createUserUseCase){
+    public void setCreateUserUseCase(CreateUserUseCase createUserUseCase) {
         this.createUserUseCase = createUserUseCase;
     }
 
     @Autowired
-    public void setLoginUserUseCase(LoginUserUseCase loginUserUseCase){
+    public void setLoginUserUseCase(LoginUserUseCase loginUserUseCase) {
         this.loginUserUseCase = loginUserUseCase;
     }
 
     @Autowired
-    public void setDeleteUserUseCase(DeleteUserUseCase deleteUserUseCase){
+    public void setDeleteUserUseCase(DeleteUserUseCase deleteUserUseCase) {
         this.deleteUserUseCase = deleteUserUseCase;
+    }
+
+    @Autowired
+    public void setGetAllUserUseCase(GetAllUserUseCase getAllUserUseCase) {
+        this.getAllUserUseCase = getAllUserUseCase;
     }
 
     @PostMapping(value = "/create")
@@ -92,4 +100,15 @@ public class UserController {
         }
     }
 
+    @GetMapping(value = "/get-all")
+    public ResponseEntity<GetAllUserOutput> getAllUser() {
+        GetAllUserOutput output = new GetAllUserOutput();
+
+        try {
+            this.getAllUserUseCase.execute(output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+    }
 }
