@@ -1,12 +1,16 @@
-USE ccc_shop;
-
 INSERT `user` (`username`, `identity`, `password`, `phone`, `email`, `credit_card`, `address`)
 VALUES ('Admin', 'admin', 'Admin123', '0912341234', 'admin@gmail.com', '0000111-2222333', 'home'),
        ('Apple', 'staff', 'Apple123', '0912345678', 'apple@gmail.com', '1111222-3333444', '台北市大安區忠孝東路xxx號5F'),
        ('ASUS', 'staff', 'ASUS123', '0900112233', 'google@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F'),
        ('Samsung', 'staff', 'Samsung123', '0909090909', 'acer@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F'),
        ('Zachary', 'customer', 'Zachary123', '0943214321', 'zachary@gmail.com', '2222333-4444555', '台北市大安區忠孝東路xxx號5F'),
-       ('Mandy', 'customer', 'Mandy123', '0987654321', 'mandy@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F');
+       ('Mandy', 'customer', 'Mandy123', '0987654321', 'mandy@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F'),
+       ('Patrick', 'customer', 'Patrick123', '0943214321', 'patrick@gmail.com', '1122333-4444555', '台北市大安區忠孝東路xxx號5F'),
+       ('Sandy', 'customer', 'Sandy123', '0943214321', 'sandy@gmail.com', '8822333-4444555', '台北市大安區忠孝東路xxx號5F'),
+       ('David', 'customer', 'David123', '0987654321', 'david@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F'),
+       ('Teddy', 'customer', 'Teddy123', '0987654321', 'teddy@gmail.com', '8822333-4444555', '台北市大安區忠孝東路xxx號5F');
+
+USE ccc_shop;
 
 INSERT `product` (`vender_id`, `name`, `category`, `price`, `stock`, `warehouse_address`, `description`, `pictureURL`)
 VALUES (2, 'Macbook Pro', 'NOTEBOOK', 54700, 152, 'XX市XX區XX路XX號XX樓', '這是很厲害的蘋果筆電', 'https://attach.setn.com/newsimages/2021/10/19/3367537-PH.jpg'),
@@ -67,5 +71,17 @@ VALUES (1, 3),
        (5, 4);
 
 INSERT `valuation` (`customer_id`, `product_id`, `comment`, `rating`)
-VALUES (6, 7, 'Not really well.', 2),
-       (5, 13, 'Excellent!', 5);
+VALUES (4, 1, 'Not really well.', 2),
+       (5, 1, 'Not really well.', 3),
+       (5, 2, 'Good.', 4),
+       (6, 2, 'Excellent!', 5),
+       (7, 4, 'Good.', 4),
+       (7, 3, 'Excellent!', 5),
+       (8, 4, 'Good.', 4),
+       (8, 1, 'Gooood!', 4),
+       (8, 5, 'Excellent!', 5),
+       (9, 6, 'very good!', 5),
+       (4, 10, 'very good!', 4),
+       (9, 11, 'Excellent!', 5),
+       (9, 12, 'so good!', 5),
+       (9, 13, 'very good!', 4);
