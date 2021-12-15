@@ -28,7 +28,10 @@ public class GetAllProductUseCase {
             List<Product> productList = new ArrayList<>();
 
             PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM `product`" +
+                    "SELECT p.*, user.username, AVG(rating) " +
+                            "FROM `product` AS p, `valuation` AS v, `user` " +
+                            "WHERE p.id = v.product_id AND p.vender_id = user.id " +
+                            "GROUP BY v.product_id " +
                             "ORDER BY `vender_id` ASC, `name` ASC, `stock` DESC, `price` ASC, `id` DESC");
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -41,8 +44,10 @@ public class GetAllProductUseCase {
                     String warehouseAddress = rs.getString("warehouse_address");
                     String description = rs.getString("description");
                     String pictureURL = rs.getString("pictureURL");
+                    String venderName = rs.getString("username");
+                    double rate = rs.getDouble("avg(rating)");
 
-                    Product product = new Product(venderId, name, category, price, stock, warehouseAddress, description, pictureURL);
+                    Product product = new Product(venderId, name, category, price, stock, warehouseAddress, description, pictureURL, venderName, rate);
                     productList.add(product);
                 }
             }

@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `product`
     `warehouse_address` varchar(100) NOT NULL,
     `description`       varchar(500) DEFAULT NULL,
     `pictureURL`        varchar(500) DEFAULT NULL,
-    FOREIGN KEY (vender_id) REFERENCES `user` (`id`)
+    FOREIGN KEY (vender_id) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Table structure for table `shipping_discount`
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `shipping_discount`
     `start_time`         TIMESTAMP    NOT NULL,
     `end_time`           TIMESTAMP    NOT NULL,
     `target_price`       int(20)      NOT NULL,
-    FOREIGN KEY (vender_id) REFERENCES `user` (`id`)
+    FOREIGN KEY (vender_id) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Table structure for table `seasonings_discount`
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `seasonings_discount`
     `start_time`         TIMESTAMP    NOT NULL,
     `end_time`           TIMESTAMP    NOT NULL,
     `discount_rate`      double       NOT NULL,
-    FOREIGN KEY (vender_id) REFERENCES `user` (`id`)
+    FOREIGN KEY (vender_id) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Table structure for table `special_discount`
@@ -64,8 +64,8 @@ CREATE TABLE IF NOT EXISTS `special_discount`
     `start_time`         TIMESTAMP    NOT NULL,
     `end_time`           TIMESTAMP    NOT NULL,
     `category`           varchar(255) NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES `product` (`id`),
-    FOREIGN KEY (vender_id) REFERENCES `user` (`id`)
+    FOREIGN KEY (product_id) REFERENCES `product` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (vender_id) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Table structure for table `order`
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `order`
     `shipping_discount_code`  int(6)                DEFAULT NULL,
     FOREIGN KEY (seasoning_discount_code) REFERENCES `seasonings_discount` (`discount_code`) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (shipping_discount_code) REFERENCES `shipping_discount` (`discount_code`) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (customer_id) REFERENCES `user` (`id`)
+    FOREIGN KEY (customer_id) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Table structure for table `order_items`
@@ -107,8 +107,8 @@ CREATE TABLE IF NOT EXISTS `shopping_cart`
     `customer_id` int(10),
     `quantity`    int(6) NOT NULL,
     PRIMARY KEY (product_id, customer_id),
-    FOREIGN KEY (product_id) REFERENCES `product` (`id`),
-    FOREIGN KEY (customer_id) REFERENCES `user` (`id`)
+    FOREIGN KEY (product_id) REFERENCES `product` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (customer_id) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Table structure for table `manage_order`
@@ -117,8 +117,8 @@ CREATE TABLE IF NOT EXISTS `manage_order`
     `order_id`  int(10),
     `vender_id` int(10),
     PRIMARY KEY (order_id, vender_id),
-    FOREIGN KEY (order_id) REFERENCES `order` (`id`),
-    FOREIGN KEY (vender_id) REFERENCES `user` (`id`)
+    FOREIGN KEY (order_id) REFERENCES `order` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (vender_id) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Table structure for table `valuation`
@@ -129,5 +129,6 @@ CREATE TABLE IF NOT EXISTS `valuation`
     `comment`     varchar(500) NOT NULL,
     `rating`      int(1)       NOT NULL,
     PRIMARY KEY (customer_id, product_id),
-    FOREIGN KEY (customer_id) REFERENCES `user` (`id`)
+    FOREIGN KEY (customer_id) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES `product` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );

@@ -12,8 +12,10 @@ public class Product {
     private String warehouseAddress;
     private String description;
     private String pictureURL;
+    private String venderName;
+    private double rate;
 
-    public Product(int venderId, String name, String category, int price, int stock, String warehouseAddress, String description, String pictureURL) {
+    public Product(int venderId, String name, String category, int price, int stock, String warehouseAddress, String description, String pictureURL,String venderName, double rate) {
         this.venderId = venderId;
         this.name = name;
         this.category = category;
@@ -22,6 +24,8 @@ public class Product {
         this.warehouseAddress = warehouseAddress;
         this.description = description;
         this.pictureURL = pictureURL;
+        this.venderName = venderName;
+        this.rate = rate;
     }
 
 
@@ -89,4 +93,19 @@ public class Product {
         this.pictureURL = pictureURL;
     }
 
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    public String getVenderName() {
+        return venderName;
+    }
+
+    public void setVenderName(String venderName) {
+        this.venderName = venderName;
+    }
 }
