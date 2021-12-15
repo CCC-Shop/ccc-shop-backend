@@ -1,9 +1,9 @@
 package com.project.ccc_shop.special_discount;
 
 import com.project.ccc_shop.common.MySQLDriver;
-import com.project.ccc_shop.special_discount.usecase.CreateSpecialDiscountInput;
-import com.project.ccc_shop.special_discount.usecase.CreateSpecialDiscountOutput;
-import com.project.ccc_shop.special_discount.usecase.CreateSpecialDiscountUseCase;
+import com.project.ccc_shop.special_discount.usecase.create.CreateSpecialDiscountInput;
+import com.project.ccc_shop.special_discount.usecase.create.CreateSpecialDiscountOutput;
+import com.project.ccc_shop.special_discount.usecase.create.CreateSpecialDiscountUseCase;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;

@@ -20,13 +20,12 @@ public class CreateShippingDiscountUseCaseTest {
         CreateShippingDiscountOutput output = new CreateShippingDiscountOutput();
 
 //        input.setDiscountCode("50percentOff");
-        input.setOrderId(123);
-        input.setUserId(123);
+        input.setVenderId(123);
         input.setPolicyDescription("discount policy description test");
         input.setStartTime(Timestamp.valueOf("2021-11-23 00:00:00"));
         input.setEndTime(Timestamp.valueOf("2021-11-24 00:00:00"));
         // "2021-11-24T13:47:58.212+00:00"
-        input.setTargetPrice(1000);
+        input.setTargetPrice(100);
 
         createShippingDiscountUseCase.execute(input, output);
 

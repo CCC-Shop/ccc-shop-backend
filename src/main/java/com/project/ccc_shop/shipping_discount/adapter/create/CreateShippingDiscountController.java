@@ -1,4 +1,4 @@
-package com.project.ccc_shop.shipping_discount.adapter;
+package com.project.ccc_shop.shipping_discount.adapter.create;
 
 import com.project.ccc_shop.shipping_discount.usecase.CreateShippingDiscountInput;
 import com.project.ccc_shop.shipping_discount.usecase.CreateShippingDiscountOutput;
@@ -27,8 +27,7 @@ public class CreateShippingDiscountController {
         try {
 
 //        input.setDiscountCode(requestBody.getDiscountCode());
-            input.setOrderId(requestBody.getOrderId());
-            input.setUserId(requestBody.getUserId());
+            input.setVenderId(requestBody.getVenderId());
             input.setPolicyDescription(requestBody.getPolicyDescription());
             input.setStartTime(requestBody.getStartTime());
             input.setEndTime(requestBody.getEndTime());

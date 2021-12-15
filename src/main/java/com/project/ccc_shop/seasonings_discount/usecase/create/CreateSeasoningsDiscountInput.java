@@ -1,4 +1,4 @@
-package com.project.ccc_shop.seasonings_discount.usecase;
+package com.project.ccc_shop.seasonings_discount.usecase.create;
 
 import com.project.ccc_shop.common.Input;
 import com.project.ccc_shop.product.entity.Category;
@@ -7,27 +7,18 @@ import java.sql.Timestamp;
 
 public class CreateSeasoningsDiscountInput implements Input {
 //    private String discountCode;
-    private int orderId;
-    private int userId;
+    private int venderId;
     private String policyDescription;
     private Timestamp startTime;
     private Timestamp endTime;
     private double discountRate;
 
-    public int getOrderId() {
-        return orderId;
+    public int getVenderId() {
+        return venderId;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setVenderId(int venderId) {
+        this.venderId = venderId;
     }
 
     public String getPolicyDescription() {
