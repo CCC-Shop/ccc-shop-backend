@@ -26,7 +26,7 @@ public class ShoppingCartController {
         CreateShoppingCartInput input = new CreateShoppingCartInput();
         CreateShoppingCartOutput output = new CreateShoppingCartOutput();
         try {
-            input.setProductId(requestBody.getCustomerId());
+            input.setProductId(requestBody.getProductId());
             input.setCustomerId(requestBody.getCustomerId());
             input.setQuantity(requestBody.getQuantity());
 

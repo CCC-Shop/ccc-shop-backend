@@ -32,6 +32,7 @@ public class LoginUserUseCase implements UseCase<LoginUserInput, LoginUserOutput
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+                output.setId(rs.getInt("id"));
                 output.setUsername(rs.getString("username"));
                 output.setIdentity(rs.getString("identity"));
                 output.setPhone(rs.getString("phone"));

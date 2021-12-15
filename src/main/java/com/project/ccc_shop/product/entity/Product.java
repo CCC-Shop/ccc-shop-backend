@@ -3,7 +3,7 @@ package com.project.ccc_shop.product.entity;
 import java.util.UUID;
 
 public class Product {
-
+    private int id;
     private int venderId;
     private String name;
     private String category;
@@ -15,7 +15,8 @@ public class Product {
     private String venderName;
     private double rate;
 
-    public Product(int venderId, String name, String category, int price, int stock, String warehouseAddress, String description, String pictureURL,String venderName, double rate) {
+    public Product(int id, int venderId, String name, String category, int price, int stock, String warehouseAddress, String description, String pictureURL,String venderName, double rate) {
+        this.id = id;
         this.venderId = venderId;
         this.name = name;
         this.category = category;
@@ -28,6 +29,9 @@ public class Product {
         this.rate = rate;
     }
 
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public int getVenderId() {
         return venderId;

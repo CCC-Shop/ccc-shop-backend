@@ -36,7 +36,7 @@ public class GetAllUserUseCase {
                     user.setPassword(rs.getString("password"));
                     user.setPhone(rs.getString("phone"));
                     user.setEmail(rs.getString("email"));
-                    user.setCreditCardId(rs.getString("credit_card"));
+                    user.setCreditCard(rs.getString("credit_card"));
                     user.setAddress(rs.getString("address"));
 
                     users.add(user);

@@ -7,7 +7,7 @@ public class User {
     private String password;
     private String phone;
     private String email;
-    private String creditCardId;
+    private String creditCard;
     private String address;
 
     public void setId(int id) {
@@ -58,12 +58,12 @@ public class User {
         this.email = email;
     }
 
-    public String getCreditCardId() {
-        return creditCardId;
+    public String getCreditCard() {
+        return creditCard;
     }
 
-    public void setCreditCardId(String creditCardId) {
-        this.creditCardId = creditCardId;
+    public void setCreditCard(String creditCard) {
+        this.creditCard = creditCard;
     }
 
     public String getAddress() {
