@@ -39,6 +39,7 @@ public class GetSeasoningsDiscountUseCase implements UseCase<GetSeasoningsDiscou
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

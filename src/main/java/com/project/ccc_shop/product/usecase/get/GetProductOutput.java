@@ -3,7 +3,7 @@ package com.project.ccc_shop.product.usecase.get;
 import com.project.ccc_shop.common.Output;
 import com.project.ccc_shop.product.entity.Category;
 
-public class GetProductOutput implements Output {
+public class GetProductOutput extends Output {
 
     private String name;
     private int userId;

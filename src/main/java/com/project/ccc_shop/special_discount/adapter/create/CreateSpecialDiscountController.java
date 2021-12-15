@@ -39,6 +39,7 @@ public class CreateSpecialDiscountController {
             this.createSpecialDiscountUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
+            output.setMessage(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
     }

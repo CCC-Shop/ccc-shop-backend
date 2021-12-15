@@ -4,7 +4,7 @@ import com.project.ccc_shop.common.Output;
 
 import java.sql.Timestamp;
 
-public class GetSeasoningsDiscountOutput implements Output {
+public class GetSeasoningsDiscountOutput extends Output {
 
     private int venderId;
     private String policyDescription;

@@ -38,6 +38,7 @@ public class CreateProductUseCase implements UseCase<CreateProductInput, CreateP
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

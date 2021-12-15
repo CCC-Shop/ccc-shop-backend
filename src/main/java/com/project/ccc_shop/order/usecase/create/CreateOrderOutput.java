@@ -4,7 +4,7 @@ import com.project.ccc_shop.common.Output;
 
 import java.sql.Timestamp;
 
-public class CreateOrderOutput implements Output {
+public class CreateOrderOutput extends Output {
     private int id;
     private Timestamp orderTime;
 

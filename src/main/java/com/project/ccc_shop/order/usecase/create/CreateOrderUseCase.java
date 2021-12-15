@@ -66,6 +66,7 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
             output.setOrderTime(input.getOrderTime());
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -100,6 +101,7 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
                 stmt.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
+                throw new RuntimeException(e);
             }
         });
     }

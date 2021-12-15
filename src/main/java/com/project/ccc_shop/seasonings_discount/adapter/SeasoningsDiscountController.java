@@ -45,6 +45,7 @@ public class SeasoningsDiscountController {
             this.createSeasoningsDiscountUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
+            output.setMessage(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
     }
@@ -60,6 +61,7 @@ public class SeasoningsDiscountController {
             this.getSeasoningsDiscountUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
+            output.setMessage(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
     }

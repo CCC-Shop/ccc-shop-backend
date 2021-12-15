@@ -2,7 +2,7 @@ package com.project.ccc_shop.user.usecase.delete;
 
 import com.project.ccc_shop.common.Output;
 
-public class DeleteUserOutput implements Output{
+public class DeleteUserOutput extends Output{
     private boolean workCheck;
 
     public void setWorkCheck(boolean workCheck) {

@@ -56,6 +56,7 @@ public class GetAllProductUseCase {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

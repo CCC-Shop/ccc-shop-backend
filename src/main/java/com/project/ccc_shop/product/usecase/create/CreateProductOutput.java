@@ -4,7 +4,7 @@ import com.project.ccc_shop.common.Output;
 
 import java.util.UUID;
 
-public class CreateProductOutput implements Output {
+public class CreateProductOutput extends Output {
     private String name;
 
     public String getName() {

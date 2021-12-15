@@ -37,6 +37,7 @@ public class CreateValuationUseCase implements UseCase<CreateValuationInput, Cre
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

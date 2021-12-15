@@ -5,7 +5,7 @@ import com.project.ccc_shop.user.entity.User;
 
 import java.util.List;
 
-public class GetAllUserOutput implements Output {
+public class GetAllUserOutput extends Output {
 
     private List<User> users;
 

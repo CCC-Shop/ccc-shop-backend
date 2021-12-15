@@ -74,6 +74,7 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.OK).body(output);
 
         } catch (Exception e) {
+            output.setMessage(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
     }
@@ -97,6 +98,7 @@ public class ProductController {
             this.updateProductUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
+            output.setMessage(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
     }
@@ -112,6 +114,7 @@ public class ProductController {
             this.deleteProductUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
+            output.setMessage(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
     }
@@ -127,6 +130,7 @@ public class ProductController {
             this.getProductUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
+            output.setMessage(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
     }
@@ -139,6 +143,7 @@ public class ProductController {
             this.getAllProductUseCase.execute(output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
+            output.setMessage(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
     }

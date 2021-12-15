@@ -39,6 +39,7 @@ public class GetValuationUseCase implements UseCase<GetValuationInput, GetValuat
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

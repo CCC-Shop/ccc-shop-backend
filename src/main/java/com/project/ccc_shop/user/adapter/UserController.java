@@ -64,6 +64,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.OK).body(output);
 
         } catch (Exception e) {
+            output.setMessage(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
     }
@@ -81,6 +82,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.OK).body(output);
 
         } catch (Exception e) {
+            output.setMessage(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
     }
@@ -96,6 +98,7 @@ public class UserController {
             this.deleteUserUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
+            output.setMessage(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
     }
@@ -108,6 +111,7 @@ public class UserController {
             this.getAllUserUseCase.execute(output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
+            output.setMessage(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
     }

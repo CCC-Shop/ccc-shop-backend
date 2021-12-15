@@ -41,6 +41,7 @@ public class UpdateProductUseCase implements UseCase<UpdateProductInput, UpdateP
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

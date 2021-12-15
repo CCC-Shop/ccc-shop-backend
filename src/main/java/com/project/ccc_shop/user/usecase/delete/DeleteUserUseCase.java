@@ -34,12 +34,14 @@ public class DeleteUserUseCase implements UseCase<DeleteUserInput, DeleteUserOut
 
             if (!rs.next()){
                 output.setWorkCheck(false);
+                throw new RuntimeException("delete user failed");
             } else {
                 output.setWorkCheck(true);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

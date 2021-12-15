@@ -46,6 +46,7 @@ public class GetAllUserUseCase {
             output.setUserList(users);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

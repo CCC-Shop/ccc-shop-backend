@@ -21,18 +21,19 @@ public class ShoppingCartController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<CreateShoppingCartOutput> createOrder(@RequestBody CreateShoppingCartInput requestBody) {
+    public ResponseEntity<CreateShoppingCartOutput> createShoppingCart(@RequestBody CreateShoppingCartInput requestBody) {
 
         CreateShoppingCartInput input = new CreateShoppingCartInput();
         CreateShoppingCartOutput output = new CreateShoppingCartOutput();
         try {
-            input.setProductId(requestBody.getCustomerId());
+            input.setProductId(requestBody.getProductId());
             input.setCustomerId(requestBody.getCustomerId());
             input.setQuantity(requestBody.getQuantity());
 
             this.createShoppingCartUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
+            output.setMessage(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
     }

@@ -40,6 +40,7 @@ public class CreateSpecialDiscountUseCase implements UseCase<CreateSpecialDiscou
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

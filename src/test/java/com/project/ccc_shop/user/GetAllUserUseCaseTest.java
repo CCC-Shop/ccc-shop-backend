@@ -30,7 +30,7 @@ public class GetAllUserUseCaseTest {
         assertEquals("Admin123", user.getPassword());
         assertEquals("0912341234", user.getPhone());
         assertEquals("admin@gmail.com", user.getEmail());
-        assertEquals("0000111-2222333", user.getCreditCardId());
+        assertEquals("0000111-2222333", user.getCreditCard());
         assertEquals("home", user.getAddress());
 
         user = testUserList.get(2);
@@ -58,7 +58,7 @@ public class GetAllUserUseCaseTest {
         assertEquals("Teddy123", user.getPassword());
         assertEquals("0987654321", user.getPhone());
         assertEquals("teddy@gmail.com", user.getEmail());
-        assertEquals("8822333-4444555", user.getCreditCardId());
+        assertEquals("8822333-4444555", user.getCreditCard());
         assertEquals("台北市大安區忠孝東路xxx號5F", user.getAddress());
     }
 }

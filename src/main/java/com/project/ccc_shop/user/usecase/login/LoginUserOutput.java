@@ -3,7 +3,7 @@ package com.project.ccc_shop.user.usecase.login;
 import com.project.ccc_shop.common.Output;
 import com.project.ccc_shop.user.entity.Identity;
 
-public class LoginUserOutput implements Output {
+public class LoginUserOutput extends Output {
     private String username;
     private String identity;
     private String phone;

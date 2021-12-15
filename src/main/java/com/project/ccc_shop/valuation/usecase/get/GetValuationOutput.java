@@ -1,6 +1,8 @@
 package com.project.ccc_shop.valuation.usecase.get;
 
-public class GetValuationOutput {
+import com.project.ccc_shop.common.Output;
+
+public class GetValuationOutput extends Output {
     private int customerId;
     private int productId;
     private String comment;

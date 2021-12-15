@@ -41,6 +41,7 @@ public class CreateUserUseCase implements UseCase<CreateUserInput, CreateUserOut
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

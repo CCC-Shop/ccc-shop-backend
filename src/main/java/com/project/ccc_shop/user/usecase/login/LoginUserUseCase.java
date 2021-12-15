@@ -40,13 +40,12 @@ public class LoginUserUseCase implements UseCase<LoginUserInput, LoginUserOutput
                 output.setAddress(rs.getString("address"));
             } else {
                 output.setUsername("fail");
-                throw new LoginFailedException();
+                throw new RuntimeException("Login failed");
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (LoginFailedException e) {
-            throw e;
+            throw new RuntimeException(e);
         }
     }
 }

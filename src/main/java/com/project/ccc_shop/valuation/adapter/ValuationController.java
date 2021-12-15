@@ -46,6 +46,7 @@ public class ValuationController {
             return ResponseEntity.status(HttpStatus.OK).body(output);
 
         } catch (Exception e) {
+            output.setMessage(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
     }
@@ -62,6 +63,7 @@ public class ValuationController {
             this.getValuationUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
+            output.setMessage(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
     }

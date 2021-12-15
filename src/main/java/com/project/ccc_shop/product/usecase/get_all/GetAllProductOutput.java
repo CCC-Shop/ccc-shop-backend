@@ -5,7 +5,7 @@ import com.project.ccc_shop.product.entity.Product;
 
 import java.util.List;
 
-public class GetAllProductOutput implements Output {
+public class GetAllProductOutput extends Output {
 
     private List<Product> productList;
 

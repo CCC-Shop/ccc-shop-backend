@@ -33,12 +33,14 @@ public class DeleteProductUseCase implements UseCase<DeleteProductInput, DeleteP
 
             if (!rs.next()) {
                 output.setWorkCheck(false);
+                throw new RuntimeException("delete product failed");
             } else {
                 output.setWorkCheck(true);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

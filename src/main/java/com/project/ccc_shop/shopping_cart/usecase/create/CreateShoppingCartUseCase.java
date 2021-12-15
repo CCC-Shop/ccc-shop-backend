@@ -34,6 +34,7 @@ public class CreateShoppingCartUseCase implements UseCase<CreateShoppingCartInpu
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

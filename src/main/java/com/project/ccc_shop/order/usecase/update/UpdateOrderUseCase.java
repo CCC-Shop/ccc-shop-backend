@@ -32,6 +32,7 @@ public class UpdateOrderUseCase implements UseCase<UpdateOrderInput, UpdateOrder
             output.setTime(input.getTime());
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -45,6 +46,7 @@ public class UpdateOrderUseCase implements UseCase<UpdateOrderInput, UpdateOrder
                 stmt.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
+                throw new RuntimeException(e);
             }
         } else if (status.equals(Status.DELIVERED)) {
             try (PreparedStatement stmt = connection.prepareStatement(
@@ -55,6 +57,7 @@ public class UpdateOrderUseCase implements UseCase<UpdateOrderInput, UpdateOrder
                 stmt.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
     }

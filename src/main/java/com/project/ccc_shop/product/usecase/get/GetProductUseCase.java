@@ -43,6 +43,7 @@ public class GetProductUseCase implements UseCase<GetProductInput, GetProductOut
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

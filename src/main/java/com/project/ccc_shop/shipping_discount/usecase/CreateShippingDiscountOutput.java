@@ -2,7 +2,7 @@ package com.project.ccc_shop.shipping_discount.usecase;
 
 import com.project.ccc_shop.common.Output;
 
-public class CreateShippingDiscountOutput implements Output {
+public class CreateShippingDiscountOutput extends Output {
     private int discountCode;
 
     public int getDiscountCode() {

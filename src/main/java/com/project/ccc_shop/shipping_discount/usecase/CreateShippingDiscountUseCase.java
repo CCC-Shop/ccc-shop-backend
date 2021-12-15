@@ -39,6 +39,7 @@ public class CreateShippingDiscountUseCase implements UseCase<CreateShippingDisc
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -55,6 +56,7 @@ public class CreateShippingDiscountUseCase implements UseCase<CreateShippingDisc
             }
         }catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         throw new RuntimeException("Discount code not found, where policy_description=" + policyDescription + ", start_time=" + startTime + ".");
     }
