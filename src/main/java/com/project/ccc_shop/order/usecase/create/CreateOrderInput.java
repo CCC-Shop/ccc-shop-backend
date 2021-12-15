@@ -5,6 +5,7 @@ import com.project.ccc_shop.order.entity.Payment;
 import com.project.ccc_shop.order.entity.Status;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.Map;
 
 public class CreateOrderInput implements Input {
@@ -18,7 +19,7 @@ public class CreateOrderInput implements Input {
     private Timestamp orderTime;
     private int seasoningDiscountCode;
     private int shippingDiscountCode;
-    private Map<Integer, Integer> orderItems;   // Map<productId, quantity>
+    private Map<Integer, Integer> orderItems = new HashMap<>();   // Map<productId, quantity>
 
     public int getCustomerId() {
         return customerId;
