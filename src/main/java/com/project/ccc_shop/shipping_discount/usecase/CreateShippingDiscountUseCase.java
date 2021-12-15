@@ -21,16 +21,15 @@ public class CreateShippingDiscountUseCase implements UseCase<CreateShippingDisc
         try(Connection connection = this.mySQLDriver.getConnection()) {
 
             PreparedStatement stmt = connection.prepareStatement(
-                    "INSERT `shipping_discount` (`order_id` ,`user_id`, `policy_description`, `start_time`, `end_time`, `target_price`)" +
-                            " VALUES (?,?,?,?,?,?)");
+                    "INSERT `shipping_discount` (`vender_id`, `policy_description`, `start_time`, `end_time`, `target_price`)" +
+                            " VALUES (?,?,?,?,?)");
 
 //            stmt.setString(1, input.getDiscountCode());
-            stmt.setInt(1, input.getOrderId());
-            stmt.setInt(2, input.getUserId());
-            stmt.setString(3, input.getPolicyDescription());
-            stmt.setTimestamp(4, input.getStartTime());
-            stmt.setTimestamp(5, input.getEndTime());
-            stmt.setInt(6, input.getTargetPrice());
+            stmt.setInt(1, input.getVenderId());
+            stmt.setString(2, input.getPolicyDescription());
+            stmt.setTimestamp(3, input.getStartTime());
+            stmt.setTimestamp(4, input.getEndTime());
+            stmt.setInt(5, input.getTargetPrice());
 
             stmt.executeUpdate();
 

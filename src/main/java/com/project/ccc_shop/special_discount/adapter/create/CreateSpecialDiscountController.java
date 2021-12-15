@@ -1,8 +1,8 @@
-package com.project.ccc_shop.special_discount.adapter;
+package com.project.ccc_shop.special_discount.adapter.create;
 
-import com.project.ccc_shop.special_discount.usecase.CreateSpecialDiscountInput;
-import com.project.ccc_shop.special_discount.usecase.CreateSpecialDiscountOutput;
-import com.project.ccc_shop.special_discount.usecase.CreateSpecialDiscountUseCase;
+import com.project.ccc_shop.special_discount.usecase.create.CreateSpecialDiscountInput;
+import com.project.ccc_shop.special_discount.usecase.create.CreateSpecialDiscountOutput;
+import com.project.ccc_shop.special_discount.usecase.create.CreateSpecialDiscountUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

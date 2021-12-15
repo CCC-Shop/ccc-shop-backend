@@ -6,27 +6,18 @@ import java.sql.Timestamp;
 
 public class CreateShippingDiscountInput implements Input {
 //    private String discountCode;
-    private int orderId;
-    private int userId;
+    private int venderId;
     private String policyDescription;
     private Timestamp startTime;
     private Timestamp endTime;
     private int targetPrice;
 
-    public int getOrderId() {
-        return orderId;
+    public int getVenderId() {
+        return venderId;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setVenderId(int venderId) {
+        this.venderId = venderId;
     }
 
     public String getPolicyDescription() {
@@ -62,8 +53,7 @@ public class CreateShippingDiscountInput implements Input {
     }
 
 //{
-//    "orderId": 456,
-//    "userId": 456,
+//    "venderId": 456,
 //    "policyDescription": "policy description post",
 //    "startTime": "2021-11-22T13:47:58.212+00:00",
 //    "endTime": "2021-11-24T13:47:58.212+00:00",
