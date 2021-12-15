@@ -28,7 +28,7 @@ public class GetAllProductUseCase {
             List<Product> productList = new ArrayList<>();
 
             PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT p.vender_id, p.name, p.category, p.price, p.stock, p.warehouse_address, p.description, p.pictureURL, user.username, AVG(rating)" +
+                    "SELECT p.id, p.vender_id, p.name, p.category, p.price, p.stock, p.warehouse_address, p.description, p.pictureURL, user.username, AVG(rating)" +
                             "            FROM `user`, `product` AS p LEFT OUTER JOIN `valuation` AS v" +
                             "            ON p.id = v.product_id" +
                             "            WHERE user.id = p.vender_id" +
@@ -37,6 +37,7 @@ public class GetAllProductUseCase {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while(rs.next()) {
+                    int id = rs.getInt("id");
                     int venderId = rs.getInt("vender_id");
                     String name = rs.getString("name");
                     String category = rs.getString("category");
@@ -48,7 +49,7 @@ public class GetAllProductUseCase {
                     String venderName = rs.getString("username");
                     double rate = rs.getDouble("avg(rating)");
 
-                    Product product = new Product(venderId, name, category, price, stock, warehouseAddress, description, pictureURL, venderName, rate);
+                    Product product = new Product(id, venderId, name, category, price, stock, warehouseAddress, description, pictureURL, venderName, rate);
                     productList.add(product);
                 }
             }
