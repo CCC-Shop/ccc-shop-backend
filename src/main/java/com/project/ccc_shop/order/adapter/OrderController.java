@@ -44,10 +44,11 @@ public class OrderController {
             input.setShippingAddress(requestBody.getShippingAddress());
             input.setStatus(requestBody.getStatus());
             input.setPaymentMethod(requestBody.getPaymentMethod());
-            input.setOrderTime(requestBody.getOrderTime());
-            input.setOrderItems(requestBody.getOrderItems());
+            input.setCreditCardId(requestBody.getCreditCardId());
+            input.setOrderTime(Timestamp.from(Instant.now()));
             input.setSeasoningDiscountCode(requestBody.getSeasoningDiscountCode());
             input.setShippingDiscountCode(requestBody.getShippingDiscountCode());
+            input.setOrderItems(requestBody.getOrderItems());
 
             this.createOrderUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);

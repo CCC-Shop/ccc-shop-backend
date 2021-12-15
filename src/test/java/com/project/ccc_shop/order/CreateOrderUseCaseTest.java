@@ -13,24 +13,23 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CreateOrderUseCaseTest {
     @Test
     public void create_order_without_discount_code() {
         MySQLDriver mySQLDriver = new MySQLDriver();
-
         CreateOrderUseCase createOrderUseCase = new CreateOrderUseCase(mySQLDriver);
         CreateOrderInput input = new CreateOrderInput();
         CreateOrderOutput output = new CreateOrderOutput();
-
         input.setCustomerId(1);
         input.setShippingFee(60);
         input.setRecipientName("Jack");
         input.setShippingAddress("台北市大安區忠孝東路xxx號");
         input.setStatus(Status.ORDER);
         input.setPaymentMethod(Payment.CASH);
-        input.setOrderTime(Timestamp.from(Instant.parse("2021-12-04T10:00:00Z")));
+        Timestamp orderTime = Timestamp.from(Instant.now());
+        input.setOrderTime(orderTime);
         Map<Integer, Integer> orderItems = new HashMap<>();
         for (int i = 1; i < 4; i++) {
             orderItems.put(i, 2);
@@ -40,59 +39,60 @@ public class CreateOrderUseCaseTest {
         createOrderUseCase.execute(input, output);
 
         assertNotNull(output.getId());
+        assertEquals(orderTime, output.getOrderTime());
     }
 
     @Test
     public void create_order_with_seasoning_discount_code() {
         MySQLDriver mySQLDriver = new MySQLDriver();
-
         CreateOrderUseCase createOrderUseCase = new CreateOrderUseCase(mySQLDriver);
         CreateOrderInput input = new CreateOrderInput();
         CreateOrderOutput output = new CreateOrderOutput();
-
         input.setCustomerId(2);
         input.setShippingFee(100);
         input.setRecipientName("Bob");
         input.setShippingAddress("some where");
         input.setStatus(Status.ORDER);
         input.setPaymentMethod(Payment.CASH);
-        input.setOrderTime(Timestamp.from(Instant.parse("2021-12-04T11:00:00Z")));
+        Timestamp orderTime = Timestamp.from(Instant.now());
+        input.setOrderTime(orderTime);
         input.setSeasoningDiscountCode(3);
         Map<Integer, Integer> orderItems = new HashMap<>();
         for (int i = 1; i < 4; i++) {
-            orderItems.put(i, 8-i);
+            orderItems.put(i, 8 - i);
         }
         input.setOrderItems(orderItems);
 
         createOrderUseCase.execute(input, output);
 
         assertNotNull(output.getId());
+        assertEquals(orderTime, output.getOrderTime());
     }
 
     @Test
     public void create_order_with_shipping_discount_code() {
         MySQLDriver mySQLDriver = new MySQLDriver();
-
         CreateOrderUseCase createOrderUseCase = new CreateOrderUseCase(mySQLDriver);
         CreateOrderInput input = new CreateOrderInput();
         CreateOrderOutput output = new CreateOrderOutput();
-
         input.setCustomerId(3);
         input.setShippingFee(80);
         input.setRecipientName("Cindy");
         input.setShippingAddress("some where");
         input.setStatus(Status.ORDER);
         input.setPaymentMethod(Payment.CASH);
-        input.setOrderTime(Timestamp.from(Instant.parse("2021-12-04T12:00:00Z")));
+        Timestamp orderTime = Timestamp.from(Instant.now());
+        input.setOrderTime(orderTime);
         input.setShippingDiscountCode(2);
         Map<Integer, Integer> orderItems = new HashMap<>();
         for (int i = 1; i < 4; i++) {
-            orderItems.put(4-i, i);
+            orderItems.put(4 - i, i);
         }
         input.setOrderItems(orderItems);
 
         createOrderUseCase.execute(input, output);
 
         assertNotNull(output.getId());
+        assertEquals(orderTime, output.getOrderTime());
     }
 }

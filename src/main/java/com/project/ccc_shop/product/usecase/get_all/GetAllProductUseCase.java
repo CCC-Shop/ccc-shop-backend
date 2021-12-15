@@ -28,11 +28,12 @@ public class GetAllProductUseCase {
             List<Product> productList = new ArrayList<>();
 
             PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT p.*, user.username, AVG(rating) " +
-                            "FROM `product` AS p, `valuation` AS v, `user` " +
-                            "WHERE p.id = v.product_id AND p.vender_id = user.id " +
-                            "GROUP BY v.product_id " +
-                            "ORDER BY `vender_id` ASC, `name` ASC, `stock` DESC, `price` ASC, `id` DESC");
+                    "SELECT p.vender_id, p.name, p.category, p.price, p.stock, p.warehouse_address, p.description, p.pictureURL, user.username, AVG(rating)" +
+                            "            FROM `user`, `product` AS p LEFT OUTER JOIN `valuation` AS v" +
+                            "            ON p.id = v.product_id" +
+                            "            WHERE user.id = p.vender_id" +
+                            "            GROUP BY p.id;");
+
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while(rs.next()) {

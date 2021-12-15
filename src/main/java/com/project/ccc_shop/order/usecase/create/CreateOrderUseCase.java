@@ -5,7 +5,10 @@ import com.project.ccc_shop.common.UseCase;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
+import java.time.Instant;
+import java.util.Calendar;
 import java.util.Map;
+import java.util.TimeZone;
 
 import static java.sql.Types.NULL;
 
@@ -30,11 +33,9 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
                             "`payment_method`, " +
                             "`credit_card_id`, " +
                             "`order_time`, " +
-                            "`shipping_time`, " +
-                            "`delivery_time`, " +
                             "`seasoning_discount_code`, " +
                             "`shipping_discount_code`)" +
-                            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+                            " VALUES (?,?,?,?,?,?,?,?,?,?)");
 
             stmt.setInt(1, input.getCustomerId());
             stmt.setInt(2, input.getShippingFee());
@@ -43,36 +44,34 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
             stmt.setString(5, input.getStatus().toString());
             stmt.setString(6, input.getPaymentMethod().toString());
             stmt.setString(7, input.getCreditCardId());
-            stmt.setTimestamp(8, input.getOrderTime());
-            stmt.setNull(9, NULL);
-            stmt.setNull(10, NULL);
+            Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Taipei"));
+            stmt.setTimestamp(8, input.getOrderTime(), calendar);
             if (input.getSeasoningDiscountCode() == 0) {
-                stmt.setNull(11, NULL);
+                stmt.setNull(9, NULL);
             } else {
-                stmt.setInt(11, input.getSeasoningDiscountCode());
+                stmt.setInt(9, input.getSeasoningDiscountCode());
             }
             if (input.getShippingDiscountCode() == 0) {
-                stmt.setNull(12, NULL);
+                stmt.setNull(10, NULL);
             } else {
-                stmt.setInt(12, input.getShippingDiscountCode());
+                stmt.setInt(10, input.getShippingDiscountCode());
             }
 
             stmt.executeUpdate();
-            int orderId = getOrderId(connection, input.getCustomerId(), input.getOrderTime());
+            int orderId = getOrderId(connection);
 
             createOrderItems(connection, orderId, input.getOrderItems());
 
             output.setId(orderId);
+            output.setOrderTime(input.getOrderTime());
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private int getOrderId(Connection connection, int customerId, Timestamp orderTime) {
+    private int getOrderId(Connection connection) {
         try (PreparedStatement stmt = connection.prepareStatement(
-                "SELECT `id` FROM `order` WHERE `customer_id`= ? && `order_time` = ?")) {
-            stmt.setString(1, Integer.toString(customerId));
-            stmt.setTimestamp(2, orderTime);
+                "SELECT * FROM `order` WHERE `id`=(SELECT max(`id`) FROM `order`);")) {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     return Integer.parseInt(rs.getString("id"));
@@ -81,11 +80,13 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        throw new RuntimeException("Order not found, where customer_id=" + customerId + ", order_time=" + orderTime + ".");
+        throw new RuntimeException("No order exist.");
     }
 
     private void createOrderItems(Connection connection, int orderId, Map<Integer, Integer> orderItems) {
-
+        if (orderItems.isEmpty()) {
+            return;
+        }
         orderItems.keySet().forEach(productId -> {
             try (PreparedStatement stmt = connection.prepareStatement(
                     "INSERT `order_items` (`order_id`, " +
