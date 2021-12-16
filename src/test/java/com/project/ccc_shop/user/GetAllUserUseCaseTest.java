@@ -26,7 +26,7 @@ public class GetAllUserUseCaseTest {
         User user = testUserList.get(0);
         assertEquals(1, user.getId());
         assertEquals("Admin", user.getUsername());
-        assertEquals(Identity.admin, user.getIdentity());
+        assertEquals(Identity.ADMIN, user.getIdentity());
         assertEquals("Admin123", user.getPassword());
         assertEquals("0912341234", user.getPhone());
         assertEquals("admin@gmail.com", user.getEmail());
@@ -36,7 +36,7 @@ public class GetAllUserUseCaseTest {
         user = testUserList.get(2);
         assertEquals(3, user.getId());
         assertEquals("ASUS", user.getUsername());
-        assertEquals(Identity.staff, user.getIdentity());
+        assertEquals(Identity.STAFF, user.getIdentity());
         assertEquals("ASUS123", user.getPassword());
         assertEquals("0900112233", user.getPhone());
         assertEquals("google@gmail.com", user.getEmail());
@@ -45,7 +45,7 @@ public class GetAllUserUseCaseTest {
         user = testUserList.get(5);
         assertEquals(6, user.getId());
         assertEquals("Mandy", user.getUsername());
-        assertEquals(Identity.customer, user.getIdentity());
+        assertEquals(Identity.CUSTOMER, user.getIdentity());
         assertEquals("Mandy123", user.getPassword());
         assertEquals("0987654321", user.getPhone());
         assertEquals("mandy@gmail.com", user.getEmail());
@@ -54,7 +54,7 @@ public class GetAllUserUseCaseTest {
         user = testUserList.get(9);
         assertEquals(10, user.getId());
         assertEquals("Teddy", user.getUsername());
-        assertEquals(Identity.customer, user.getIdentity());
+        assertEquals(Identity.CUSTOMER, user.getIdentity());
         assertEquals("Teddy123", user.getPassword());
         assertEquals("0987654321", user.getPhone());
         assertEquals("teddy@gmail.com", user.getEmail());

@@ -20,7 +20,7 @@ public class CreateUserUseCaseTest {
         CreateUserOutput output = new CreateUserOutput();
 
         input.setUsername("test user");
-        input.setIdentity(Identity.admin);
+        input.setIdentity(Identity.ADMIN);
         input.setPassword("admin");
         input.setPhone("091234567");
         input.setEmail("admin@gmail.com");

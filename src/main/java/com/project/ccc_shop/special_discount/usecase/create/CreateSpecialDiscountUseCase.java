@@ -17,47 +17,27 @@ public class CreateSpecialDiscountUseCase implements UseCase<CreateSpecialDiscou
 
     @Override
     public void execute(CreateSpecialDiscountInput input, CreateSpecialDiscountOutput output) {
-
         try(Connection connection = this.mySQLDriver.getConnection()) {
-
             PreparedStatement stmt = connection.prepareStatement(
-                    "INSERT `special_discount` (`product_id`, `vender_id`, `policy_description`, `start_time`, `end_time`, `category`)" +
+                    "INSERT `special_discount` (`vender_id`, " +
+                            "`policy_description`, " +
+                            "`start_time`, " +
+                            "`end_time`, " +
+                            "`category`, " +
+                            "`discount_rate`)" +
                             " VALUES (?,?,?,?,?,?)");
 
-//            stmt.setString(1, input.getDiscountCode());
-            stmt.setInt(1, input.getProductId());
-            stmt.setInt(2, input.getVenderId());
-            stmt.setString(3, input.getPolicyDescription());
-            stmt.setTimestamp(4, input.getStartTime());
-            stmt.setTimestamp(5, input.getEndTime());
-            stmt.setString(6, input.getCategory());
+            stmt.setInt(1, input.getVenderId());
+            stmt.setString(2, input.getPolicyDescription());
+            stmt.setTimestamp(3, input.getStartTime());
+            stmt.setTimestamp(4, input.getEndTime());
+            stmt.setString(5, input.getCategory().toString());
+            stmt.setDouble(6, input.getDiscountRate());
 
             stmt.executeUpdate();
-
-//            output.setDiscountCode(input.getDiscountCode());
-            int discount_code = getDiscountCode(connection, input.getPolicyDescription(), input.getStartTime());
-            output.setDiscountCode(discount_code);
-
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-    }
-
-    private int getDiscountCode(Connection connection, String policyDescription, Timestamp startTime){
-        try (PreparedStatement stmt = connection.prepareStatement(
-//                && `start_time` = ?"
-                "SELECT `discount_code` FROM `special_discount` WHERE `policy_description`= ?")) {
-            stmt.setString(1, policyDescription);
-//            stmt.setTimestamp(2, startTime);
-            try (ResultSet rs = stmt.executeQuery()) {
-                while(rs.next()) {
-                    return rs.getInt("discount_code");
-                }
-            }
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-        throw new RuntimeException("Discount code not found, where policy_description=" + policyDescription + ", start_time=" + startTime + ".");
     }
 }

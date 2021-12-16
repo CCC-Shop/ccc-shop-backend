@@ -1,35 +1,33 @@
 package com.project.ccc_shop.special_discount;
 
 import com.project.ccc_shop.common.MySQLDriver;
+import com.project.ccc_shop.product.entity.Category;
 import com.project.ccc_shop.special_discount.usecase.create.CreateSpecialDiscountInput;
 import com.project.ccc_shop.special_discount.usecase.create.CreateSpecialDiscountOutput;
 import com.project.ccc_shop.special_discount.usecase.create.CreateSpecialDiscountUseCase;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CreateSpecialDiscountUseCaseTest {
     @Test
     public void create_special_discount_use_case() {
         MySQLDriver mySQLDriver = new MySQLDriver();
-
         CreateSpecialDiscountUseCase createSpecialDiscountUseCase = new CreateSpecialDiscountUseCase(mySQLDriver);
         CreateSpecialDiscountInput input = new CreateSpecialDiscountInput();
         CreateSpecialDiscountOutput output = new CreateSpecialDiscountOutput();
-
-        input.setProductId(123);
-        input.setVenderId(123);
-        input.setPolicyDescription("discount policy description test");
-        input.setStartTime(Timestamp.valueOf("2021-11-23 00:00:00"));
-        input.setEndTime(Timestamp.valueOf("2021-11-24 00:00:00"));
-        // "2021-11-24T13:47:58.212+00:00"
-        input.setCategory("computer");
+        input.setVenderId(2);
+        input.setPolicyDescription("IMac is on sale! 25% off!");
+        input.setStartTime(Timestamp.from(Instant.parse("2021-11-23T00:00:00Z")));
+        input.setEndTime(Timestamp.from(Instant.parse("2021-11-24T00:00:00Z")));
+        input.setCategory(Category.COMPUTER);
+        input.setDiscountRate(0.75);
 
         createSpecialDiscountUseCase.execute(input, output);
 
-        assertNotNull(output.getDiscountCode());
-//        assertEquals(6, output.getDiscountCode());
+        assertEquals("Success!", output.getMessage());
     }
 }

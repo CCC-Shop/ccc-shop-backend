@@ -1,4 +1,4 @@
-package com.project.ccc_shop.special_discount.adapter.create;
+package com.project.ccc_shop.special_discount.adapter;
 
 import com.project.ccc_shop.special_discount.usecase.create.CreateSpecialDiscountInput;
 import com.project.ccc_shop.special_discount.usecase.create.CreateSpecialDiscountOutput;
@@ -6,14 +6,12 @@ import com.project.ccc_shop.special_discount.usecase.create.CreateSpecialDiscoun
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/special_discount")
-public class CreateSpecialDiscountController {
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+public class SpecialDiscountController {
 
     CreateSpecialDiscountUseCase createSpecialDiscountUseCase;
 
@@ -24,19 +22,10 @@ public class CreateSpecialDiscountController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<CreateSpecialDiscountOutput> createSpecialDiscount(@RequestBody CreateSpecialDiscountInput requestBody) {
-        CreateSpecialDiscountInput input = new CreateSpecialDiscountInput();
         CreateSpecialDiscountOutput output = new CreateSpecialDiscountOutput();
+
         try {
-
-//        input.setDiscountCode(requestBody.getDiscountCode());
-            input.setProductId(requestBody.getProductId());
-            input.setVenderId(requestBody.getVenderId());
-            input.setPolicyDescription(requestBody.getPolicyDescription());
-            input.setStartTime(requestBody.getStartTime());
-            input.setEndTime(requestBody.getEndTime());
-            input.setCategory(requestBody.getCategory());
-
-            this.createSpecialDiscountUseCase.execute(input, output);
+            this.createSpecialDiscountUseCase.execute(requestBody, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             output.setMessage(e.getMessage());

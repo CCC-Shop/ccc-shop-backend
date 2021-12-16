@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `product`
     `warehouse_address` varchar(100) NOT NULL,
     `description`       varchar(500) DEFAULT NULL,
     `pictureURL`        varchar(500) DEFAULT NULL,
-    `exist_flag`        boolean         NOT NULL,
+    `exist_flag`        boolean      NOT NULL,
     FOREIGN KEY (vender_id) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS `special_discount`
     `start_time`         TIMESTAMP    NOT NULL,
     `end_time`           TIMESTAMP    NOT NULL,
     `category`           varchar(255) NOT NULL,
+    `discount_rate`      double       NOT NULL,
     FOREIGN KEY (vender_id) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -83,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `order`
     `delivery_time`           TIMESTAMP    NULL     DEFAULT NULL,
     `seasoning_discount_code` int(6)                DEFAULT NULL,
     `shipping_discount_code`  int(6)                DEFAULT NULL,
-    `total_price`             int(6)                NOT NULL,
+    `total_price`             int(6)       NOT NULL,
     FOREIGN KEY (seasoning_discount_code) REFERENCES `seasonings_discount` (`discount_code`) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (shipping_discount_code) REFERENCES `shipping_discount` (`discount_code`) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (customer_id) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE

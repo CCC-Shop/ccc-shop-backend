@@ -39,10 +39,10 @@ VALUES (2, '開學季全面9折', '2020-08-01 00:00:00', '2020-09-30 23:59:59', 
        (3, '春節特賣全商品享79折優惠', '2021-02-01 00:00:00', '2021-02-28 23:59:59', 0.79),
        (4, '母親節活動全店88折', '2021-05-01 00:00:00', '2021-05-31 23:59:59', 0.88);
 
-INSERT `special_discount` (`vender_id`, `policy_description`, `start_time`, `end_time`, `category`)
-VALUES (2, 'iPhone 13 Pro特惠出清', '2021-08-01 00:00:00', '2021-09-30 23:59:59', 'PHONE'),
-       (3, 'TUF Dash F15折扣', '2021-02-01 00:00:00', '2021-02-28 23:59:59', 'NOTEBOOK'),
-       (4, 'Galaxy Z Fold3 5G上市優惠', '2021-05-01 00:00:00', '2021-05-31 23:59:59', 'TABLET');
+INSERT `special_discount` (`vender_id`, `policy_description`, `start_time`, `end_time`, `category`, `discount_rate`)
+VALUES (2, 'iPhone 13 Pro特惠出清', '2021-08-01 00:00:00', '2021-09-30 23:59:59', 'PHONE', 0.9),
+       (3, 'TUF Dash F15折扣', '2021-02-01 00:00:00', '2021-02-28 23:59:59', 'NOTEBOOK', 0.8),
+       (4, 'Galaxy Z Fold3 5G上市優惠', '2021-05-01 00:00:00', '2021-05-31 23:59:59', 'TABLET', 0.75);
 
 INSERT `order` (`customer_id`, `shipping_fee`, `recipient_name`, `shipping_address`, `status`, `payment_method`, `credit_card_id`, `order_time`, `shipping_time`, `delivery_time`, `seasoning_discount_code`, `shipping_discount_code`, `total_price`)
 VALUES (6, 100, 'Mandy', '台北市大安區忠孝東路xxx號5F', 'RECEIVED', 'MOBILE', NULL, '2020-09-21 12:34:56', '2020-09-23 12:34:56', '2020-09-25 12:34:56', 1, NULL, 19810),
