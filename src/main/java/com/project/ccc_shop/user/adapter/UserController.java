@@ -11,6 +11,9 @@ import com.project.ccc_shop.user.usecase.login.LoginUserUseCase;
 import com.project.ccc_shop.user.usecase.delete.DeleteUserInput;
 import com.project.ccc_shop.user.usecase.delete.DeleteUserOutput;
 import com.project.ccc_shop.user.usecase.delete.DeleteUserUseCase;
+import com.project.ccc_shop.user.usecase.update.UpdateUserInput;
+import com.project.ccc_shop.user.usecase.update.UpdateUserOutput;
+import com.project.ccc_shop.user.usecase.update.UpdateUserUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,7 @@ public class UserController {
     LoginUserUseCase loginUserUseCase;
     DeleteUserUseCase deleteUserUseCase;
     GetAllUserUseCase getAllUserUseCase;
+    UpdateUserUseCase updateUserUseCase;
 
     @Autowired
     public void setCreateUserUseCase(CreateUserUseCase createUserUseCase) {
@@ -44,6 +48,11 @@ public class UserController {
     @Autowired
     public void setGetAllUserUseCase(GetAllUserUseCase getAllUserUseCase) {
         this.getAllUserUseCase = getAllUserUseCase;
+    }
+
+    @Autowired
+    public void setUpdateUserUseCase(UpdateUserUseCase updateUserUseCase) {
+        this.updateUserUseCase = updateUserUseCase;
     }
 
     @PostMapping(value = "/create")
@@ -109,6 +118,19 @@ public class UserController {
 
         try {
             this.getAllUserUseCase.execute(output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } catch (Exception e) {
+            output.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+    }
+
+    @PostMapping(value = "/update")
+    public ResponseEntity<UpdateUserOutput> updateUser(@RequestBody UpdateUserInput requestBody) {
+        UpdateUserOutput output = new UpdateUserOutput();
+
+        try {
+            this.updateUserUseCase.execute(requestBody, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             output.setMessage(e.getMessage());

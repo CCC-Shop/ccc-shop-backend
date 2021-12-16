@@ -15,7 +15,7 @@ public class UpdateProductUseCaseTest {
     public void update_product_use_case() {
         MySQLDriver mySQLDriver = new MySQLDriver();
 
-        UpdateProductUseCase createProductUseCase = new UpdateProductUseCase(mySQLDriver);
+        UpdateProductUseCase updateProductUseCase = new UpdateProductUseCase(mySQLDriver);
         UpdateProductInput input = new UpdateProductInput();
         UpdateProductOutput output = new UpdateProductOutput();
 
@@ -29,10 +29,9 @@ public class UpdateProductUseCaseTest {
         input.setDescription("great product in your life");
         input.setPictureURL("https://picsum.photos/200");
 
-        createProductUseCase.execute(input, output);
+        updateProductUseCase.execute(input, output);
 
         assertNotNull(output.getName());
         assertEquals("ipad2", output.getName());
     }
-
 }
