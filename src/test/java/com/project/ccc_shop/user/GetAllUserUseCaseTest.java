@@ -13,9 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GetAllUserUseCaseTest {
     @Test
-    public void get_all_product_use_case() {
+    public void get_all_user_use_case() {
         MySQLDriver mySQLDriver = new MySQLDriver();
-
         GetAllUserUseCase getAllUserUseCase = new GetAllUserUseCase(mySQLDriver);
         GetAllUserOutput output = new GetAllUserOutput();
 

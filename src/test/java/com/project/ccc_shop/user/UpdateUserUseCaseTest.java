@@ -18,7 +18,7 @@ public class UpdateUserUseCaseTest {
         UpdateUserOutput output = new UpdateUserOutput();
         input.setId(9);
         input.setUsername("Eddie");
-        input.setIdentity(Identity.valueOf("staff"));
+        input.setIdentity(Identity.valueOf("STAFF"));
         input.setPassword("Eddie123");
         input.setPhone("0987654321");
         input.setEmail("eddie@gmail.com");

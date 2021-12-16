@@ -1,16 +1,16 @@
 USE ccc_shop;
 
 INSERT `user` (`username`, `identity`, `password`, `phone`, `email`, `credit_card`, `address`)
-VALUES ('Admin', 'admin', 'Admin123', '0912341234', 'admin@gmail.com', '0000111-2222333', 'home'),
-       ('Apple', 'staff', 'Apple123', '0912345678', 'apple@gmail.com', '1111222-3333444', '台北市大安區忠孝東路xxx號5F'),
-       ('ASUS', 'staff', 'ASUS123', '0900112233', 'google@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F'),
-       ('Samsung', 'staff', 'Samsung123', '0909090909', 'acer@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F'),
-       ('Zachary', 'customer', 'Zachary123', '0943214321', 'zachary@gmail.com', '2222333-4444555', '台北市大安區忠孝東路xxx號5F'),
-       ('Mandy', 'customer', 'Mandy123', '0987654321', 'mandy@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F'),
-       ('Patrick', 'customer', 'Patrick123', '0943214321', 'patrick@gmail.com', '1122333-4444555', '台北市大安區忠孝東路xxx號5F'),
-       ('Sandy', 'customer', 'Sandy123', '0943214321', 'sandy@gmail.com', '8822333-4444555', '台北市大安區忠孝東路xxx號5F'),
-       ('David', 'customer', 'David123', '0987654321', 'david@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F'),
-       ('Teddy', 'customer', 'Teddy123', '0987654321', 'teddy@gmail.com', '8822333-4444555', '台北市大安區忠孝東路xxx號5F');
+VALUES ('Admin', 'ADMIN', 'Admin123', '0912341234', 'admin@gmail.com', '0000111-2222333', 'home'),
+       ('Apple', 'STAFF', 'Apple123', '0912345678', 'apple@gmail.com', '1111222-3333444', '台北市大安區忠孝東路xxx號5F'),
+       ('ASUS', 'STAFF', 'ASUS123', '0900112233', 'google@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F'),
+       ('Samsung', 'STAFF', 'Samsung123', '0909090909', 'acer@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F'),
+       ('Zachary', 'CUSTOMER', 'Zachary123', '0943214321', 'zachary@gmail.com', '2222333-4444555', '台北市大安區忠孝東路xxx號5F'),
+       ('Mandy', 'CUSTOMER', 'Mandy123', '0987654321', 'mandy@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F'),
+       ('Patrick', 'CUSTOMER', 'Patrick123', '0943214321', 'patrick@gmail.com', '1122333-4444555', '台北市大安區忠孝東路xxx號5F'),
+       ('Sandy', 'CUSTOMER', 'Sandy123', '0943214321', 'sandy@gmail.com', '8822333-4444555', '台北市大安區忠孝東路xxx號5F'),
+       ('David', 'CUSTOMER', 'David123', '0987654321', 'david@gmail.com', NULL, '台北市大安區忠孝東路xxx號5F'),
+       ('Teddy', 'CUSTOMER', 'Teddy123', '0987654321', 'teddy@gmail.com', '8822333-4444555', '台北市大安區忠孝東路xxx號5F');
 
 INSERT `product` (`vender_id`, `name`, `category`, `price`, `stock`, `warehouse_address`, `description`, `pictureURL`, `exist_flag`)
 VALUES (2, 'Macbook Pro', 'NOTEBOOK', 54700, 152, 'XX市XX區XX路XX號XX樓', '這是很厲害的蘋果筆電', 'https://attach.setn.com/newsimages/2021/10/19/3367537-PH.jpg', true),
