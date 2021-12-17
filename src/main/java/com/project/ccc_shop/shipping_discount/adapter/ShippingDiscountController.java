@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/shipping_discount")
-@CrossOrigin(origins="http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class ShippingDiscountController {
 
     CreateShippingDiscountUseCase createShippingDiscountUseCase;
@@ -22,18 +22,10 @@ public class ShippingDiscountController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<CreateShippingDiscountOutput> createShippingDiscount(@RequestBody CreateShippingDiscountInput requestBody) {
-        CreateShippingDiscountInput input = new CreateShippingDiscountInput();
         CreateShippingDiscountOutput output = new CreateShippingDiscountOutput();
+
         try {
-
-//        input.setDiscountCode(requestBody.getDiscountCode());
-            input.setVenderId(requestBody.getVenderId());
-            input.setPolicyDescription(requestBody.getPolicyDescription());
-            input.setStartTime(requestBody.getStartTime());
-            input.setEndTime(requestBody.getEndTime());
-            input.setTargetPrice(requestBody.getTargetPrice());
-
-            this.createShippingDiscountUseCase.execute(input, output);
+            this.createShippingDiscountUseCase.execute(requestBody, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             output.setMessage(e.getMessage());

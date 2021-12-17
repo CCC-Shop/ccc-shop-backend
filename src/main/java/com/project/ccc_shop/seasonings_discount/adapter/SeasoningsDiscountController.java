@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/seasonings_discount")
-@CrossOrigin(origins="http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class SeasoningsDiscountController {
 
     CreateSeasoningsDiscountUseCase createSeasoningsDiscountUseCase;
@@ -31,18 +31,10 @@ public class SeasoningsDiscountController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<CreateSeasoningsDiscountOutput> createSeasoningsDiscount(@RequestBody CreateSeasoningsDiscountInput requestBody) {
-        CreateSeasoningsDiscountInput input = new CreateSeasoningsDiscountInput();
         CreateSeasoningsDiscountOutput output = new CreateSeasoningsDiscountOutput();
+
         try {
-
-//        input.setDiscountCode(requestBody.getDiscountCode());
-            input.setVenderId(requestBody.getVenderId());
-            input.setPolicyDescription(requestBody.getPolicyDescription());
-            input.setStartTime(requestBody.getStartTime());
-            input.setEndTime(requestBody.getEndTime());
-            input.setDiscountRate(requestBody.getDiscountRate());
-
-            this.createSeasoningsDiscountUseCase.execute(input, output);
+            this.createSeasoningsDiscountUseCase.execute(requestBody, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             output.setMessage(e.getMessage());

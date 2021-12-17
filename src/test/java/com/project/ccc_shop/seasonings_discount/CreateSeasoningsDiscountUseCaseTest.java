@@ -7,30 +7,25 @@ import com.project.ccc_shop.seasonings_discount.usecase.create.CreateSeasoningsD
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CreateSeasoningsDiscountUseCaseTest {
     @Test
     public void create_seasonings_discount_use_case() {
         MySQLDriver mySQLDriver = new MySQLDriver();
-
         CreateSeasoningsDiscountUseCase createSeasoningsDiscountUseCase = new CreateSeasoningsDiscountUseCase(mySQLDriver);
         CreateSeasoningsDiscountInput input = new CreateSeasoningsDiscountInput();
         CreateSeasoningsDiscountOutput output = new CreateSeasoningsDiscountOutput();
-
-//        input.setDiscountCode("50percentOff");
-        input.setVenderId(2);
-        input.setPolicyDescription("discount policy description test");
-        input.setStartTime(Timestamp.valueOf("2021-11-23 00:00:00"));
-        input.setEndTime(Timestamp.valueOf("2021-11-24 00:00:00"));
-        // "2021-11-24T13:47:58.212+00:00"
+        input.setVenderId(3);
+        input.setPolicyDescription("All products in ASUS are 50% off on Christmas Day!");
+        input.setStartTime(Timestamp.from(Instant.parse("2021-12-25T00:00:00Z")));
+        input.setEndTime(Timestamp.from(Instant.parse("2021-12-25T23:59:00Z")));
         input.setDiscountRate(0.5);
 
         createSeasoningsDiscountUseCase.execute(input, output);
 
-        assertNotNull(output.getDiscountCode());
-//        assertEquals(6, output.getDiscountCode());
+        assertEquals("Success!", output.getMessage());
     }
 }
