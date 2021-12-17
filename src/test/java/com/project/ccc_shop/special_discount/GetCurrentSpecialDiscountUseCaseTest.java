@@ -30,7 +30,7 @@ public class GetCurrentSpecialDiscountUseCaseTest {
         assertEquals(1, discount.getDiscountCode());
         assertEquals(2, discount.getVenderId());
         assertEquals("iPhone 13 Pro特惠出清", discount.getPolicyDescription());
-        assertEquals(Timestamp.from(Instant.parse("2021-12-17T21:03:14Z")), discount.getStartTime());
+        assertEquals(Timestamp.from(Instant.parse("2021-08-01T00:00:00Z")), discount.getStartTime());
         assertEquals(Timestamp.from(Instant.parse("2021-12-30T23:59:59Z")), discount.getEndTime());
         assertEquals(Category.PHONE, discount.getCategory());
         assertEquals(0.9, discount.getDiscountRate());
@@ -39,7 +39,7 @@ public class GetCurrentSpecialDiscountUseCaseTest {
         assertEquals(2, discount.getDiscountCode());
         assertEquals(3, discount.getVenderId());
         assertEquals("TUF Dash F15折扣", discount.getPolicyDescription());
-        assertEquals(Timestamp.from(Instant.parse("2021-12-17T21:03:14Z")), discount.getStartTime());
+        assertEquals(Timestamp.from(Instant.parse("2021-02-01T00:00:00Z")), discount.getStartTime());
         assertEquals(Timestamp.from(Instant.parse("2021-12-28T23:59:59Z")), discount.getEndTime());
         assertEquals(Category.NOTEBOOK, discount.getCategory());
         assertEquals(0.8, discount.getDiscountRate());
@@ -48,7 +48,7 @@ public class GetCurrentSpecialDiscountUseCaseTest {
         assertEquals(3, discount.getDiscountCode());
         assertEquals(4, discount.getVenderId());
         assertEquals("Galaxy Z Fold3 5G上市優惠", discount.getPolicyDescription());
-        assertEquals(Timestamp.from(Instant.parse("2021-12-17T21:03:14Z")), discount.getStartTime());
+        assertEquals(Timestamp.from(Instant.parse("2021-05-01T00:00:00Z")), discount.getStartTime());
         assertEquals(Timestamp.from(Instant.parse("2021-12-31T23:59:59Z")), discount.getEndTime());
         assertEquals(Category.TABLET, discount.getCategory());
         assertEquals(0.75, discount.getDiscountRate());

@@ -29,9 +29,10 @@ public class GetCurrentSpecialDiscountUseCase {
                             "WHERE ? > `start_time` " +
                             "AND ? < `end_time`;");
 
-            Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Taipei"));
-            stmt.setTimestamp(1, Timestamp.from(Instant.now()), calendar);
-            stmt.setTimestamp(2, Timestamp.from(Instant.now()), calendar);
+            Timestamp currentTime = Timestamp.from(Instant.now());
+            Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Taipei"));  // set timezone
+            stmt.setTimestamp(1, currentTime, calendar);
+            stmt.setTimestamp(2, currentTime, calendar);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
