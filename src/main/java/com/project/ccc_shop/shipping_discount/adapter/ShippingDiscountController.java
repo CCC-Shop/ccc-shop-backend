@@ -1,8 +1,8 @@
-package com.project.ccc_shop.shipping_discount.adapter.create;
+package com.project.ccc_shop.shipping_discount.adapter;
 
-import com.project.ccc_shop.shipping_discount.usecase.CreateShippingDiscountInput;
-import com.project.ccc_shop.shipping_discount.usecase.CreateShippingDiscountOutput;
-import com.project.ccc_shop.shipping_discount.usecase.CreateShippingDiscountUseCase;
+import com.project.ccc_shop.shipping_discount.usecase.create.CreateShippingDiscountInput;
+import com.project.ccc_shop.shipping_discount.usecase.create.CreateShippingDiscountOutput;
+import com.project.ccc_shop.shipping_discount.usecase.create.CreateShippingDiscountUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/shipping_discount")
 @CrossOrigin(origins="http://localhost:3000", allowCredentials = "true")
-public class CreateShippingDiscountController {
+public class ShippingDiscountController {
 
     CreateShippingDiscountUseCase createShippingDiscountUseCase;
 
