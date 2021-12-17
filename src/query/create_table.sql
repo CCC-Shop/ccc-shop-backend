@@ -37,8 +37,8 @@ CREATE TABLE IF NOT EXISTS `shipping_discount`
     `discount_code`      int(10) PRIMARY KEY AUTO_INCREMENT,
     `vender_id`          int(10)      NOT NULL,
     `policy_description` varchar(500) NOT NULL,
-    `start_time`         TIMESTAMP    NOT NULL,
-    `end_time`           TIMESTAMP    NOT NULL,
+    `start_time`         TIMESTAMP    NOT NULL DEFAULT 0,
+    `end_time`           TIMESTAMP    NOT NULL DEFAULT 0,
     `target_price`       int(20)      NOT NULL,
     FOREIGN KEY (vender_id) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -49,8 +49,8 @@ CREATE TABLE IF NOT EXISTS `seasonings_discount`
     `discount_code`      int(10) PRIMARY KEY AUTO_INCREMENT,
     `vender_id`          int(10)      NOT NULL,
     `policy_description` varchar(500) NOT NULL,
-    `start_time`         TIMESTAMP    NOT NULL,
-    `end_time`           TIMESTAMP    NOT NULL,
+    `start_time`         TIMESTAMP    NOT NULL DEFAULT 0,
+    `end_time`           TIMESTAMP    NOT NULL DEFAULT 0,
     `discount_rate`      double       NOT NULL,
     FOREIGN KEY (vender_id) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -61,8 +61,8 @@ CREATE TABLE IF NOT EXISTS `special_discount`
     `discount_code`      int(10) PRIMARY KEY AUTO_INCREMENT,
     `vender_id`          int(10)      NOT NULL,
     `policy_description` varchar(500) NOT NULL,
-    `start_time`         TIMESTAMP    NOT NULL,
-    `end_time`           TIMESTAMP    NOT NULL,
+    `start_time`         TIMESTAMP    NOT NULL DEFAULT 0,
+    `end_time`           TIMESTAMP    NOT NULL DEFAULT 0,
     `category`           varchar(255) NOT NULL,
     `discount_rate`      double       NOT NULL,
     FOREIGN KEY (vender_id) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
