@@ -1,11 +1,10 @@
 package com.project.ccc_shop.seasonings_discount.adapter;
 
-import com.project.ccc_shop.seasonings_discount.usecase.get.GetSeasoningsDiscountInput;
-import com.project.ccc_shop.seasonings_discount.usecase.get.GetSeasoningsDiscountOutput;
 import com.project.ccc_shop.seasonings_discount.usecase.create.CreateSeasoningsDiscountInput;
 import com.project.ccc_shop.seasonings_discount.usecase.create.CreateSeasoningsDiscountOutput;
 import com.project.ccc_shop.seasonings_discount.usecase.create.CreateSeasoningsDiscountUseCase;
-import com.project.ccc_shop.seasonings_discount.usecase.get.GetSeasoningsDiscountUseCase;
+import com.project.ccc_shop.seasonings_discount.usecase.get_current.GetCurrentSeasoningsDiscountOutput;
+import com.project.ccc_shop.seasonings_discount.usecase.get_current.GetCurrentSeasoningsDiscountUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class SeasoningsDiscountController {
 
     CreateSeasoningsDiscountUseCase createSeasoningsDiscountUseCase;
-    GetSeasoningsDiscountUseCase getSeasoningsDiscountUseCase;
+    GetCurrentSeasoningsDiscountUseCase getCurrentSeasoningsDiscountUseCase;
 
     @Autowired
     public void setCreateDiscountUseCase(CreateSeasoningsDiscountUseCase createSeasoningsDiscountUseCase) {
@@ -25,8 +24,8 @@ public class SeasoningsDiscountController {
     }
 
     @Autowired
-    public void setGetSeasoningsDiscountUseCase(GetSeasoningsDiscountUseCase getSeasoningsDiscountUseCase) {
-        this.getSeasoningsDiscountUseCase = getSeasoningsDiscountUseCase;
+    public void setGetCurrentSeasoningsDiscountUseCase(GetCurrentSeasoningsDiscountUseCase getCurrentSeasoningsDiscountUseCase) {
+        this.getCurrentSeasoningsDiscountUseCase = getCurrentSeasoningsDiscountUseCase;
     }
 
     @PostMapping(value = "/create")
@@ -42,15 +41,12 @@ public class SeasoningsDiscountController {
         }
     }
 
-    @PostMapping(value = "/get")
-    public ResponseEntity<GetSeasoningsDiscountOutput> getSeasoningsDiscount(@RequestBody GetSeasoningsDiscountInput requestBody) {
-        GetSeasoningsDiscountInput input = new GetSeasoningsDiscountInput();
-        GetSeasoningsDiscountOutput output = new GetSeasoningsDiscountOutput();
-
-        input.setDiscountCode(requestBody.getDiscountCode());
+    @GetMapping(value = "/get-current")
+    public ResponseEntity<GetCurrentSeasoningsDiscountOutput> getCurrentSeasoningsDiscount() {
+        GetCurrentSeasoningsDiscountOutput output = new GetCurrentSeasoningsDiscountOutput();
 
         try {
-            this.getSeasoningsDiscountUseCase.execute(input, output);
+            this.getCurrentSeasoningsDiscountUseCase.execute(output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             output.setMessage(e.getMessage());
