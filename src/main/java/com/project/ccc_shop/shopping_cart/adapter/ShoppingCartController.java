@@ -6,6 +6,9 @@ import com.project.ccc_shop.shopping_cart.usecase.create.CreateShoppingCartUseCa
 import com.project.ccc_shop.shopping_cart.usecase.get.GetShoppingCartItemsInput;
 import com.project.ccc_shop.shopping_cart.usecase.get.GetShoppingCartItemsOutput;
 import com.project.ccc_shop.shopping_cart.usecase.get.GetShoppingCartItemsUseCase;
+import com.project.ccc_shop.shopping_cart.usecase.update.UpdateShoppingCartInput;
+import com.project.ccc_shop.shopping_cart.usecase.update.UpdateShoppingCartOutput;
+import com.project.ccc_shop.shopping_cart.usecase.update.UpdateShoppingCartUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ public class ShoppingCartController {
 
     CreateShoppingCartUseCase createShoppingCartUseCase;
     GetShoppingCartItemsUseCase getShoppingCartItemsUseCase;
+    UpdateShoppingCartUseCase updateShoppingCartUseCase;
 
     @Autowired
     public void setCreateShoppingCartUseCase(CreateShoppingCartUseCase createShoppingCartUseCase) {
@@ -27,6 +31,11 @@ public class ShoppingCartController {
     @Autowired
     public void setGetShoppingCartItemsUseCase(GetShoppingCartItemsUseCase getShoppingCartItemsUseCase) {
         this.getShoppingCartItemsUseCase = getShoppingCartItemsUseCase;
+    }
+
+    @Autowired
+    public void setUpdateShoppingCartUseCase(UpdateShoppingCartUseCase updateShoppingCartUseCase) {
+        this.updateShoppingCartUseCase = updateShoppingCartUseCase;
     }
 
     @PostMapping(value = "/create")
@@ -56,6 +65,24 @@ public class ShoppingCartController {
             input.setId(requestBody.getId());
 
             this.getShoppingCartItemsUseCase.execute(input, output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } catch (Exception e) {
+            output.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+    }
+
+    @PostMapping(value = "/update")
+    public ResponseEntity<UpdateShoppingCartOutput> updateShoppingCart(@RequestBody UpdateShoppingCartInput requestBody) {
+
+        UpdateShoppingCartInput input = new UpdateShoppingCartInput();
+        UpdateShoppingCartOutput output = new UpdateShoppingCartOutput();
+        try {
+            input.setProductId(requestBody.getProductId());
+            input.setCustomerId(requestBody.getCustomerId());
+            input.setQuantity(requestBody.getQuantity());
+
+            this.updateShoppingCartUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             output.setMessage(e.getMessage());
