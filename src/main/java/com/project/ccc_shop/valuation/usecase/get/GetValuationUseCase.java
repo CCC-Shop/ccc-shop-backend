@@ -33,9 +33,11 @@ public class GetValuationUseCase implements UseCase<GetValuationInput, GetValuat
 
             stmt.setInt(1, input.getProductId());
             ResultSet rs = stmt.executeQuery();
-            if(!rs.next()){
-                throw new RuntimeException("The product doesn't have any valuation!");
-            }
+//            if(!rs.next()){
+//                throw new RuntimeException("The product doesn't have any valuation!");
+//            }else{
+//                rs.beforeFirst();
+//            }
 
             while(rs.next()){
                 int customer_id = rs.getInt("customer_id");
