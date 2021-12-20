@@ -56,7 +56,6 @@ public class ValuationController {
         GetValuationInput input = new GetValuationInput();
         GetValuationOutput output = new GetValuationOutput();
 
-        input.setCustomerId(requestBody.getCustomerId());
         input.setProductId(requestBody.getProductId());
 
         try {
