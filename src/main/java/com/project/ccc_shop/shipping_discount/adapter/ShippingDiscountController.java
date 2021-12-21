@@ -5,6 +5,9 @@ import com.project.ccc_shop.shipping_discount.usecase.create.CreateShippingDisco
 import com.project.ccc_shop.shipping_discount.usecase.create.CreateShippingDiscountUseCase;
 import com.project.ccc_shop.shipping_discount.usecase.get_current.GetCurrentShippingDiscountOutput;
 import com.project.ccc_shop.shipping_discount.usecase.get_current.GetCurrentShippingDiscountUseCase;
+import com.project.ccc_shop.shipping_discount.usecase.edit.EditShippingDiscountInput;
+import com.project.ccc_shop.shipping_discount.usecase.edit.EditShippingDiscountOutput;
+import com.project.ccc_shop.shipping_discount.usecase.edit.EditShippingDiscountUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,7 @@ public class ShippingDiscountController {
 
     CreateShippingDiscountUseCase createShippingDiscountUseCase;
     GetCurrentShippingDiscountUseCase getCurrentShippingDiscountUseCase;
+    EditShippingDiscountUseCase editShippingDiscountUseCase;
 
     @Autowired
     public void setCreateDiscountUseCase(CreateShippingDiscountUseCase createShippingDiscountUseCase) {
@@ -26,6 +30,11 @@ public class ShippingDiscountController {
     @Autowired
     public void setGetCurrentShippingDiscountUseCase(GetCurrentShippingDiscountUseCase getCurrentShippingDiscountUseCase) {
         this.getCurrentShippingDiscountUseCase = getCurrentShippingDiscountUseCase;
+    }
+
+    @Autowired
+    public void setEditShippingDiscountUseCase(EditShippingDiscountUseCase editShippingDiscountUseCase) {
+        this.editShippingDiscountUseCase = editShippingDiscountUseCase;
     }
 
     @PostMapping(value = "/create")
@@ -47,6 +56,27 @@ public class ShippingDiscountController {
 
         try {
             this.getCurrentShippingDiscountUseCase.execute(output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } catch (Exception e) {
+            output.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+    }
+
+    @PostMapping(value = "/edit")
+    public ResponseEntity<EditShippingDiscountOutput> updateOrder(@RequestBody EditShippingDiscountInput requestBody) {
+
+        EditShippingDiscountInput input = new EditShippingDiscountInput();
+        EditShippingDiscountOutput output = new EditShippingDiscountOutput();
+        try {
+            input.setDiscountCode(requestBody.getDiscountCode());
+            input.setVenderId(requestBody.getVenderId());
+            input.setPolicyDescription(requestBody.getPolicyDescription());
+            input.setStartTime(requestBody.getStartTime());
+            input.setEndTime(requestBody.getEndTime());
+            input.setTargetPrice(requestBody.getTargetPrice());
+
+            this.editShippingDiscountUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             output.setMessage(e.getMessage());
