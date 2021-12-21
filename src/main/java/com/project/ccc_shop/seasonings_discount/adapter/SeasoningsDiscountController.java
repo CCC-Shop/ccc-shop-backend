@@ -1,7 +1,5 @@
 package com.project.ccc_shop.seasonings_discount.adapter;
 
-import com.project.ccc_shop.order.usecase.update.UpdateOrderInput;
-import com.project.ccc_shop.order.usecase.update.UpdateOrderOutput;
 import com.project.ccc_shop.seasonings_discount.usecase.create.CreateSeasoningsDiscountInput;
 import com.project.ccc_shop.seasonings_discount.usecase.create.CreateSeasoningsDiscountOutput;
 import com.project.ccc_shop.seasonings_discount.usecase.create.CreateSeasoningsDiscountUseCase;
