@@ -3,6 +3,9 @@ package com.project.ccc_shop.order.adapter;
 import com.project.ccc_shop.order.usecase.create.CreateOrderInput;
 import com.project.ccc_shop.order.usecase.create.CreateOrderOutput;
 import com.project.ccc_shop.order.usecase.create.CreateOrderUseCase;
+import com.project.ccc_shop.order.usecase.get.GetCustomerOrderInput;
+import com.project.ccc_shop.order.usecase.get.GetCustomerOrderOutput;
+import com.project.ccc_shop.order.usecase.get.GetCustomerOrderUseCase;
 import com.project.ccc_shop.order.usecase.update.UpdateOrderInput;
 import com.project.ccc_shop.order.usecase.update.UpdateOrderOutput;
 import com.project.ccc_shop.order.usecase.update.UpdateOrderUseCase;
@@ -21,6 +24,7 @@ public class OrderController {
 
     CreateOrderUseCase createOrderUseCase;
     UpdateOrderUseCase updateOrderUseCase;
+    GetCustomerOrderUseCase getCustomerOrderUseCase;
 
     @Autowired
     public void setCreateOrderUseCase(CreateOrderUseCase createOrderUseCase) {
@@ -32,11 +36,16 @@ public class OrderController {
         this.updateOrderUseCase = updateOrderUseCase;
     }
 
+    @Autowired
+    public void setGetCustomerOrderUseCase(GetCustomerOrderUseCase getCustomerOrderUseCase) {
+        this.getCustomerOrderUseCase = getCustomerOrderUseCase;
+    }
+
     @PostMapping(value = "/create")
     public ResponseEntity<CreateOrderOutput> createOrder(@RequestBody CreateOrderInput requestBody) {
-
         CreateOrderInput input = new CreateOrderInput();
         CreateOrderOutput output = new CreateOrderOutput();
+
         try {
             input.setCustomerId(requestBody.getCustomerId());
             input.setShippingFee(requestBody.getShippingFee());
@@ -49,6 +58,7 @@ public class OrderController {
             input.setSeasoningDiscountCode(requestBody.getSeasoningDiscountCode());
             input.setShippingDiscountCode(requestBody.getShippingDiscountCode());
             input.setOrderItems(requestBody.getOrderItems());
+            input.setTotalPrice(requestBody.getTotalPrice());
 
             this.createOrderUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
@@ -60,15 +70,28 @@ public class OrderController {
 
     @PostMapping(value = "/update")
     public ResponseEntity<UpdateOrderOutput> updateOrder(@RequestBody UpdateOrderInput requestBody) {
-
         UpdateOrderInput input = new UpdateOrderInput();
         UpdateOrderOutput output = new UpdateOrderOutput();
+
         try {
             input.setOrderId(requestBody.getOrderId());
             input.setStatus(requestBody.getStatus());
-            input.setTime(requestBody.getTime());
+            input.setTime(Timestamp.from(Instant.now()));
 
             this.updateOrderUseCase.execute(input, output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } catch (Exception e) {
+            output.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+    }
+
+    @GetMapping(value = "/get-customer")
+    public ResponseEntity<GetCustomerOrderOutput> getAllUser(@RequestBody GetCustomerOrderInput requestBody) {
+        GetCustomerOrderOutput output = new GetCustomerOrderOutput();
+
+        try {
+            this.getCustomerOrderUseCase.execute(requestBody, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             output.setMessage(e.getMessage());

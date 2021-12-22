@@ -5,9 +5,7 @@ import com.project.ccc_shop.common.UseCase;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
-import java.util.Calendar;
-import java.util.Map;
-import java.util.TimeZone;
+import java.util.*;
 
 import static java.sql.Types.NULL;
 
@@ -33,8 +31,9 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
                             "`credit_card_id`, " +
                             "`order_time`, " +
                             "`seasoning_discount_code`, " +
-                            "`shipping_discount_code`)" +
-                            " VALUES (?,?,?,?,?,?,?,?,?,?)");
+                            "`shipping_discount_code`, " +
+                            "`total_price`)" +
+                            " VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 
             stmt.setInt(1, input.getCustomerId());
             stmt.setInt(2, input.getShippingFee());
@@ -55,13 +54,13 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
             } else {
                 stmt.setInt(10, input.getShippingDiscountCode());
             }
+            stmt.setInt(11, input.getTotalPrice());
 
             stmt.executeUpdate();
             int orderId = getOrderId(connection);
 
             createOrderItems(connection, orderId, input.getOrderItems());
 
-            output.setId(orderId);
             output.setOrderTime(input.getOrderTime());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,6 +78,7 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         throw new RuntimeException("No order exist.");
     }
@@ -87,7 +87,9 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
         if (orderItems.isEmpty()) {
             return;
         }
+        List<Integer> productIdList = new ArrayList<>();
         orderItems.keySet().forEach(productId -> {
+            productIdList.add(productId);
             try (PreparedStatement stmt = connection.prepareStatement(
                     "INSERT `order_items` (`order_id`, " +
                             "`product_id`, " +
@@ -103,5 +105,37 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
                 throw new RuntimeException(e);
             }
         });
+        generateOrderAndVenderRelation(connection, orderId, productIdList.get(0));
+    }
+
+    private void generateOrderAndVenderRelation(Connection connection, int orderId, Integer productId) {
+        try (PreparedStatement stmt = connection.prepareStatement(
+                "SELECT `vender_id` FROM `product` WHERE `id`=?")) {
+            stmt.setInt(1, productId);
+
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            int venderId = rs.getInt("vender_id");
+
+            insertValueToManageOrder(connection, orderId, venderId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void insertValueToManageOrder(Connection connection, int orderId, int venderId) {
+        try (PreparedStatement stmt = connection.prepareStatement(
+                "INSERT `manage_order` (`order_id`, " +
+                        "`vender_id`)" +
+                        " VALUES (?,?)")) {
+            stmt.setInt(1, orderId);
+            stmt.setInt(2, venderId);
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 }

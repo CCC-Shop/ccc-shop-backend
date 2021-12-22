@@ -1,6 +1,7 @@
 package com.project.ccc_shop.order;
 
 import com.project.ccc_shop.common.MySQLDriver;
+import com.project.ccc_shop.common.Output;
 import com.project.ccc_shop.order.entity.Payment;
 import com.project.ccc_shop.order.entity.Status;
 import com.project.ccc_shop.order.usecase.create.CreateOrderInput;
@@ -16,6 +17,8 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CreateOrderUseCaseTest {
+    final static String SUCCESS_MESSAGE = "Success!";
+
     @Test
     public void create_order_without_discount_code() {
         MySQLDriver mySQLDriver = new MySQLDriver();
@@ -30,6 +33,7 @@ public class CreateOrderUseCaseTest {
         input.setPaymentMethod(Payment.CASH);
         Timestamp orderTime = Timestamp.from(Instant.now());
         input.setOrderTime(orderTime);
+        input.setTotalPrice(30000);
         Map<Integer, Integer> orderItems = new HashMap<>();
         for (int i = 1; i < 4; i++) {
             orderItems.put(i, 2);
@@ -38,7 +42,7 @@ public class CreateOrderUseCaseTest {
 
         createOrderUseCase.execute(input, output);
 
-        assertNotNull(output.getId());
+        assertEquals(SUCCESS_MESSAGE, output.getMessage());
         assertEquals(orderTime, output.getOrderTime());
     }
 
@@ -57,6 +61,7 @@ public class CreateOrderUseCaseTest {
         Timestamp orderTime = Timestamp.from(Instant.now());
         input.setOrderTime(orderTime);
         input.setSeasoningDiscountCode(3);
+        input.setTotalPrice(10000);
         Map<Integer, Integer> orderItems = new HashMap<>();
         for (int i = 1; i < 4; i++) {
             orderItems.put(i, 8 - i);
@@ -65,7 +70,7 @@ public class CreateOrderUseCaseTest {
 
         createOrderUseCase.execute(input, output);
 
-        assertNotNull(output.getId());
+        assertEquals(SUCCESS_MESSAGE, output.getMessage());
         assertEquals(orderTime, output.getOrderTime());
     }
 
@@ -84,15 +89,16 @@ public class CreateOrderUseCaseTest {
         Timestamp orderTime = Timestamp.from(Instant.now());
         input.setOrderTime(orderTime);
         input.setShippingDiscountCode(2);
+        input.setTotalPrice(25000);
         Map<Integer, Integer> orderItems = new HashMap<>();
         for (int i = 1; i < 4; i++) {
-            orderItems.put(4 - i, i);
+            orderItems.put(15 - i, i);
         }
         input.setOrderItems(orderItems);
 
         createOrderUseCase.execute(input, output);
 
-        assertNotNull(output.getId());
+        assertEquals(SUCCESS_MESSAGE, output.getMessage());
         assertEquals(orderTime, output.getOrderTime());
     }
 }

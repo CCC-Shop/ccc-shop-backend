@@ -24,7 +24,6 @@ public class UpdateUserUseCase implements UseCase<UpdateUserInput, UpdateUserOut
                     "UPDATE `user` SET " +
                             "`username`=?, " +
                             "`identity`=?, " +
-                            "`password`=?, " +
                             "`phone`=?, " +
                             "`email`=?, " +
                             "`credit_card`=?, " +
@@ -33,12 +32,11 @@ public class UpdateUserUseCase implements UseCase<UpdateUserInput, UpdateUserOut
 
             stmt.setString(1, input.getUsername());
             stmt.setString(2, input.getIdentity().toString());
-            stmt.setString(3, input.getPassword());
-            stmt.setString(4, input.getPhone());
-            stmt.setString(5, input.getEmail());
-            stmt.setString(6, input.getCreditCard());
-            stmt.setString(7, input.getAddress());
-            stmt.setInt(8, input.getId());
+            stmt.setString(3, input.getPhone());
+            stmt.setString(4, input.getEmail());
+            stmt.setString(5, input.getCreditCard());
+            stmt.setString(6, input.getAddress());
+            stmt.setInt(7, input.getId());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
