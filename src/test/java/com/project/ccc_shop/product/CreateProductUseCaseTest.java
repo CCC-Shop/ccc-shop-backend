@@ -11,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class CreateProductUseCaseTest {
+    final static String SUCCESS_MESSAGE = "Success!";
+
     @Test
     public void create_product_use_case() {
         MySQLDriver mySQLDriver = new MySQLDriver();
@@ -20,7 +22,7 @@ public class CreateProductUseCaseTest {
         CreateProductOutput output = new CreateProductOutput();
 
         input.setName("ipad");
-        input.setUserId(6);
+        input.setVenderId(6);
         input.setCategory(Category.TABLET);
         input.setPrice(20000);
         input.setStock(3);
@@ -30,7 +32,6 @@ public class CreateProductUseCaseTest {
 
         createProductUseCase.execute(input, output);
 
-        assertNotNull(output.getName());
-        assertEquals("ipad", output.getName());
+        assertEquals(SUCCESS_MESSAGE, output.getMessage());
     }
 }

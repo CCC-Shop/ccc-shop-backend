@@ -4,8 +4,8 @@ import com.project.ccc_shop.common.Input;
 import com.project.ccc_shop.product.entity.Category;
 
 public class CreateProductInput implements Input {
+    private int venderId;
     private String name;
-    private int userId;
     private Category category;
     private int price;
     private int stock;
@@ -21,12 +21,12 @@ public class CreateProductInput implements Input {
         this.name = name;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getVenderId() {
+        return venderId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setVenderId(int venderId) {
+        this.venderId = venderId;
     }
 
     public Category getCategory() {

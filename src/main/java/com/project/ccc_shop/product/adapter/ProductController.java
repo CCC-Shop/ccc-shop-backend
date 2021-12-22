@@ -61,7 +61,7 @@ public class ProductController {
         CreateProductOutput output = new CreateProductOutput();
 
         input.setName(requestBody.getName());
-        input.setUserId(requestBody.getUserId());
+        input.setVenderId(requestBody.getVenderId());
         input.setCategory(requestBody.getCategory());
         input.setStock(requestBody.getStock());
         input.setPrice(requestBody.getPrice());
