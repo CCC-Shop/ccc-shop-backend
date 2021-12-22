@@ -8,6 +8,9 @@ import com.project.ccc_shop.shipping_discount.usecase.get_current.GetCurrentShip
 import com.project.ccc_shop.shipping_discount.usecase.edit.EditShippingDiscountInput;
 import com.project.ccc_shop.shipping_discount.usecase.edit.EditShippingDiscountOutput;
 import com.project.ccc_shop.shipping_discount.usecase.edit.EditShippingDiscountUseCase;
+import com.project.ccc_shop.shipping_discount.usecase.get_vender.GetVenderShippingDiscountInput;
+import com.project.ccc_shop.shipping_discount.usecase.get_vender.GetVenderShippingDiscountOutput;
+import com.project.ccc_shop.shipping_discount.usecase.get_vender.GetVenderShippingDiscountUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +23,7 @@ public class ShippingDiscountController {
 
     CreateShippingDiscountUseCase createShippingDiscountUseCase;
     GetCurrentShippingDiscountUseCase getCurrentShippingDiscountUseCase;
+    GetVenderShippingDiscountUseCase getVenderShippingDiscountUseCase;
     EditShippingDiscountUseCase editShippingDiscountUseCase;
 
     @Autowired
@@ -30,6 +34,11 @@ public class ShippingDiscountController {
     @Autowired
     public void setGetCurrentShippingDiscountUseCase(GetCurrentShippingDiscountUseCase getCurrentShippingDiscountUseCase) {
         this.getCurrentShippingDiscountUseCase = getCurrentShippingDiscountUseCase;
+    }
+
+    @Autowired
+    public void setGetVenderShippingDiscountUseCase(GetVenderShippingDiscountUseCase getVenderShippingDiscountUseCase) {
+        this.getVenderShippingDiscountUseCase = getVenderShippingDiscountUseCase;
     }
 
     @Autowired
@@ -56,6 +65,19 @@ public class ShippingDiscountController {
 
         try {
             this.getCurrentShippingDiscountUseCase.execute(output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } catch (Exception e) {
+            output.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+    }
+
+    @GetMapping(value = "/get-vender")
+    public ResponseEntity<GetVenderShippingDiscountOutput> getVenderShippingDiscount(@RequestBody GetVenderShippingDiscountInput requestBody) {
+        GetVenderShippingDiscountOutput output = new GetVenderShippingDiscountOutput();
+
+        try {
+            this.getVenderShippingDiscountUseCase.execute(requestBody, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             output.setMessage(e.getMessage());
