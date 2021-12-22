@@ -3,6 +3,9 @@ package com.project.ccc_shop.shopping_cart.adapter;
 import com.project.ccc_shop.shopping_cart.usecase.create.CreateShoppingCartInput;
 import com.project.ccc_shop.shopping_cart.usecase.create.CreateShoppingCartOutput;
 import com.project.ccc_shop.shopping_cart.usecase.create.CreateShoppingCartUseCase;
+import com.project.ccc_shop.shopping_cart.usecase.delete.DeleteShoppingCartItemInput;
+import com.project.ccc_shop.shopping_cart.usecase.delete.DeleteShoppingCartItemOutput;
+import com.project.ccc_shop.shopping_cart.usecase.delete.DeleteShoppingCartItemUseCase;
 import com.project.ccc_shop.shopping_cart.usecase.get.GetShoppingCartItemsInput;
 import com.project.ccc_shop.shopping_cart.usecase.get.GetShoppingCartItemsOutput;
 import com.project.ccc_shop.shopping_cart.usecase.get.GetShoppingCartItemsUseCase;
@@ -22,6 +25,7 @@ public class ShoppingCartController {
     CreateShoppingCartUseCase createShoppingCartUseCase;
     GetShoppingCartItemsUseCase getShoppingCartItemsUseCase;
     UpdateShoppingCartUseCase updateShoppingCartUseCase;
+    DeleteShoppingCartItemUseCase deleteShoppingCartItemUseCase;
 
     @Autowired
     public void setCreateShoppingCartUseCase(CreateShoppingCartUseCase createShoppingCartUseCase) {
@@ -36,6 +40,11 @@ public class ShoppingCartController {
     @Autowired
     public void setUpdateShoppingCartUseCase(UpdateShoppingCartUseCase updateShoppingCartUseCase) {
         this.updateShoppingCartUseCase = updateShoppingCartUseCase;
+    }
+
+    @Autowired
+    public void setDeleteShoppingCartItemUseCase(DeleteShoppingCartItemUseCase deleteShoppingCartItemUseCase) {
+        this.deleteShoppingCartItemUseCase = deleteShoppingCartItemUseCase;
     }
 
     @PostMapping(value = "/create")
@@ -83,6 +92,24 @@ public class ShoppingCartController {
             input.setQuantity(requestBody.getQuantity());
 
             this.updateShoppingCartUseCase.execute(input, output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } catch (Exception e) {
+            output.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+    }
+
+    @PostMapping(value = "/delete-item")
+    public ResponseEntity<DeleteShoppingCartItemOutput> deleteShoppingCartItem(@RequestBody DeleteShoppingCartItemInput requestBody) {
+
+//        DeleteShoppingCartItemInput input = new DeleteShoppingCartItemInput();
+        DeleteShoppingCartItemOutput output = new DeleteShoppingCartItemOutput();
+
+//        input.setProductId(requestBody.getProductId());
+//        input.setCustomerId(requestBody.getCustomerId());
+
+        try {
+            this.deleteShoppingCartItemUseCase.execute(requestBody, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             output.setMessage(e.getMessage());
