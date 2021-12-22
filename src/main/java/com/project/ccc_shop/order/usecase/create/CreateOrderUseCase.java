@@ -2,7 +2,6 @@ package com.project.ccc_shop.order.usecase.create;
 
 import com.project.ccc_shop.common.MySQLDriver;
 import com.project.ccc_shop.common.UseCase;
-import com.project.ccc_shop.seasonings_discount.entity.SeasoningsDiscount;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;

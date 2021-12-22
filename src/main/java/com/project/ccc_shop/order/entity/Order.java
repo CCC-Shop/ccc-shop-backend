@@ -1,26 +1,33 @@
-package com.project.ccc_shop.order.usecase.create;
-
-import com.project.ccc_shop.common.Input;
-import com.project.ccc_shop.order.entity.Payment;
-import com.project.ccc_shop.order.entity.Status;
+package com.project.ccc_shop.order.entity;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CreateOrderInput implements Input {
+public class Order {
+    private int id;
     private int customerId;
     private int shippingFee;
     private String recipientName;
     private String shippingAddress;
     private Status status;
-    private Payment payment;
+    private Payment paymentMethod;
     private String creditCardId;
     private Timestamp orderTime;
+    private Timestamp shippingTime;
+    private Timestamp deliveryTime;
     private int seasoningDiscountCode;
     private int shippingDiscountCode;
     private int totalPrice;
-    private Map<Integer, Integer> orderItems = new HashMap<>();
+    private Map<Integer, Integer> orderItems = new HashMap<>();   // Map<productId, quantity>
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getCustomerId() {
         return customerId;
@@ -63,11 +70,11 @@ public class CreateOrderInput implements Input {
     }
 
     public Payment getPaymentMethod() {
-        return payment;
+        return paymentMethod;
     }
 
-    public void setPaymentMethod(Payment payment) {
-        this.payment = payment;
+    public void setPaymentMethod(Payment paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public String getCreditCardId() {
@@ -86,6 +93,22 @@ public class CreateOrderInput implements Input {
         this.orderTime = orderTime;
     }
 
+    public Timestamp getShippingTime() {
+        return shippingTime;
+    }
+
+    public void setShippingTime(Timestamp shippingTime) {
+        this.shippingTime = shippingTime;
+    }
+
+    public Timestamp getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(Timestamp deliveryTime) {
+        this.deliveryTime = deliveryTime;
+    }
+
     public int getSeasoningDiscountCode() {
         return seasoningDiscountCode;
     }
@@ -102,6 +125,14 @@ public class CreateOrderInput implements Input {
         this.shippingDiscountCode = shippingDiscountCode;
     }
 
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     public Map<Integer, Integer> getOrderItems() {
         return orderItems;
     }
@@ -110,11 +141,12 @@ public class CreateOrderInput implements Input {
         this.orderItems = orderItems;
     }
 
-    public int getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
+    public void addOrderItem(int productId, int quantity) {
+        if (orderItems.containsKey(productId)) {
+            int oldQuantity = orderItems.get(productId);
+            orderItems.put(productId, oldQuantity + quantity);
+            return;
+        }
+        orderItems.put(productId, quantity);
     }
 }
