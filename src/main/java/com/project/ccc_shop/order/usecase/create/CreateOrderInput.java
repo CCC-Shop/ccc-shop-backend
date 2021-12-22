@@ -19,6 +19,7 @@ public class CreateOrderInput implements Input {
     private Timestamp orderTime;
     private int seasoningDiscountCode;
     private int shippingDiscountCode;
+    private int totalPrice;
     private Map<Integer, Integer> orderItems = new HashMap<>();   // Map<productId, quantity>
 
     public int getCustomerId() {
@@ -107,5 +108,13 @@ public class CreateOrderInput implements Input {
 
     public void setOrderItems(Map<Integer, Integer> orderItems) {
         this.orderItems = orderItems;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

@@ -10,7 +10,6 @@ import java.util.Map;
 public class UpdateOrderInput implements Input {
     private int orderId;
     private Status status;
-    private Payment payment;
     private Timestamp time;
 
     public int getOrderId() {
@@ -27,14 +26,6 @@ public class UpdateOrderInput implements Input {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
     }
 
     public Timestamp getTime() {

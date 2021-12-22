@@ -34,9 +34,9 @@ public class OrderController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<CreateOrderOutput> createOrder(@RequestBody CreateOrderInput requestBody) {
-
         CreateOrderInput input = new CreateOrderInput();
         CreateOrderOutput output = new CreateOrderOutput();
+
         try {
             input.setCustomerId(requestBody.getCustomerId());
             input.setShippingFee(requestBody.getShippingFee());
@@ -49,6 +49,7 @@ public class OrderController {
             input.setSeasoningDiscountCode(requestBody.getSeasoningDiscountCode());
             input.setShippingDiscountCode(requestBody.getShippingDiscountCode());
             input.setOrderItems(requestBody.getOrderItems());
+            input.setTotalPrice(requestBody.getTotalPrice());
 
             this.createOrderUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
@@ -60,13 +61,13 @@ public class OrderController {
 
     @PostMapping(value = "/update")
     public ResponseEntity<UpdateOrderOutput> updateOrder(@RequestBody UpdateOrderInput requestBody) {
-
         UpdateOrderInput input = new UpdateOrderInput();
         UpdateOrderOutput output = new UpdateOrderOutput();
+
         try {
             input.setOrderId(requestBody.getOrderId());
             input.setStatus(requestBody.getStatus());
-            input.setTime(requestBody.getTime());
+            input.setTime(Timestamp.from(Instant.now()));
 
             this.updateOrderUseCase.execute(input, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);

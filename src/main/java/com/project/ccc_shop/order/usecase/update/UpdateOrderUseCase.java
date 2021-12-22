@@ -6,6 +6,8 @@ import com.project.ccc_shop.order.entity.Status;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 @Service
 public class UpdateOrderUseCase implements UseCase<UpdateOrderInput, UpdateOrderOutput> {
@@ -40,7 +42,8 @@ public class UpdateOrderUseCase implements UseCase<UpdateOrderInput, UpdateOrder
         if (status.equals(Status.SHIPPING)) {
             try (PreparedStatement stmt = connection.prepareStatement(
                     "UPDATE `order` SET `shipping_time`= ? WHERE `id`= ?")) {
-                stmt.setTimestamp(1, timestamp);
+                Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Taipei"));
+                stmt.setTimestamp(1, timestamp, calendar);
                 stmt.setInt(2, orderId);
 
                 stmt.executeUpdate();
