@@ -1,7 +1,7 @@
 package com.project.ccc_shop.product.usecase.get_all;
 
 import com.project.ccc_shop.common.MySQLDriver;
-import com.project.ccc_shop.common.UseCase;
+import com.project.ccc_shop.product.entity.Category;
 import com.project.ccc_shop.product.entity.Product;
 import org.springframework.stereotype.Service;
 
@@ -22,34 +22,32 @@ public class GetAllProductUseCase {
     }
 
     public void execute(GetAllProductOutput output) {
-
-        try(Connection connection = this.mySQLDriver.getConnection()) {
-
+        try (Connection connection = this.mySQLDriver.getConnection()) {
             List<Product> productList = new ArrayList<>();
-
             PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT p.id, p.vender_id, p.name, p.category, p.price, p.stock, p.warehouse_address, p.description, p.pictureURL, user.username, AVG(rating)" +
-                            "            FROM `user`, `product` AS p LEFT OUTER JOIN `valuation` AS v" +
-                            "            ON p.id = v.product_id" +
-                            "            WHERE user.id = p.vender_id" +
-                            "            GROUP BY p.id;");
-
+                    "SELECT p.id, p.vender_id, p.name, p.category, p.price, p.stock, p.warehouse_address, p.description, " +
+                            "p.pictureURL, user.username, AVG(rating), p.exist_flag " +
+                            "FROM `user`, `product` AS p LEFT OUTER JOIN `valuation` AS v " +
+                            "ON p.id = v.product_id " +
+                            "WHERE user.id = p.vender_id " +
+                            "GROUP BY p.id");
 
             try (ResultSet rs = stmt.executeQuery()) {
-                while(rs.next()) {
-                    int id = rs.getInt("id");
-                    int venderId = rs.getInt("vender_id");
-                    String name = rs.getString("name");
-                    String category = rs.getString("category");
-                    int price = rs.getInt("price");
-                    int stock = rs.getInt("stock");
-                    String warehouseAddress = rs.getString("warehouse_address");
-                    String description = rs.getString("description");
-                    String pictureURL = rs.getString("pictureURL");
-                    String venderName = rs.getString("username");
-                    double rate = rs.getDouble("avg(rating)");
+                while (rs.next()) {
+                    Product product = new Product();
+                    product.setId(rs.getInt("id"));
+                    product.setVenderId(rs.getInt("vender_id"));
+                    product.setName(rs.getString("name"));
+                    product.setCategory(Category.valueOf(rs.getString("category")));
+                    product.setPrice(rs.getInt("price"));
+                    product.setStock(rs.getInt("stock"));
+                    product.setWarehouseAddress(rs.getString("warehouse_address"));
+                    product.setDescription(rs.getString("description"));
+                    product.setPictureURL(rs.getString("pictureURL"));
+                    product.setVenderName(rs.getString("username"));
+                    product.setRate(rs.getDouble("avg(rating)"));
+                    product.setExistFlag(rs.getBoolean("exist_flag"));
 
-                    Product product = new Product(id, venderId, name, category, price, stock, warehouseAddress, description, pictureURL, venderName, rate);
                     productList.add(product);
                 }
             }
@@ -60,5 +58,4 @@ public class GetAllProductUseCase {
             throw new RuntimeException(e);
         }
     }
-
 }

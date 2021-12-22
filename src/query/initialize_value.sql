@@ -21,7 +21,7 @@ VALUES (2, 'Macbook Pro', 'NOTEBOOK', 54700, 152, 'XX市XX區XX路XX號XX樓', '
        (3, 'ChromePad CT100', 'TABLET', 9500, 23, 'XX市XX區XX路XX號XX樓', '這是很好用的華碩平板', 'https://www.asus.com/media/global/gallery/MxNQtIeWKR9EANan_setting_xxx_0_90_end_2000.png', true),
        (3, 'Zenfone 8', 'PHONE', 21900, 276, 'XX市XX區XX路XX號XX樓', '這是比較便宜的華碩手機', 'https://dlcdnwebimgs.asus.com/gain/c05b6491-6d2b-48f0-81f0-d268840208d6/', true),
        (3, 'ROG Phone 5s Pro', 'PHONE', 37990, 120, 'XX市XX區XX路XX號XX樓', '這是很貴的華碩手機', 'https://dlcdnwebimgs.asus.com/gain/885B6C14-4A95-44AE-9073-602451A79511/w1000/h732', true),
-       (3, 'TUF Dash F15', 'NOTEBOOK', 45000, 326, 'XX市XX區XX路XX號XX樓', '這是很好用的華碩筆電', 'https://dlcdnwebimgs.asus.com/gain/15d0f62e-8b6b-4acd-b938-1bfbd908cb67/', true),
+       (3, 'TUF Dash F15', 'NOTEBOOK', 45000, 326, 'XX市XX區XX路XX號XX樓', '這是很好用的華碩筆電', 'https://dlcdnwebimgs.asus.com/gain/15d0f62e-8b6b-4acd-b938-1bfbd908cb67/', false),
        (3, 'S700TA', 'COMPUTER', 27000, 8, 'XX市XX區XX路XX號XX樓', '這是很厲害的華碩電腦', 'https://www.asus.com/media/global/gallery/spghwb4k7042hglq_setting_xxx_0_90_end_2000.png', true),
        (4, 'Galaxy Book Pro 360', 'NOTEBOOK', 12000, 28, 'XX市XX區XX路XX號XX樓', '這是很好用的三星筆電', 'https://images.samsung.com/is/image/samsung/p6pim/uk/feature/155011270/uk-feature-thin-as-a-smartphone--powerful-as-a-pc-505622468?$FB_TYPE_A_MO_JPG$', true),
        (4, 'Galaxy Z Fold3 5G', 'PHONE', 56888, 380, 'XX市XX區XX路XX號XX樓', '這是很貴的三星手機', 'https://images.samsung.com/ca/smartphones/galaxy-z-fold3-5g/buy/zfold3_carousel_productimage_phantomsilver_mo.jpg?imwidth=720', true),

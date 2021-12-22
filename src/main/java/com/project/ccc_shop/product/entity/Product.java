@@ -1,12 +1,10 @@
 package com.project.ccc_shop.product.entity;
 
-import java.util.UUID;
-
 public class Product {
     private int id;
     private int venderId;
     private String name;
-    private String category;
+    private Category category;
     private int price;
     private int stock;
     private String warehouseAddress;
@@ -14,24 +12,15 @@ public class Product {
     private String pictureURL;
     private String venderName;
     private double rate;
+    private boolean existFlag = false;
 
-    public Product(int id, int venderId, String name, String category, int price, int stock, String warehouseAddress, String description, String pictureURL,String venderName, double rate) {
-        this.id = id;
-        this.venderId = venderId;
-        this.name = name;
-        this.category = category;
-        this.price = price;
-        this.stock = stock;
-        this.warehouseAddress = warehouseAddress;
-        this.description = description;
-        this.pictureURL = pictureURL;
-        this.venderName = venderName;
-        this.rate = rate;
+    public int getId() {
+        return id;
     }
 
-    public int getId() { return id; }
-
-    public void setId(int id) { this.id = id; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getVenderId() {
         return venderId;
@@ -49,11 +38,11 @@ public class Product {
         this.name = name;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -111,5 +100,13 @@ public class Product {
 
     public void setVenderName(String venderName) {
         this.venderName = venderName;
+    }
+
+    public boolean getExistFlag() {
+        return existFlag;
+    }
+
+    public void setExistFlag(boolean existFlag) {
+        this.existFlag = existFlag;
     }
 }
