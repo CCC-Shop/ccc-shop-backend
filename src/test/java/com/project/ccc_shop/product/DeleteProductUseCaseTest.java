@@ -9,33 +9,31 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DeleteProductUseCaseTest {
-    @Test
-    public void delete_product_Succeed() {
-        MySQLDriver mySQLDriver = new MySQLDriver();
+    final static String SUCCESS_MESSAGE = "Success!";
 
+    @Test
+    public void delete_product_succeeded() {
+        MySQLDriver mySQLDriver = new MySQLDriver();
         DeleteProductUseCase deleteProductUseCase = new DeleteProductUseCase(mySQLDriver);
         DeleteProductInput input = new DeleteProductInput();
         DeleteProductOutput output = new DeleteProductOutput();
-
         input.setId(4);
 
         deleteProductUseCase.execute(input, output);
 
-        assertTrue(output.getWorkCheck());
+        assertEquals(SUCCESS_MESSAGE, output.getMessage());
     }
 
     @Test
-    public void delete_product_use_Failed() {
+    public void delete_product_failed() {
         MySQLDriver mySQLDriver = new MySQLDriver();
-
         DeleteProductUseCase deleteProductUseCase = new DeleteProductUseCase(mySQLDriver);
         DeleteProductInput input = new DeleteProductInput();
         DeleteProductOutput output = new DeleteProductOutput();
-
         input.setId(100);
 
-        deleteProductUseCase.execute(input, output);
-
-        assertFalse(output.getWorkCheck());
+        assertThrows(RuntimeException.class, () -> {
+            deleteProductUseCase.execute(input, output);
+        });
     }
 }

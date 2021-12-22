@@ -20,28 +20,38 @@ public class DeleteProductUseCase implements UseCase<DeleteProductInput, DeleteP
 
     @Override
     public void execute(DeleteProductInput input, DeleteProductOutput output) {
-
         try (Connection connection = this.mySQLDriver.getConnection()) {
+            if (productExists(connection, input.getId())) {
+                PreparedStatement stmt = connection.prepareStatement(
+                        "UPDATE `product` SET `exist_flag` = ? WHERE id = ?");
+                stmt.setBoolean(1, false);
+                stmt.setInt(2, input.getId());
 
-            PreparedStatement stmt = connection.prepareStatement("SELECT `id` FROM `product` WHERE id = ?");
-            stmt.setInt(1, input.getId());
-            ResultSet rs = stmt.executeQuery();
-
-            stmt = connection.prepareStatement("DELETE FROM `product` WHERE id = ?");
-            stmt.setInt(1, input.getId());
-            stmt.executeUpdate();
-
-            if (!rs.next()) {
-                output.setWorkCheck(false);
-                throw new RuntimeException("delete product failed");
-            } else {
-                output.setWorkCheck(true);
+                stmt.executeUpdate();
             }
-
+            else {
+                throw new RuntimeException("product not exist, where product id = " + input.getId());
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
 
+    private boolean productExists(Connection connection, int productId) {
+        try (PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT * FROM `product` WHERE `id`= ?")) {
+            stmt.setInt(1, productId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 }

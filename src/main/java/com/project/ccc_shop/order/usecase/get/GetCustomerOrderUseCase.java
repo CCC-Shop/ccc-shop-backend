@@ -62,7 +62,7 @@ public class GetCustomerOrderUseCase implements UseCase<GetCustomerOrderInput, G
 
     private void addOrderItems(Connection connection, Order order) {
         try (PreparedStatement stmt = connection.prepareStatement(
-                "SELECT * FROM `order_items` WHERE `order_id`=?;")) {
+                "SELECT * FROM `order_items` WHERE `order_id` = ?")) {
             stmt.setInt(1, order.getId());
 
             try (ResultSet rs = stmt.executeQuery()) {
