@@ -19,7 +19,6 @@ public class UpdateUserUseCaseTest {
         input.setId(9);
         input.setUsername("Eddie");
         input.setIdentity(Identity.valueOf("STAFF"));
-        input.setPassword("Eddie123");
         input.setPhone("0987654321");
         input.setEmail("eddie@gmail.com");
         input.setCreditCard("1234567-1234567");

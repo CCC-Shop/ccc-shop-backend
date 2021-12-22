@@ -7,7 +7,6 @@ public class UpdateUserInput implements Input {
     private int id;
     private String username;
     private Identity identity;
-    private String password;
     private String phone;
     private String email;
     private String creditCard;
@@ -35,14 +34,6 @@ public class UpdateUserInput implements Input {
 
     public void setIdentity(Identity identity) {
         this.identity = identity;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhone() {
