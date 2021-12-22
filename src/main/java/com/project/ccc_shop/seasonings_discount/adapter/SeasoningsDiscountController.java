@@ -64,7 +64,7 @@ public class SeasoningsDiscountController {
     }
 
     @PostMapping(value = "/edit")
-    public ResponseEntity<EditSeasoningsDiscountOutput> updateOrder(@RequestBody EditSeasoningsDiscountInput requestBody) {
+    public ResponseEntity<EditSeasoningsDiscountOutput> editSeasoningsDiscount(@RequestBody EditSeasoningsDiscountInput requestBody) {
 
         EditSeasoningsDiscountInput input = new EditSeasoningsDiscountInput();
         EditSeasoningsDiscountOutput output = new EditSeasoningsDiscountOutput();

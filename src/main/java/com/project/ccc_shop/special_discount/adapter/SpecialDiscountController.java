@@ -65,7 +65,7 @@ public class SpecialDiscountController {
     }
 
     @PostMapping(value = "/edit")
-    public ResponseEntity<EditSpecialDiscountOutput> updateOrder(@RequestBody EditSpecialDiscountInput requestBody) {
+    public ResponseEntity<EditSpecialDiscountOutput> editSpecialDiscount(@RequestBody EditSpecialDiscountInput requestBody) {
 
         EditSpecialDiscountInput input = new EditSpecialDiscountInput();
         EditSpecialDiscountOutput output = new EditSpecialDiscountOutput();

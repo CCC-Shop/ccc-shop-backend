@@ -24,7 +24,7 @@ public class EditSeasoningsDiscountUseCaseTest {
 
         input.setDiscountCode(1);
         input.setVenderId(4);
-        input.setPolicyDescription("周年慶活動");
+        input.setPolicyDescription("event celebration!");
         Timestamp startTime = Timestamp.from(Instant.now());
         input.setStartTime(startTime);
         Timestamp endTime = Timestamp.from(Instant.now());

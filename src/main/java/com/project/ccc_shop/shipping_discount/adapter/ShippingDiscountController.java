@@ -86,7 +86,7 @@ public class ShippingDiscountController {
     }
 
     @PostMapping(value = "/edit")
-    public ResponseEntity<EditShippingDiscountOutput> updateOrder(@RequestBody EditShippingDiscountInput requestBody) {
+    public ResponseEntity<EditShippingDiscountOutput> editShippingDiscount(@RequestBody EditShippingDiscountInput requestBody) {
 
         EditShippingDiscountInput input = new EditShippingDiscountInput();
         EditShippingDiscountOutput output = new EditShippingDiscountOutput();
