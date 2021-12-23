@@ -6,13 +6,14 @@ import com.project.ccc_shop.product.entity.Category;
 public class UpdateProductInput implements Input {
     private int id;
     private String name;
-    private int userId;
+    private int venderId;
     private Category category;
     private int price;
     private int stock;
     private String warehouseAddress;
     private String description;
     private String pictureURL;
+    private boolean existFlag;
 
     public int getId() {
         return id;
@@ -30,12 +31,12 @@ public class UpdateProductInput implements Input {
         this.name = name;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getVenderId() {
+        return venderId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setVenderId(int venderId) {
+        this.venderId = venderId;
     }
 
     public Category getCategory() {
@@ -84,5 +85,13 @@ public class UpdateProductInput implements Input {
 
     public void setPictureURL(String pictureURL) {
         this.pictureURL = pictureURL;
+    }
+
+    public boolean getExistFlag() {
+        return existFlag;
+    }
+
+    public void setExistFlag(boolean existFlag) {
+        this.existFlag = existFlag;
     }
 }

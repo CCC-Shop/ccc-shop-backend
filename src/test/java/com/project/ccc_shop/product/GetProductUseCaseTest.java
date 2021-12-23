@@ -23,7 +23,7 @@ public class GetProductUseCaseTest {
         assertEquals(SUCCESS_MESSAGE, output.getMessage());
         assertEquals(2, output.getVenderId());
         assertEquals("iPhone 13 Pro", output.getName());
-        assertEquals(Category.PHONE, Category.valueOf(output.getCategory()));
+        assertEquals(Category.PHONE, output.getCategory());
         assertEquals(32900, output.getPrice());
         assertEquals(200, output.getStock());
         assertEquals("XX市XX區XX路XX號XX樓", output.getWarehouseAddress());

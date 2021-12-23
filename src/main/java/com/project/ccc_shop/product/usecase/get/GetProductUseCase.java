@@ -2,6 +2,7 @@ package com.project.ccc_shop.product.usecase.get;
 
 import com.project.ccc_shop.common.MySQLDriver;
 import com.project.ccc_shop.common.UseCase;
+import com.project.ccc_shop.product.entity.Category;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
@@ -29,7 +30,7 @@ public class GetProductUseCase implements UseCase<GetProductInput, GetProductOut
                 if (rs.next()){
                     output.setName(rs.getString("name"));
                     output.setVenderId(rs.getInt("vender_id"));
-                    output.setCategory(rs.getString("category"));
+                    output.setCategory(Category.valueOf(rs.getString("category")));
                     output.setPrice(rs.getInt("price"));
                     output.setStock(rs.getInt("stock"));
                     output.setWarehouseAddress(rs.getString("warehouse_address"));

@@ -86,13 +86,14 @@ public class ProductController {
 
         input.setId(requestBody.getId());
         input.setName(requestBody.getName());
-        input.setUserId(requestBody.getUserId());
+        input.setVenderId(requestBody.getVenderId());
         input.setCategory(requestBody.getCategory());
         input.setStock(requestBody.getStock());
         input.setPrice(requestBody.getPrice());
         input.setDescription(requestBody.getDescription());
         input.setPictureURL(requestBody.getPictureURL());
         input.setWarehouseAddress(requestBody.getWarehouseAddress());
+        input.setExistFlag(requestBody.getExistFlag());
 
         try {
             this.updateProductUseCase.execute(input, output);

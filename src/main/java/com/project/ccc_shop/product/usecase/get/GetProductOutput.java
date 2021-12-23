@@ -1,12 +1,13 @@
 package com.project.ccc_shop.product.usecase.get;
 
 import com.project.ccc_shop.common.Output;
+import com.project.ccc_shop.product.entity.Category;
 
 public class GetProductOutput extends Output {
 
     private int venderId;
     private String name;
-    private String category;
+    private Category category;
     private int price;
     private int stock;
     private String warehouseAddress;
@@ -30,11 +31,11 @@ public class GetProductOutput extends Output {
         this.venderId = venderId;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
