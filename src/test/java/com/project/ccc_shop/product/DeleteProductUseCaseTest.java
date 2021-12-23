@@ -25,7 +25,7 @@ public class DeleteProductUseCaseTest {
     }
 
     @Test
-    public void delete_product_failed() {
+    public void delete_product_failed_caused_by_product_does_not_exist() {
         MySQLDriver mySQLDriver = new MySQLDriver();
         DeleteProductUseCase deleteProductUseCase = new DeleteProductUseCase(mySQLDriver);
         DeleteProductInput input = new DeleteProductInput();

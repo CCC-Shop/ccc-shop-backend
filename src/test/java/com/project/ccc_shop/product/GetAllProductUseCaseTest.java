@@ -12,6 +12,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GetAllProductUseCaseTest {
+    final static String SUCCESS_MESSAGE = "Success!";
+
     @Test
     public void get_all_product_succeeded() {
         MySQLDriver mySQLDriver = new MySQLDriver();
@@ -20,6 +22,7 @@ public class GetAllProductUseCaseTest {
 
         getAllProductUseCase.execute(output);
 
+        assertEquals(SUCCESS_MESSAGE, output.getMessage());
         List<Product> productList = output.getProductList();
         assertEquals(15, productList.size());
         Product product = productList.get(2);

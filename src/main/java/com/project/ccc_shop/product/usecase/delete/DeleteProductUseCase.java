@@ -30,7 +30,7 @@ public class DeleteProductUseCase implements UseCase<DeleteProductInput, DeleteP
                 stmt.executeUpdate();
             }
             else {
-                throw new RuntimeException("product not exist, where product id = " + input.getId());
+                throw new RuntimeException("product doesn't exist, where product id = " + input.getId());
             }
         } catch (SQLException e) {
             e.printStackTrace();

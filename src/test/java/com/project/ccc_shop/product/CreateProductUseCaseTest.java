@@ -34,7 +34,7 @@ public class CreateProductUseCaseTest {
     }
 
     @Test
-    public void create_product_failed() {
+    public void create_product_failed_caused_by_no_enough_product_info() {
         MySQLDriver mySQLDriver = new MySQLDriver();
         CreateProductUseCase createProductUseCase = new CreateProductUseCase(mySQLDriver);
         CreateProductInput input = new CreateProductInput();
