@@ -1,7 +1,6 @@
 package com.project.ccc_shop.order;
 
 import com.project.ccc_shop.common.MySQLDriver;
-import com.project.ccc_shop.common.Output;
 import com.project.ccc_shop.order.entity.Payment;
 import com.project.ccc_shop.order.entity.Status;
 import com.project.ccc_shop.order.usecase.create.CreateOrderInput;
@@ -43,7 +42,6 @@ public class CreateOrderUseCaseTest {
         createOrderUseCase.execute(input, output);
 
         assertEquals(SUCCESS_MESSAGE, output.getMessage());
-        assertEquals(orderTime, output.getOrderTime());
     }
 
     @Test
@@ -71,7 +69,6 @@ public class CreateOrderUseCaseTest {
         createOrderUseCase.execute(input, output);
 
         assertEquals(SUCCESS_MESSAGE, output.getMessage());
-        assertEquals(orderTime, output.getOrderTime());
     }
 
     @Test
@@ -99,6 +96,5 @@ public class CreateOrderUseCaseTest {
         createOrderUseCase.execute(input, output);
 
         assertEquals(SUCCESS_MESSAGE, output.getMessage());
-        assertEquals(orderTime, output.getOrderTime());
     }
 }

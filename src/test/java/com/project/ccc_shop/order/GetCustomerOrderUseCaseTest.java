@@ -45,7 +45,7 @@ public class GetCustomerOrderUseCaseTest {
 
         order = orderList.get(1);
         assertEquals(4, order.getId());
-        assertEquals(10, order.getShippingFee());
+        assertEquals(0, order.getShippingFee());
         assertEquals("Zack", order.getRecipientName());
         assertEquals("台北市大安區忠孝東路xxx號5F", order.getShippingAddress());
         assertEquals(Status.SHIPPING, order.getStatus());

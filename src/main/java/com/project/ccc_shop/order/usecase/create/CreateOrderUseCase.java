@@ -61,7 +61,7 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
 
             createOrderItems(connection, orderId, input.getOrderItems());
 
-            output.setOrderTime(input.getOrderTime());
+            output.setOrderTime(getOrderTime(connection, orderId));
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -70,10 +70,11 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
 
     private int getOrderId(Connection connection) {
         try (PreparedStatement stmt = connection.prepareStatement(
-                "SELECT * FROM `order` WHERE `id`=(SELECT max(`id`) FROM `order`);")) {
+                "SELECT `id` FROM `order` WHERE `id`=(SELECT max(`id`) FROM `order`)")) {
+
             try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    return Integer.parseInt(rs.getString("id"));
+                if (rs.next()) {
+                    return rs.getInt("id");
                 }
             }
         } catch (SQLException e) {
@@ -113,11 +114,15 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
                 "SELECT `vender_id` FROM `product` WHERE `id`=?")) {
             stmt.setInt(1, productId);
 
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
-            int venderId = rs.getInt("vender_id");
-
-            insertValueToManageOrder(connection, orderId, venderId);
+            int venderId;
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    venderId = rs.getInt("vender_id");
+                    insertValueToManageOrder(connection, orderId, venderId);
+                } else {
+                    throw new RuntimeException("product doesn't exist, where id = " + productId);
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -137,5 +142,22 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    private Timestamp getOrderTime(Connection connection, int orderId) {
+        try (PreparedStatement stmt = connection.prepareStatement(
+                "SELECT `order_time` FROM `order` WHERE `id`=?")) {
+            stmt.setInt(1, orderId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getTimestamp("order_time");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        throw new RuntimeException("order doesn't exist, where id = " + orderId);
     }
 }
