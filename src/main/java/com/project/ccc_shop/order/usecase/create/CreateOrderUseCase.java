@@ -57,10 +57,9 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
             stmt.setInt(11, input.getTotalPrice());
 
             stmt.executeUpdate();
+
             int orderId = getOrderId(connection);
-
             createOrderItems(connection, orderId, input.getOrderItems());
-
             output.setOrderTime(getOrderTime(connection, orderId));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,12 +100,28 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
                 stmt.setInt(3, orderItems.get(productId));
 
                 stmt.executeUpdate();
+                updateProductStock(connection, productId, orderItems.get(productId));
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw new RuntimeException(e);
             }
         });
         generateOrderAndVenderRelation(connection, orderId, productIdList.get(0));
+    }
+
+    private void updateProductStock(Connection connection, int productId, int quantity) {
+        try (PreparedStatement stmt = connection.prepareStatement(
+                "UPDATE `product` " +
+                        "SET `stock`= `stock` - ? " +
+                        "WHERE `id`=?")) {
+            stmt.setInt(1, quantity);
+            stmt.setInt(2, productId);
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
     private void generateOrderAndVenderRelation(Connection connection, int orderId, Integer productId) {
