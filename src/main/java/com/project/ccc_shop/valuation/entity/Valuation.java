@@ -1,23 +1,22 @@
 package com.project.ccc_shop.valuation.entity;
 
 public class Valuation {
-    private int customerId;
+    private String customerName;
     private String comment;
     private int rating;
 
-
-    public Valuation(int customerId, String comment, int rating) {
-        this.customerId = customerId;
+    public Valuation(String customerName, String comment, int rating) {
+        this.customerName = customerName;
         this.comment = comment;
         this.rating = rating;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getComment() {

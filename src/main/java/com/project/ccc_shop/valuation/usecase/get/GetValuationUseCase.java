@@ -29,7 +29,9 @@ public class GetValuationUseCase implements UseCase<GetValuationInput, GetValuat
         try(Connection connection = this.mySQLDriver.getConnection()) {
 
             PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM `valuation` WHERE `product_id` = ?");
+                    "SELECT `valuation`.*, `user`.username FROM `valuation`, `user` " +
+                            "WHERE `product_id` = ? " +
+                            "AND `valuation`.`customer_id` = `user`.`id`");
 
             stmt.setInt(1, input.getProductId());
             ResultSet rs = stmt.executeQuery();
@@ -40,10 +42,10 @@ public class GetValuationUseCase implements UseCase<GetValuationInput, GetValuat
 //            }
 
             while(rs.next()){
-                int customer_id = rs.getInt("customer_id");
+                String customerName = rs.getString("username");
                 String comment = rs.getString("comment");
                 int rating = rs.getInt("rating");
-                Valuation valuation = new Valuation(customer_id, comment, rating);
+                Valuation valuation = new Valuation(customerName, comment, rating);
                 valuationList.add(valuation);
             }
 

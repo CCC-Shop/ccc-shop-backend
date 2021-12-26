@@ -86,8 +86,8 @@ public class OrderController {
         }
     }
 
-    @GetMapping(value = "/get-customer")
-    public ResponseEntity<GetCustomerOrderOutput> getAllUser(@RequestBody GetCustomerOrderInput requestBody) {
+    @PostMapping(value = "/get-customer")
+    public ResponseEntity<GetCustomerOrderOutput> GetCustomerOrder(@RequestBody GetCustomerOrderInput requestBody) {
         GetCustomerOrderOutput output = new GetCustomerOrderOutput();
 
         try {

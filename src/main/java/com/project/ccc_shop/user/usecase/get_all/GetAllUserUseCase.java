@@ -33,7 +33,6 @@ public class GetAllUserUseCase {
                     user.setId(rs.getInt("id"));
                     user.setUsername(rs.getString("username"));
                     user.setIdentity(Identity.valueOf(rs.getString("identity")));
-                    user.setPassword(rs.getString("password"));
                     user.setPhone(rs.getString("phone"));
                     user.setEmail(rs.getString("email"));
                     user.setCreditCard(rs.getString("credit_card"));
