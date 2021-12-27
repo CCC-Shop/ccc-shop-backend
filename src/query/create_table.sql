@@ -6,7 +6,7 @@ USE ccc_shop;
 CREATE TABLE IF NOT EXISTS `user`
 (
     `id`          int(10) PRIMARY KEY AUTO_INCREMENT,
-    `username`    varchar(255) NOT NULL,
+    `username`    varchar(255) NOT NULL UNIQUE ,
     `identity`    varchar(30)  NOT NULL,
     `password`    varchar(255) NOT NULL,
     `phone`       varchar(30)  NOT NULL,
