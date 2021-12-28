@@ -141,7 +141,7 @@ public class Order {
         this.orderItems = orderItems;
     }
 
-    public void addOrderItem(int productId, int quantity) {
+    public void putOrderItem(int productId, int quantity) {
         if (orderItems.containsKey(productId)) {
             int oldQuantity = orderItems.get(productId);
             orderItems.put(productId, oldQuantity + quantity);

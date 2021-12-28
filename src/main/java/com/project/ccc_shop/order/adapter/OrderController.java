@@ -3,9 +3,7 @@ package com.project.ccc_shop.order.adapter;
 import com.project.ccc_shop.order.usecase.create.CreateOrderInput;
 import com.project.ccc_shop.order.usecase.create.CreateOrderOutput;
 import com.project.ccc_shop.order.usecase.create.CreateOrderUseCase;
-import com.project.ccc_shop.order.usecase.get.GetCustomerOrderInput;
-import com.project.ccc_shop.order.usecase.get.GetCustomerOrderOutput;
-import com.project.ccc_shop.order.usecase.get.GetCustomerOrderUseCase;
+import com.project.ccc_shop.order.usecase.get.*;
 import com.project.ccc_shop.order.usecase.update.UpdateOrderInput;
 import com.project.ccc_shop.order.usecase.update.UpdateOrderOutput;
 import com.project.ccc_shop.order.usecase.update.UpdateOrderUseCase;
@@ -25,6 +23,7 @@ public class OrderController {
     CreateOrderUseCase createOrderUseCase;
     UpdateOrderUseCase updateOrderUseCase;
     GetCustomerOrderUseCase getCustomerOrderUseCase;
+    GetVenderOrderUseCase getVenderOrderUseCase;
 
     @Autowired
     public void setCreateOrderUseCase(CreateOrderUseCase createOrderUseCase) {
@@ -39,6 +38,11 @@ public class OrderController {
     @Autowired
     public void setGetCustomerOrderUseCase(GetCustomerOrderUseCase getCustomerOrderUseCase) {
         this.getCustomerOrderUseCase = getCustomerOrderUseCase;
+    }
+
+    @Autowired
+    public void setGetVenderOrderUseCase(GetVenderOrderUseCase getVenderOrderUseCase) {
+        this.getVenderOrderUseCase = getVenderOrderUseCase;
     }
 
     @PostMapping(value = "/create")
@@ -92,6 +96,19 @@ public class OrderController {
 
         try {
             this.getCustomerOrderUseCase.execute(requestBody, output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } catch (Exception e) {
+            output.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+    }
+
+    @PostMapping(value = "/get-vender")
+    public ResponseEntity<GetVenderOrderOutput> GetVenderOrder(@RequestBody GetVenderOrderInput requestBody) {
+        GetVenderOrderOutput output = new GetVenderOrderOutput();
+
+        try {
+            this.getVenderOrderUseCase.execute(requestBody, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             output.setMessage(e.getMessage());

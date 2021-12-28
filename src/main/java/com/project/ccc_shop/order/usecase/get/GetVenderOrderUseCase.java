@@ -15,20 +15,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class GetCustomerOrderUseCase implements UseCase<GetCustomerOrderInput, GetCustomerOrderOutput> {
+public class GetVenderOrderUseCase implements UseCase<GetVenderOrderInput, GetVenderOrderOutput> {
     private MySQLDriver mySQLDriver;
 
-    public GetCustomerOrderUseCase(MySQLDriver mySQLDriver) {
+    public GetVenderOrderUseCase(MySQLDriver mySQLDriver) {
         this.mySQLDriver = mySQLDriver;
     }
 
     @Override
-    public void execute(GetCustomerOrderInput input, GetCustomerOrderOutput output) {
+    public void execute(GetVenderOrderInput input, GetVenderOrderOutput output) {
         try (Connection connection = this.mySQLDriver.getConnection()) {
             List<Order> orderList = new ArrayList<>();
             PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM `order` WHERE `customer_id`=?;");
-            stmt.setInt(1, input.getCustomerId());
+                    "SELECT * FROM `manage_order` WHERE `vender_id`=?;");
+            stmt.setInt(1, input.getVenderId());
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    addOrderToList(connection, rs.getInt("order_id"), orderList);
+                }
+            }
+
+            output.setOrderList(orderList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void addOrderToList(Connection connection, int orderId, List<Order> orderList) {
+        try (PreparedStatement stmt = connection.prepareStatement(
+                "SELECT * FROM `order` WHERE `id`=?;")) {
+            stmt.setInt(1, orderId);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -52,8 +69,6 @@ public class GetCustomerOrderUseCase implements UseCase<GetCustomerOrderInput, G
                     orderList.add(order);
                 }
             }
-
-            output.setOrderList(orderList);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
