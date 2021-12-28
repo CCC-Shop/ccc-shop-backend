@@ -1,5 +1,8 @@
 package com.project.ccc_shop.special_discount.adapter;
 
+import com.project.ccc_shop.seasonings_discount.usecase.get_vender.GetVenderSeasoningsDiscountInput;
+import com.project.ccc_shop.seasonings_discount.usecase.get_vender.GetVenderSeasoningsDiscountOutput;
+import com.project.ccc_shop.seasonings_discount.usecase.get_vender.GetVenderSeasoningsDiscountUseCase;
 import com.project.ccc_shop.special_discount.usecase.create.CreateSpecialDiscountInput;
 import com.project.ccc_shop.special_discount.usecase.create.CreateSpecialDiscountOutput;
 import com.project.ccc_shop.special_discount.usecase.create.CreateSpecialDiscountUseCase;
@@ -8,6 +11,9 @@ import com.project.ccc_shop.special_discount.usecase.get_current.GetCurrentSpeci
 import com.project.ccc_shop.special_discount.usecase.edit.EditSpecialDiscountInput;
 import com.project.ccc_shop.special_discount.usecase.edit.EditSpecialDiscountOutput;
 import com.project.ccc_shop.special_discount.usecase.edit.EditSpecialDiscountUseCase;
+import com.project.ccc_shop.special_discount.usecase.get_vender.GetVenderSpecialDiscountInput;
+import com.project.ccc_shop.special_discount.usecase.get_vender.GetVenderSpecialDiscountOutput;
+import com.project.ccc_shop.special_discount.usecase.get_vender.GetVenderSpecialDiscountUseCase;
 import com.project.ccc_shop.user.usecase.get_all.GetAllUserOutput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +27,7 @@ public class SpecialDiscountController {
 
     CreateSpecialDiscountUseCase createSpecialDiscountUseCase;
     GetCurrentSpecialDiscountUseCase getCurrentSpecialDiscountUseCase;
+    GetVenderSpecialDiscountUseCase getVenderSpecialDiscountUseCase;
     EditSpecialDiscountUseCase editSpecialDiscountUseCase;
 
     @Autowired
@@ -31,6 +38,11 @@ public class SpecialDiscountController {
     @Autowired
     public void setGetCurrentSpecialDiscountUseCase(GetCurrentSpecialDiscountUseCase getCurrentSpecialDiscountUseCase) {
         this.getCurrentSpecialDiscountUseCase = getCurrentSpecialDiscountUseCase;
+    }
+
+    @Autowired
+    public void setGetVenderSpecialDiscountUseCase(GetVenderSpecialDiscountUseCase getVenderSpecialDiscountUseCase) {
+        this.getVenderSpecialDiscountUseCase = getVenderSpecialDiscountUseCase;
     }
 
     @Autowired
@@ -57,6 +69,19 @@ public class SpecialDiscountController {
 
         try {
             this.getCurrentSpecialDiscountUseCase.execute(output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } catch (Exception e) {
+            output.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+    }
+
+    @GetMapping(value = "/get-vender")
+    public ResponseEntity<GetVenderSpecialDiscountOutput> getVenderSpecialDiscountOutput(@RequestBody GetVenderSpecialDiscountInput requestBody) {
+        GetVenderSpecialDiscountOutput output = new GetVenderSpecialDiscountOutput();
+
+        try {
+            this.getVenderSpecialDiscountUseCase.execute(requestBody, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             output.setMessage(e.getMessage());
