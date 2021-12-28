@@ -59,7 +59,7 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
             stmt.executeUpdate();
 
             int orderId = getOrderId(connection);
-            createOrderItems(connection, orderId, input.getOrderItems());
+            createOrderItems(connection, orderId, input.getOrderItems(), input.getCustomerId());
             output.setOrderTime(getOrderTime(connection, orderId));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,7 +83,7 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
         throw new RuntimeException("No order exist.");
     }
 
-    private void createOrderItems(Connection connection, int orderId, Map<Integer, Integer> orderItems) {
+    private void createOrderItems(Connection connection, int orderId, Map<Integer, Integer> orderItems, int customerId) {
         if (orderItems.isEmpty()) {
             return;
         }
@@ -101,6 +101,7 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
 
                 stmt.executeUpdate();
                 updateProductStock(connection, productId, orderItems.get(productId));
+                deleteItemsInShoppingCart(connection, productId, customerId, orderItems.get(productId));
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw new RuntimeException(e);
@@ -116,6 +117,23 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
                         "WHERE `id`=?")) {
             stmt.setInt(1, quantity);
             stmt.setInt(2, productId);
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void deleteItemsInShoppingCart(Connection connection, int productId, int customerId, int quantity) {
+        try (PreparedStatement stmt = connection.prepareStatement(
+                "DELETE FROM `shopping_cart` " +
+                        "WHERE `product_id`=? " +
+                        "AND `customer_id`=? " +
+                        "AND `quantity`=?")) {
+            stmt.setInt(1, productId);
+            stmt.setInt(2, customerId);
+            stmt.setInt(3, quantity);
 
             stmt.executeUpdate();
         } catch (SQLException e) {

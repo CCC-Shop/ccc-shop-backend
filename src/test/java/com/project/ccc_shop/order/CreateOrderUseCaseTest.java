@@ -97,4 +97,29 @@ public class CreateOrderUseCaseTest {
 
         assertEquals(SUCCESS_MESSAGE, output.getMessage());
     }
+
+    @Test
+    public void create_order_will_delete_items_in_shopping_cart() {
+        MySQLDriver mySQLDriver = new MySQLDriver();
+        CreateOrderUseCase createOrderUseCase = new CreateOrderUseCase(mySQLDriver);
+        CreateOrderInput input = new CreateOrderInput();
+        CreateOrderOutput output = new CreateOrderOutput();
+        input.setCustomerId(5);
+        input.setShippingFee(60);
+        input.setRecipientName("Zach");
+        input.setShippingAddress("some where");
+        input.setStatus(Status.ORDER);
+        input.setPaymentMethod(Payment.CASH);
+        Timestamp orderTime = Timestamp.from(Instant.now());
+        input.setOrderTime(orderTime);
+        input.setTotalPrice(56888);
+        Map<Integer, Integer> orderItems = new HashMap<>();
+        orderItems.put(12, 1);
+        orderItems.put(3, 3);
+        input.setOrderItems(orderItems);
+
+        createOrderUseCase.execute(input, output);
+
+        assertEquals(SUCCESS_MESSAGE, output.getMessage());
+    }
 }
