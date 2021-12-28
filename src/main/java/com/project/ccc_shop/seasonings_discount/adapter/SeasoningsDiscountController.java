@@ -8,6 +8,10 @@ import com.project.ccc_shop.seasonings_discount.usecase.get_current.GetCurrentSe
 import com.project.ccc_shop.seasonings_discount.usecase.edit.EditSeasoningsDiscountInput;
 import com.project.ccc_shop.seasonings_discount.usecase.edit.EditSeasoningsDiscountOutput;
 import com.project.ccc_shop.seasonings_discount.usecase.edit.EditSeasoningsDiscountUseCase;
+import com.project.ccc_shop.seasonings_discount.usecase.get_vender.GetVenderSeasoningsDiscountInput;
+import com.project.ccc_shop.seasonings_discount.usecase.get_vender.GetVenderSeasoningsDiscountOutput;
+import com.project.ccc_shop.seasonings_discount.usecase.get_vender.GetVenderSeasoningsDiscountUseCase;
+import com.project.ccc_shop.shipping_discount.usecase.get_vender.GetVenderShippingDiscountUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,7 @@ public class SeasoningsDiscountController {
 
     CreateSeasoningsDiscountUseCase createSeasoningsDiscountUseCase;
     GetCurrentSeasoningsDiscountUseCase getCurrentSeasoningsDiscountUseCase;
+    GetVenderSeasoningsDiscountUseCase getVenderSeasoningsDiscountUseCase;
     EditSeasoningsDiscountUseCase editSeasoningsDiscountUseCase;
 
     @Autowired
@@ -30,6 +35,11 @@ public class SeasoningsDiscountController {
     @Autowired
     public void setGetCurrentSeasoningsDiscountUseCase(GetCurrentSeasoningsDiscountUseCase getCurrentSeasoningsDiscountUseCase) {
         this.getCurrentSeasoningsDiscountUseCase = getCurrentSeasoningsDiscountUseCase;
+    }
+
+    @Autowired
+    public void setGetVenderSeasoningsDiscountUseCase(GetVenderSeasoningsDiscountUseCase getVenderSeasoningsDiscountUseCase) {
+        this.getVenderSeasoningsDiscountUseCase = getVenderSeasoningsDiscountUseCase;
     }
 
     @Autowired
@@ -56,6 +66,19 @@ public class SeasoningsDiscountController {
 
         try {
             this.getCurrentSeasoningsDiscountUseCase.execute(output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } catch (Exception e) {
+            output.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+    }
+
+    @GetMapping(value = "/get-vender")
+    public ResponseEntity<GetVenderSeasoningsDiscountOutput> getVenderSeasoningsDiscountOutput(@RequestBody GetVenderSeasoningsDiscountInput requestBody) {
+        GetVenderSeasoningsDiscountOutput output = new GetVenderSeasoningsDiscountOutput();
+
+        try {
+            this.getVenderSeasoningsDiscountUseCase.execute(requestBody, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             output.setMessage(e.getMessage());
