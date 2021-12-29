@@ -1,5 +1,6 @@
 package com.project.ccc_shop.order.adapter;
 
+import com.project.ccc_shop.order.entity.Status;
 import com.project.ccc_shop.order.usecase.create.CreateOrderInput;
 import com.project.ccc_shop.order.usecase.create.CreateOrderOutput;
 import com.project.ccc_shop.order.usecase.create.CreateOrderUseCase;
@@ -55,7 +56,7 @@ public class OrderController {
             input.setShippingFee(requestBody.getShippingFee());
             input.setRecipientName(requestBody.getRecipientName());
             input.setShippingAddress(requestBody.getShippingAddress());
-            input.setStatus(requestBody.getStatus());
+            input.setStatus(Status.ORDER);
             input.setPaymentMethod(requestBody.getPaymentMethod());
             input.setCreditCardId(requestBody.getCreditCardId());
             input.setOrderTime(Timestamp.from(Instant.now()));
