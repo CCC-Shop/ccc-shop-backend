@@ -82,12 +82,29 @@ public class GetVenderOrderUseCase implements UseCase<GetVenderOrderInput, GetVe
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    order.putOrderItem(rs.getInt("product_id"), rs.getInt("quantity"));
+                    order.putOrderItem(getProductName(connection, rs.getInt("product_id")), rs.getInt("quantity"));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    private String getProductName(Connection connection, int productId) {
+        try (PreparedStatement stmt = connection.prepareStatement(
+                "SELECT `name` FROM `product` WHERE `id` = ?")) {
+            stmt.setInt(1, productId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    return rs.getString("name");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        throw new RuntimeException("product not found");
     }
 }

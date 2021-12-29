@@ -19,7 +19,7 @@ public class Order {
     private int seasoningDiscountCode;
     private int shippingDiscountCode;
     private int totalPrice;
-    private Map<Integer, Integer> orderItems = new HashMap<>();   // Map<productId, quantity>
+    private Map<String, Integer> orderItems = new HashMap<>();   // Map<productName, quantity>
 
     public int getId() {
         return id;
@@ -133,20 +133,20 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public Map<Integer, Integer> getOrderItems() {
+    public Map<String, Integer> getOrderItems() {
         return orderItems;
     }
 
-    public void setOrderItems(Map<Integer, Integer> orderItems) {
+    public void setOrderItems(Map<String, Integer> orderItems) {
         this.orderItems = orderItems;
     }
 
-    public void putOrderItem(int productId, int quantity) {
-        if (orderItems.containsKey(productId)) {
-            int oldQuantity = orderItems.get(productId);
-            orderItems.put(productId, oldQuantity + quantity);
+    public void putOrderItem(String productName, int quantity) {
+        if (orderItems.containsKey(productName)) {
+            int oldQuantity = orderItems.get(productName);
+            orderItems.put(productName, oldQuantity + quantity);
             return;
         }
-        orderItems.put(productId, quantity);
+        orderItems.put(productName, quantity);
     }
 }

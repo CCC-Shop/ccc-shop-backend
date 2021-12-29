@@ -44,7 +44,7 @@ public class GetVenderOrderUseCaseTest {
         assertEquals(0, order.getShippingDiscountCode());
         assertEquals(19810, order.getTotalPrice());
         assertEquals(1, order.getOrderItems().size());
-        assertEquals(1, order.getOrderItems().get(7));
+        assertEquals(1, order.getOrderItems().get("Zenfone 8"));
 
         order = orderList.get(1);
         assertEquals(3, order.getId());
@@ -61,6 +61,6 @@ public class GetVenderOrderUseCaseTest {
         assertEquals(0, order.getSeasoningDiscountCode());
         assertEquals(0, order.getShippingDiscountCode());
         assertEquals(45120, order.getTotalPrice());
-        assertEquals(1, order.getOrderItems().get(9));
+        assertEquals(1, order.getOrderItems().get("TUF Dash F15"));
     }
 }
