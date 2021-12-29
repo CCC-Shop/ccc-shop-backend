@@ -43,8 +43,10 @@ public class GetVenderOrderUseCaseTest {
         assertEquals(1, order.getSeasoningDiscountCode());
         assertEquals(0, order.getShippingDiscountCode());
         assertEquals(19810, order.getTotalPrice());
-        assertEquals(1, order.getOrderItems().size());
+        assertEquals(3, order.getOrderItems().size());
         assertEquals(1, order.getOrderItems().get("Zenfone 8"));
+        assertEquals(3, order.getOrderItems().get("ROG Phone 5s Pro"));
+        assertEquals(2, order.getOrderItems().get("S700TA"));
 
         order = orderList.get(1);
         assertEquals(3, order.getId());
