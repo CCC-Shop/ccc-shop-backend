@@ -4,5 +4,5 @@ public enum Status {
     ORDER,
     SHIPPING,
     DELIVERED,
-    RECEIVED
+    RECEIVED,
 }
