@@ -1,4 +1,4 @@
-package com.project.ccc_shop.report.usecase;
+package com.project.ccc_shop.report.usecase.productSalesReport;
 
 import com.project.ccc_shop.common.Output;
 import com.project.ccc_shop.seasonings_discount.entity.SeasoningsDiscount;
@@ -6,7 +6,7 @@ import com.project.ccc_shop.seasonings_discount.entity.SeasoningsDiscount;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetSalesReportOutput extends Output {
+public class GetProductSalesReportOutput extends Output {
     private List<String> categoryList = new ArrayList<>();
     private List<Integer> quantityList = new ArrayList<>();
 

@@ -1,25 +1,21 @@
-package com.project.ccc_shop.report.usecase;
+package com.project.ccc_shop.report.usecase.productSalesReport;
 
 import com.project.ccc_shop.common.MySQLDriver;
-import com.project.ccc_shop.seasonings_discount.entity.SeasoningsDiscount;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.TimeZone;
 
 @Service
-public class GetSalesReportUseCase {
+public class GetProductSalesReportUseCase {
     private MySQLDriver mySQLDriver;
 
-    public GetSalesReportUseCase(MySQLDriver mySQLDriver) {
+    public GetProductSalesReportUseCase(MySQLDriver mySQLDriver) {
         this.mySQLDriver = mySQLDriver;
     }
 
-    public void execute(GetSalesReportInput input, GetSalesReportOutput output) {
+    public void execute(GetProductSalesReportInput input, GetProductSalesReportOutput output) {
         List<String> categoryList = new ArrayList<>();
         List<Integer> quantityList = new ArrayList<>();
 

@@ -1,10 +1,10 @@
-package com.project.ccc_shop.report.usecase;
+package com.project.ccc_shop.report.usecase.productSalesReport;
 
 import com.project.ccc_shop.common.Input;
 
 import java.sql.Timestamp;
 
-public class GetSalesReportInput implements Input {
+public class GetProductSalesReportInput implements Input {
     private int venderId;
     private Timestamp startTime;
     private Timestamp endTime;
