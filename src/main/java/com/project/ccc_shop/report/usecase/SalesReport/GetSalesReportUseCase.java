@@ -7,6 +7,8 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class GetSalesReportUseCase {
@@ -49,7 +51,6 @@ public class GetSalesReportUseCase {
             calendar.add(Calendar.YEAR, -1);
             calendar.add(Calendar.MONTH, 1);
             Date lastYear = calendar.getTime();  // If it's 2022/01/XX now, it will get 2021/02/01.
-            System.out.println(lastYear);
 
             Timestamp timeRecord = null;
             Date currentMonth = calendar.getTime();
@@ -79,6 +80,11 @@ public class GetSalesReportUseCase {
                 timeStringList.add(currentMonth.toString());
                 totalPriceList.add(0);
                 calendar.add(Calendar.MONTH, 1);
+            }
+
+            for (int i = 0; i < timeStringList.size(); i++){
+                String[] splitTimeList = timeStringList.get(i).split(" ");
+                timeStringList.set(i, splitTimeList[1] + " " + splitTimeList[5]);
             }
 
             output.setTimeList(timeStringList);
