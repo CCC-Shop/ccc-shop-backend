@@ -1,6 +1,7 @@
 package com.project.ccc_shop.special_discount.usecase.get_vender;
 
 import com.project.ccc_shop.common.MySQLDriver;
+import com.project.ccc_shop.common.UseCase;
 import com.project.ccc_shop.product.entity.Category;
 import com.project.ccc_shop.seasonings_discount.usecase.get_current.GetCurrentSeasoningsDiscountUseCase;
 import com.project.ccc_shop.special_discount.entity.SpecialDiscount;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class GetVenderSpecialDiscountUseCase {
+public class GetVenderSpecialDiscountUseCase implements UseCase<GetVenderSpecialDiscountInput, GetVenderSpecialDiscountOutput> {
     private MySQLDriver mySQLDriver;
 
     public GetVenderSpecialDiscountUseCase(MySQLDriver mySQLDriver) {

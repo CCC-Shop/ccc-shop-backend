@@ -1,6 +1,7 @@
 package com.project.ccc_shop.shipping_discount.usecase.get_vender;
 
 import com.project.ccc_shop.common.MySQLDriver;
+import com.project.ccc_shop.common.UseCase;
 import com.project.ccc_shop.seasonings_discount.usecase.get_current.GetCurrentSeasoningsDiscountUseCase;
 import com.project.ccc_shop.shipping_discount.entity.ShippingDiscount;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class GetVenderShippingDiscountUseCase {
+public class GetVenderShippingDiscountUseCase implements UseCase<GetVenderShippingDiscountInput, GetVenderShippingDiscountOutput>{
     private MySQLDriver mySQLDriver;
 
     public GetVenderShippingDiscountUseCase(MySQLDriver mySQLDriver) {

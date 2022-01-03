@@ -72,7 +72,7 @@ public class ShippingDiscountController {
         }
     }
 
-    @GetMapping(value = "/get-vender")
+    @PostMapping(value = "/get-vender")
     public ResponseEntity<GetVenderShippingDiscountOutput> getVenderShippingDiscount(@RequestBody GetVenderShippingDiscountInput requestBody) {
         GetVenderShippingDiscountOutput output = new GetVenderShippingDiscountOutput();
 

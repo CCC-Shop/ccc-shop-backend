@@ -76,8 +76,8 @@ public class SpecialDiscountController {
         }
     }
 
-    @GetMapping(value = "/get-vender")
-    public ResponseEntity<GetVenderSpecialDiscountOutput> getVenderSpecialDiscountOutput(@RequestBody GetVenderSpecialDiscountInput requestBody) {
+    @PostMapping(value = "/get-vender")
+    public ResponseEntity<GetVenderSpecialDiscountOutput> getVenderSpecialDiscount(@RequestBody GetVenderSpecialDiscountInput requestBody) {
         GetVenderSpecialDiscountOutput output = new GetVenderSpecialDiscountOutput();
 
         try {

@@ -11,7 +11,6 @@ import com.project.ccc_shop.seasonings_discount.usecase.edit.EditSeasoningsDisco
 import com.project.ccc_shop.seasonings_discount.usecase.get_vender.GetVenderSeasoningsDiscountInput;
 import com.project.ccc_shop.seasonings_discount.usecase.get_vender.GetVenderSeasoningsDiscountOutput;
 import com.project.ccc_shop.seasonings_discount.usecase.get_vender.GetVenderSeasoningsDiscountUseCase;
-import com.project.ccc_shop.shipping_discount.usecase.get_vender.GetVenderShippingDiscountUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -73,8 +72,8 @@ public class SeasoningsDiscountController {
         }
     }
 
-    @GetMapping(value = "/get-vender")
-    public ResponseEntity<GetVenderSeasoningsDiscountOutput> getVenderSeasoningsDiscountOutput(@RequestBody GetVenderSeasoningsDiscountInput requestBody) {
+    @PostMapping(value = "/get-vender")
+    public ResponseEntity<GetVenderSeasoningsDiscountOutput> getVenderSeasoningsDiscount(@RequestBody GetVenderSeasoningsDiscountInput requestBody) {
         GetVenderSeasoningsDiscountOutput output = new GetVenderSeasoningsDiscountOutput();
 
         try {
