@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 public class SpecialDiscount {
     private int discountCode;
     private int venderId;
+    private String venderName;
     private String policyDescription;
     private Timestamp startTime;
     private Timestamp endTime;
@@ -27,6 +28,14 @@ public class SpecialDiscount {
 
     public void setVenderId(int venderId) {
         this.venderId = venderId;
+    }
+
+    public String getVenderName() {
+        return venderName;
+    }
+
+    public void setVenderName(String venderName) {
+        this.venderName = venderName;
     }
 
     public String getPolicyDescription() {

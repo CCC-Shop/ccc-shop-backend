@@ -26,7 +26,7 @@ public class GetVenderSeasoningsDiscountUseCaseTest {
         List<SeasoningsDiscount> seasoningsDiscountList = output.getSeasoningsDiscountList();
 
         assertEquals("Success!", output.getMessage());
-        assertEquals(1, seasoningsDiscountList.size());
+        assertEquals(3, seasoningsDiscountList.size());
 
         SeasoningsDiscount discount = seasoningsDiscountList.get(0);
         assertEquals(2, discount.getDiscountCode());

@@ -38,6 +38,7 @@ public class GetCurrentSeasoningsDiscountUseCase {
                     SeasoningsDiscount seasoningsDiscount = new SeasoningsDiscount();
                     seasoningsDiscount.setDiscountCode(rs.getInt("discount_code"));
                     seasoningsDiscount.setVenderId(rs.getInt("vender_id"));
+                    seasoningsDiscount.setVenderName(queryVenderName(connection, rs.getInt("vender_id")));
                     seasoningsDiscount.setPolicyDescription(rs.getString("policy_description"));
                     seasoningsDiscount.setStartTime(rs.getTimestamp("start_time"));
                     seasoningsDiscount.setEndTime(rs.getTimestamp("end_time"));
@@ -52,5 +53,22 @@ public class GetCurrentSeasoningsDiscountUseCase {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    private String queryVenderName(Connection connection, int venderId) {
+        try (PreparedStatement stmt = connection.prepareStatement(
+                "SELECT `username` FROM `user` WHERE `id` = ?")) {
+            stmt.setInt(1, venderId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    return rs.getString("username");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        throw new RuntimeException("user not found");
     }
 }

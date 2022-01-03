@@ -23,30 +23,24 @@ public class GetCurrentSeasoningsDiscountUseCaseTest {
         List<SeasoningsDiscount> seasoningsDiscountList = output.getSeasoningsDiscountList();
 
         assertEquals("Success!", output.getMessage());
-        assertEquals(3, seasoningsDiscountList.size());
+        assertEquals(2, seasoningsDiscountList.size());
 
         SeasoningsDiscount discount = seasoningsDiscountList.get(0);
-        assertEquals(1, discount.getDiscountCode());
-        assertEquals(2, discount.getVenderId());
-        assertEquals("開學季全面9折", discount.getPolicyDescription());
-        assertEquals(Timestamp.from(Instant.parse("2020-08-01T00:00:00Z")), discount.getStartTime());
-        assertEquals(Timestamp.from(Instant.parse("2021-12-30T23:59:59Z")), discount.getEndTime());
-        assertEquals(0.9, discount.getDiscountRate());
+        assertEquals(5, discount.getDiscountCode());
+        assertEquals(4, discount.getVenderId());
+        assertEquals("Samsung", discount.getVenderName());
+        assertEquals("新年買起來！虎年1月Samsung全系列商品85折優惠！", discount.getPolicyDescription());
+        assertEquals(Timestamp.from(Instant.parse("2022-01-01T00:00:00Z")), discount.getStartTime());
+        assertEquals(Timestamp.from(Instant.parse("2022-01-31T23:59:59Z")), discount.getEndTime());
+        assertEquals(0.85, discount.getDiscountRate());
 
         discount = seasoningsDiscountList.get(1);
-        assertEquals(2, discount.getDiscountCode());
+        assertEquals(6, discount.getDiscountCode());
         assertEquals(3, discount.getVenderId());
-        assertEquals("春節特賣全商品享79折優惠", discount.getPolicyDescription());
-        assertEquals(Timestamp.from(Instant.parse("2021-02-01T00:00:00Z")), discount.getStartTime());
-        assertEquals(Timestamp.from(Instant.parse("2021-12-28T23:59:59Z")), discount.getEndTime());
-        assertEquals(0.79, discount.getDiscountRate());
-
-        discount = seasoningsDiscountList.get(2);
-        assertEquals(3, discount.getDiscountCode());
-        assertEquals(4, discount.getVenderId());
-        assertEquals("母親節活動全店88折", discount.getPolicyDescription());
-        assertEquals(Timestamp.from(Instant.parse("2021-05-01T00:00:00Z")), discount.getStartTime());
-        assertEquals(Timestamp.from(Instant.parse("2021-12-31T23:59:59Z")), discount.getEndTime());
-        assertEquals(0.88, discount.getDiscountRate());
+        assertEquals("ASUS", discount.getVenderName());
+        assertEquals("ASUS全館7折優惠！", discount.getPolicyDescription());
+        assertEquals(Timestamp.from(Instant.parse("2021-12-29T00:00:00Z")), discount.getStartTime());
+        assertEquals(Timestamp.from(Instant.parse("2022-01-14T23:59:59Z")), discount.getEndTime());
+        assertEquals(0.7, discount.getDiscountRate());
     }
 }

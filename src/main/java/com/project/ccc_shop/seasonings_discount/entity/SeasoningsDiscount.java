@@ -1,12 +1,11 @@
 package com.project.ccc_shop.seasonings_discount.entity;
 
-import com.project.ccc_shop.product.entity.Category;
-
 import java.sql.Timestamp;
 
 public class SeasoningsDiscount {
     private int discountCode;
     private int venderId;
+    private String venderName;
     private String policyDescription;
     private Timestamp startTime;
     private Timestamp endTime;
@@ -26,6 +25,14 @@ public class SeasoningsDiscount {
 
     public void setVenderId(int venderId) {
         this.venderId = venderId;
+    }
+
+    public String getVenderName() {
+        return venderName;
+    }
+
+    public void setVenderName(String venderName) {
+        this.venderName = venderName;
     }
 
     public String getPolicyDescription() {
@@ -60,3 +67,4 @@ public class SeasoningsDiscount {
         this.discountRate = discountRate;
     }
 }
+

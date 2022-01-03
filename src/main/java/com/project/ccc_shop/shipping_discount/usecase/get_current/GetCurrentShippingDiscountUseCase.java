@@ -38,6 +38,7 @@ public class GetCurrentShippingDiscountUseCase {
                     ShippingDiscount shippingDiscount = new ShippingDiscount();
                     shippingDiscount.setDiscountCode(rs.getInt("discount_code"));
                     shippingDiscount.setVenderId(rs.getInt("vender_id"));
+                    shippingDiscount.setVenderName(queryVenderName(connection, rs.getInt("vender_id")));
                     shippingDiscount.setPolicyDescription(rs.getString("policy_description"));
                     shippingDiscount.setStartTime(rs.getTimestamp("start_time"));
                     shippingDiscount.setEndTime(rs.getTimestamp("end_time"));
@@ -52,5 +53,22 @@ public class GetCurrentShippingDiscountUseCase {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    private String queryVenderName(Connection connection, int venderId) {
+        try (PreparedStatement stmt = connection.prepareStatement(
+                "SELECT `username` FROM `user` WHERE `id` = ?")) {
+            stmt.setInt(1, venderId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    return rs.getString("username");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        throw new RuntimeException("user not found");
     }
 }
