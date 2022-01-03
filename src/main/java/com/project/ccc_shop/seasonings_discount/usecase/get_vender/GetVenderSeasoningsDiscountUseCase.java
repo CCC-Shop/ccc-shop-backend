@@ -2,9 +2,13 @@ package com.project.ccc_shop.seasonings_discount.usecase.get_vender;
 
 import com.project.ccc_shop.common.MySQLDriver;
 import com.project.ccc_shop.seasonings_discount.entity.SeasoningsDiscount;
+import com.project.ccc_shop.seasonings_discount.usecase.get_current.GetCurrentSeasoningsDiscountUseCase;
 import org.springframework.stereotype.Service;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +35,7 @@ public class GetVenderSeasoningsDiscountUseCase {
                     SeasoningsDiscount seasoningsDiscount = new SeasoningsDiscount();
                     seasoningsDiscount.setDiscountCode(rs.getInt("discount_code"));
                     seasoningsDiscount.setVenderId(rs.getInt("vender_id"));
-                    seasoningsDiscount.setVenderName(queryVenderName(connection, rs.getInt("vender_id")));
+                    seasoningsDiscount.setVenderName(GetCurrentSeasoningsDiscountUseCase.queryVenderName(connection, rs.getInt("vender_id")));
                     seasoningsDiscount.setPolicyDescription(rs.getString("policy_description"));
                     seasoningsDiscount.setStartTime(rs.getTimestamp("start_time"));
                     seasoningsDiscount.setEndTime(rs.getTimestamp("end_time"));
@@ -46,22 +50,5 @@ public class GetVenderSeasoningsDiscountUseCase {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-    }
-
-    private String queryVenderName(Connection connection, int venderId) {
-        try (PreparedStatement stmt = connection.prepareStatement(
-                "SELECT `username` FROM `user` WHERE `id` = ?")) {
-            stmt.setInt(1, venderId);
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    return rs.getString("username");
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-        throw new RuntimeException("user not found");
     }
 }

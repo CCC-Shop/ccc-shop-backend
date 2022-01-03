@@ -55,7 +55,7 @@ public class GetCurrentSeasoningsDiscountUseCase {
         }
     }
 
-    private String queryVenderName(Connection connection, int venderId) {
+    public static String queryVenderName(Connection connection, int venderId) {
         try (PreparedStatement stmt = connection.prepareStatement(
                 "SELECT `username` FROM `user` WHERE `id` = ?")) {
             stmt.setInt(1, venderId);

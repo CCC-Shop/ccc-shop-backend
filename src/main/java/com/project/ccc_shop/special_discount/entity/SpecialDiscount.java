@@ -13,6 +13,8 @@ public class SpecialDiscount {
     private Timestamp endTime;
     private Category category;
     private double discountRate;
+    private String startDate;
+    private String endDate;
 
     public int getDiscountCode() {
         return discountCode;
@@ -52,6 +54,7 @@ public class SpecialDiscount {
 
     public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
+        setStartDate();
     }
 
     public Timestamp getEndTime() {
@@ -60,6 +63,7 @@ public class SpecialDiscount {
 
     public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
+        setEndDate();
     }
 
     public Category getCategory() {
@@ -76,5 +80,21 @@ public class SpecialDiscount {
 
     public void setDiscountRate(double discountRate) {
         this.discountRate = discountRate;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate() {
+        this.startDate = this.startTime.toString().split(" ")[0];
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate() {
+        this.endDate = this.endTime.toString().split(" ")[0];
     }
 }

@@ -20,6 +20,9 @@ public class Order {
     private int shippingDiscountCode;
     private int totalPrice;
     private Map<String, Integer> orderItems = new HashMap<>();   // Map<productName, quantity>
+    private String orderDate;
+    private String shippingDate;
+    private String deliveryDate;
 
     public int getId() {
         return id;
@@ -91,6 +94,7 @@ public class Order {
 
     public void setOrderTime(Timestamp orderTime) {
         this.orderTime = orderTime;
+        setOrderDate();
     }
 
     public Timestamp getShippingTime() {
@@ -99,6 +103,7 @@ public class Order {
 
     public void setShippingTime(Timestamp shippingTime) {
         this.shippingTime = shippingTime;
+        setShippingDate();
     }
 
     public Timestamp getDeliveryTime() {
@@ -107,6 +112,7 @@ public class Order {
 
     public void setDeliveryTime(Timestamp deliveryTime) {
         this.deliveryTime = deliveryTime;
+        setDeliveryDate();
     }
 
     public int getSeasoningDiscountCode() {
@@ -148,5 +154,33 @@ public class Order {
             return;
         }
         orderItems.put(productName, quantity);
+    }
+
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate() {
+        this.orderDate = this.orderTime.toString().split(" ")[0];
+    }
+
+    public String getShippingDate() {
+        return shippingDate;
+    }
+
+    public void setShippingDate() {
+        if (this.shippingTime != null) {
+            this.shippingDate = this.shippingTime.toString().split(" ")[0];
+        }
+    }
+
+    public String getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate() {
+        if (this.deliveryTime != null) {
+            this.deliveryDate = this.deliveryTime.toString().split(" ")[0];
+        }
     }
 }

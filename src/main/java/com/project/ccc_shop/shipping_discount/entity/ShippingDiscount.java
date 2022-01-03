@@ -10,6 +10,8 @@ public class ShippingDiscount {
     private Timestamp startTime;
     private Timestamp endTime;
     private int targetPrice;
+    private String startDate;
+    private String endDate;
 
     public int getDiscountCode() {
         return discountCode;
@@ -49,6 +51,7 @@ public class ShippingDiscount {
 
     public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
+        setStartDate();
     }
 
     public Timestamp getEndTime() {
@@ -57,6 +60,7 @@ public class ShippingDiscount {
 
     public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
+        setEndDate();
     }
 
     public int getTargetPrice() {
@@ -65,5 +69,20 @@ public class ShippingDiscount {
 
     public void setTargetPrice(int targetPrice) {
         this.targetPrice = targetPrice;
+    }
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate() {
+        this.startDate = this.startTime.toString().split(" ")[0];
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate() {
+        this.endDate = this.endTime.toString().split(" ")[0];
     }
 }
