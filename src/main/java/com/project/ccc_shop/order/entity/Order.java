@@ -161,7 +161,7 @@ public class Order {
     }
 
     public void setOrderDate() {
-        this.orderDate = this.orderTime.toString().split(" ")[0];
+        this.orderDate = this.orderTime.toString().split(" ")[0] + " " + this.orderTime.toString().split(" ")[1].split(":")[0] + ":" + this.orderTime.toString().split(" ")[1].split(":")[1];
     }
 
     public String getShippingDate() {
@@ -170,7 +170,7 @@ public class Order {
 
     public void setShippingDate() {
         if (this.shippingTime != null) {
-            this.shippingDate = this.shippingTime.toString().split(" ")[0];
+            this.shippingDate = this.shippingTime.toString().split(" ")[0] + " " + this.shippingTime.toString().split(" ")[1].split(":")[0] + ":" + this.shippingTime.toString().split(" ")[1].split(":")[1];
         }
     }
 
@@ -180,7 +180,7 @@ public class Order {
 
     public void setDeliveryDate() {
         if (this.deliveryTime != null) {
-            this.deliveryDate = this.deliveryTime.toString().split(" ")[0];
+            this.deliveryDate = this.deliveryTime.toString().split(" ")[0] + " " + this.deliveryTime.toString().split(" ")[1].split(":")[0] + ":" + this.deliveryTime.toString().split(" ")[1].split(":")[1];
         }
     }
 }
