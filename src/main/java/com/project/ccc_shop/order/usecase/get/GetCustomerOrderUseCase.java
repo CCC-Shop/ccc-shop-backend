@@ -46,7 +46,7 @@ public class GetCustomerOrderUseCase implements UseCase<GetCustomerOrderInput, G
                     order.setCreditCardId(rs.getString("credit_card_id"));
                     order.setOrderTime(rs.getTimestamp("order_time", calendar));
                     order.setShippingTime(rs.getTimestamp("shipping_time", calendar));
-                    order.setDeliveryTime(rs.getTimestamp("delivery_time",calendar));
+                    order.setDeliveryTime(rs.getTimestamp("delivery_time", calendar));
                     order.setSeasoningDiscountCode(rs.getInt("seasoning_discount_code"));
                     order.setShippingDiscountCode(rs.getInt("shipping_discount_code"));
                     order.setTotalPrice(rs.getInt("total_price"));
