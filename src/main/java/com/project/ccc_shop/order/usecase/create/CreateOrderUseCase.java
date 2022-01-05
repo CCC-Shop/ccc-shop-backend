@@ -1,9 +1,11 @@
 package com.project.ccc_shop.order.usecase.create;
 
 import com.project.ccc_shop.common.MySQLDriver;
+import com.project.ccc_shop.common.SendLetter;
 import com.project.ccc_shop.common.UseCase;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.sql.*;
 import java.util.*;
 
@@ -44,6 +46,7 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
             stmt.setString(7, input.getCreditCardId());
             Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Taipei"));
             stmt.setTimestamp(8, input.getOrderTime(), calendar);
+//            stmt.setTimestamp(8, input.getOrderTime());
             if (input.getSeasoningDiscountCode() == 0) {
                 stmt.setNull(9, NULL);
             } else {
@@ -64,6 +67,42 @@ public class CreateOrderUseCase implements UseCase<CreateOrderInput, CreateOrder
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
+        }
+
+        sendEmail(input.getCustomerId(), input);
+    }
+
+    private void sendEmail(int customerId, CreateOrderInput input) {
+        try (Connection connection = this.mySQLDriver.getConnection()) {
+
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT `user`.`email` FROM `user` WHERE `id` = ? ");
+
+            stmt.setInt(1, customerId);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String toAddress = (rs.getString("email"));
+                String message =  "<h3>尊貴的客戶您好:</h3>" + "<p>我們已於" +
+                        input.getOrderTime().toString().split(" ")[0] + " " +
+                        input.getOrderTime().toString().split(" ")[1].split(":")[0] + ":" +
+                        input.getOrderTime().toString().split(" ")[1].split(":")[1] +
+                        "收到您的訂單，" +
+                        "您可於 CCC Shop 網站 -> 使用者區域 -> 訂單管理 中追蹤您的運送狀態與詳細購物資訊。</p>" +
+                        "<p>祝您有美好的一天!!! ξ( ✿＞◡❛)< </p>" +
+                        "<p>CCC Shop</p>";
+
+                SendLetter.sendPlainTextEmail(toAddress, message);
+
+            } else {
+                throw new RuntimeException("Email not found");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (MessagingException e) {
+            e.printStackTrace();
         }
     }
 
