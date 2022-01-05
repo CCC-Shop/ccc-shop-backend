@@ -8,6 +8,9 @@ import com.project.ccc_shop.valuation.usecase.create.CreateValuationUseCase;
 import com.project.ccc_shop.valuation.usecase.get.GetValuationInput;
 import com.project.ccc_shop.valuation.usecase.get.GetValuationOutput;
 import com.project.ccc_shop.valuation.usecase.get.GetValuationUseCase;
+import com.project.ccc_shop.valuation.usecase.get_customer.GetCustomerValuationInput;
+import com.project.ccc_shop.valuation.usecase.get_customer.GetCustomerValuationOutput;
+import com.project.ccc_shop.valuation.usecase.get_customer.GetCustomerValuationUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +23,7 @@ public class ValuationController {
 
     CreateValuationUseCase createValuationUseCase;
     GetValuationUseCase getValuationUseCase;
+    GetCustomerValuationUseCase getCustomerValuationUseCase;
 
     @Autowired
     public void setCreateValuationUseCase(CreateValuationUseCase createValuationUseCase) {
@@ -29,6 +33,11 @@ public class ValuationController {
     @Autowired
     public void setGetValuationUseCase(GetValuationUseCase getValuationUseCase) {
         this.getValuationUseCase = getValuationUseCase;
+    }
+
+    @Autowired
+    public void setGetCustomerValuationUseCase(GetCustomerValuationUseCase getCustomerValuationUseCase) {
+        this.getCustomerValuationUseCase = getCustomerValuationUseCase;
     }
 
     @PostMapping(value = "/create")
@@ -60,6 +69,19 @@ public class ValuationController {
 
         try {
             this.getValuationUseCase.execute(input, output);
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } catch (Exception e) {
+            output.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+    }
+
+    @PostMapping(value = "/get-customer")
+    public ResponseEntity<GetCustomerValuationOutput> getCustomerValuation(@RequestBody GetCustomerValuationInput requestBody) {
+        GetCustomerValuationOutput output = new GetCustomerValuationOutput();
+
+        try {
+            this.getCustomerValuationUseCase.execute(requestBody, output);
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } catch (Exception e) {
             output.setMessage(e.getMessage());

@@ -54,7 +54,8 @@ public class UpdateOrderUseCase implements UseCase<UpdateOrderInput, UpdateOrder
         } else if (status.equals(Status.DELIVERED)) {
             try (PreparedStatement stmt = connection.prepareStatement(
                     "UPDATE `order` SET `delivery_time`= ? WHERE `id`= ?")) {
-                stmt.setTimestamp(1, timestamp);
+                Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Taipei"));
+                stmt.setTimestamp(1, timestamp, calendar);
                 stmt.setInt(2, orderId);
 
                 stmt.executeUpdate();
