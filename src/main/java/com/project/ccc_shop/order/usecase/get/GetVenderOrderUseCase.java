@@ -12,7 +12,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 @Service
 public class GetVenderOrderUseCase implements UseCase<GetVenderOrderInput, GetVenderOrderOutput> {
@@ -50,6 +52,7 @@ public class GetVenderOrderUseCase implements UseCase<GetVenderOrderInput, GetVe
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     Order order = new Order();
+                    Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Taipei"));
                     order.setId(rs.getInt("id"));
                     order.setCustomerId(rs.getInt("customer_id"));
                     order.setShippingFee(rs.getInt("shipping_fee"));
@@ -58,9 +61,9 @@ public class GetVenderOrderUseCase implements UseCase<GetVenderOrderInput, GetVe
                     order.setStatus(Status.valueOf(rs.getString("status")));
                     order.setPaymentMethod(Payment.valueOf(rs.getString("payment_method")));
                     order.setCreditCardId(rs.getString("credit_card_id"));
-                    order.setOrderTime(rs.getTimestamp("order_time"));
-                    order.setShippingTime(rs.getTimestamp("shipping_time"));
-                    order.setDeliveryTime(rs.getTimestamp("delivery_time"));
+                    order.setOrderTime(rs.getTimestamp("order_time", calendar));
+                    order.setShippingTime(rs.getTimestamp("shipping_time", calendar));
+                    order.setDeliveryTime(rs.getTimestamp("delivery_time", calendar));
                     order.setSeasoningDiscountCode(rs.getInt("seasoning_discount_code"));
                     order.setShippingDiscountCode(rs.getInt("shipping_discount_code"));
                     order.setTotalPrice(rs.getInt("total_price"));
