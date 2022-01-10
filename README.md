@@ -4,18 +4,18 @@ Backend for online shopping system **CCC Shop** of database systems course.
 
 ## How to Run ?
 
-### Install MariaDb
+### Install Mariadb
 
-[Download mariaDb](https://mariadb.org/download/?t=mariadb&p=mariadb&r=10.6.5&os=windows&cpu=x86_64&pkg=msi&m=blendbyte) and set username and password to root
+[Download mariadb](https://mariadb.org/download/?t=mariadb&p=mariadb&r=10.6.5&os=windows&cpu=x86_64&pkg=msi&m=blendbyte) and set username and password to root
 
-or you can run mariaDb with docker
+or you can run mariadb with docker
 ```cmd
 docker run --name mariadb -p 3306:3306 -e MARIADB_USER=root MARIADB_ROOT_PASSWORD=root -v /data/mariadb/data:/var/lib/mysql -d mariadb
 ```
 
 ### Create database and add initial value
 
-run `create_table.sql` and `initial_value.sql` in your database
+run `create_table.sql` and `initial_value.sql`  under `src/query` in your database
 
 ### Install IntelliJ IDEA
 
