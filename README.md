@@ -35,7 +35,7 @@ run `create_table.sql` and `initial_value.sql` in your database
 #### Run application
 
 - Right click on `CccShopApplication`
-- Run `CccShopApplication`
+- Run `CccShopApplication` \
 ![](https://i.imgur.com/7bFJes3.png)
 
 
