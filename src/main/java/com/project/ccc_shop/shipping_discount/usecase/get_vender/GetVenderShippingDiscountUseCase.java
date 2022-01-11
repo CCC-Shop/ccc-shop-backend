@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 @Service
 public class GetVenderShippingDiscountUseCase implements UseCase<GetVenderShippingDiscountInput, GetVenderShippingDiscountOutput>{
@@ -31,12 +33,13 @@ public class GetVenderShippingDiscountUseCase implements UseCase<GetVenderShippi
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     ShippingDiscount shippingDiscount = new ShippingDiscount();
+                    Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Taipei"));  // set timezone
                     shippingDiscount.setDiscountCode(rs.getInt("discount_code"));
                     shippingDiscount.setVenderId(rs.getInt("vender_id"));
                     shippingDiscount.setVenderName(GetCurrentSeasoningsDiscountUseCase.queryVenderName(connection, rs.getInt("vender_id")));
                     shippingDiscount.setPolicyDescription(rs.getString("policy_description"));
-                    shippingDiscount.setStartTime(rs.getTimestamp("start_time"));
-                    shippingDiscount.setEndTime(rs.getTimestamp("end_time"));
+                    shippingDiscount.setStartTime(rs.getTimestamp("start_time", calendar));
+                    shippingDiscount.setEndTime(rs.getTimestamp("end_time", calendar));
                     shippingDiscount.setTargetPrice(rs.getInt("target_price"));
 
                     discounts.add(shippingDiscount);

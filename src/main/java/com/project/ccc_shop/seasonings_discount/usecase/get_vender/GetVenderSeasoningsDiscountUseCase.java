@@ -11,7 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 @Service
 public class GetVenderSeasoningsDiscountUseCase implements UseCase<GetVenderSeasoningsDiscountInput, GetVenderSeasoningsDiscountOutput>{
@@ -34,12 +36,13 @@ public class GetVenderSeasoningsDiscountUseCase implements UseCase<GetVenderSeas
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     SeasoningsDiscount seasoningsDiscount = new SeasoningsDiscount();
+                    Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Taipei"));  // set timezone
                     seasoningsDiscount.setDiscountCode(rs.getInt("discount_code"));
                     seasoningsDiscount.setVenderId(rs.getInt("vender_id"));
                     seasoningsDiscount.setVenderName(GetCurrentSeasoningsDiscountUseCase.queryVenderName(connection, rs.getInt("vender_id")));
                     seasoningsDiscount.setPolicyDescription(rs.getString("policy_description"));
-                    seasoningsDiscount.setStartTime(rs.getTimestamp("start_time"));
-                    seasoningsDiscount.setEndTime(rs.getTimestamp("end_time"));
+                    seasoningsDiscount.setStartTime(rs.getTimestamp("start_time", calendar));
+                    seasoningsDiscount.setEndTime(rs.getTimestamp("end_time", calendar));
                     seasoningsDiscount.setDiscountRate(rs.getDouble("discount_rate"));
 
                     discounts.add(seasoningsDiscount);

@@ -40,8 +40,8 @@ public class GetCurrentSeasoningsDiscountUseCase {
                     seasoningsDiscount.setVenderId(rs.getInt("vender_id"));
                     seasoningsDiscount.setVenderName(queryVenderName(connection, rs.getInt("vender_id")));
                     seasoningsDiscount.setPolicyDescription(rs.getString("policy_description"));
-                    seasoningsDiscount.setStartTime(rs.getTimestamp("start_time"));
-                    seasoningsDiscount.setEndTime(rs.getTimestamp("end_time"));
+                    seasoningsDiscount.setStartTime(rs.getTimestamp("start_time", calendar));
+                    seasoningsDiscount.setEndTime(rs.getTimestamp("end_time", calendar));
                     seasoningsDiscount.setDiscountRate(rs.getDouble("discount_rate"));
 
                     discounts.add(seasoningsDiscount);

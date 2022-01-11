@@ -42,8 +42,8 @@ public class GetCurrentSpecialDiscountUseCase {
                     specialDiscount.setVenderId(rs.getInt("vender_id"));
                     specialDiscount.setVenderName(GetCurrentSeasoningsDiscountUseCase.queryVenderName(connection, rs.getInt("vender_id")));
                     specialDiscount.setPolicyDescription(rs.getString("policy_description"));
-                    specialDiscount.setStartTime(rs.getTimestamp("start_time"));
-                    specialDiscount.setEndTime(rs.getTimestamp("end_time"));
+                    specialDiscount.setStartTime(rs.getTimestamp("start_time", calendar));
+                    specialDiscount.setEndTime(rs.getTimestamp("end_time", calendar));
                     specialDiscount.setCategory(Category.valueOf(rs.getString("category")));
                     specialDiscount.setDiscountRate(rs.getDouble("discount_rate"));
 
