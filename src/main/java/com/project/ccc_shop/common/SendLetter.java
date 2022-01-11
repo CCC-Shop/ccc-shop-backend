@@ -1,12 +1,7 @@
 package com.project.ccc_shop.common;
 
-import javax.mail.Authenticator;
-import javax.mail.PasswordAuthentication;
 import java.util.Date;
 import java.util.Properties;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -18,9 +13,9 @@ import javax.mail.internet.*;
 public class SendLetter {
     public static void main(String[] args) {
 
-        String user = "cccshop2022@gmail.com";
-        String pwd = "CCCshop2022";
-        String toAddress = "angelalo88362@gmail.com";
+        String user = "";
+        String pwd = "";
+        String toAddress = "";
         String host = "smtp.gmail.com";
         String subject = "subject";
         String message = "message";

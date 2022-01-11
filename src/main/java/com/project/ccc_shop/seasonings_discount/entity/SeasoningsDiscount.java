@@ -76,7 +76,9 @@ public class SeasoningsDiscount {
     }
 
     public void setStartDate() {
-        this.startDate = this.startTime.toString().split(" ")[0];
+        if (this.startTime != null) {
+            this.startDate = this.startTime.toString().split(" ")[0] + " " + this.startTime.toString().split(" ")[1].split(":")[0] + ":" + this.startTime.toString().split(" ")[1].split(":")[1];
+        }
     }
 
     public String getEndDate() {
@@ -84,7 +86,9 @@ public class SeasoningsDiscount {
     }
 
     public void setEndDate() {
-        this.endDate = this.endTime.toString().split(" ")[0];
+        if (this.endTime != null) {
+            this.endDate = this.endTime.toString().split(" ")[0] + " " + this.endTime.toString().split(" ")[1].split(":")[0] + ":" + this.endTime.toString().split(" ")[1].split(":")[1];
+        }
     }
 }
 

@@ -70,12 +70,15 @@ public class ShippingDiscount {
     public void setTargetPrice(int targetPrice) {
         this.targetPrice = targetPrice;
     }
+
     public String getStartDate() {
         return startDate;
     }
 
     public void setStartDate() {
-        this.startDate = this.startTime.toString().split(" ")[0];
+        if (this.startTime != null) {
+            this.startDate = this.startTime.toString().split(" ")[0] + " " + this.startTime.toString().split(" ")[1].split(":")[0] + ":" + this.startTime.toString().split(" ")[1].split(":")[1];
+        }
     }
 
     public String getEndDate() {
@@ -83,6 +86,8 @@ public class ShippingDiscount {
     }
 
     public void setEndDate() {
-        this.endDate = this.endTime.toString().split(" ")[0];
+        if (this.endTime != null) {
+            this.endDate = this.endTime.toString().split(" ")[0] + " " + this.endTime.toString().split(" ")[1].split(":")[0] + ":" + this.endTime.toString().split(" ")[1].split(":")[1];
+        }
     }
 }
