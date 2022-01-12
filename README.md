@@ -39,4 +39,16 @@ run `create_table.sql` and `initial_value.sql`  under `src/query` in your databa
 ![](https://i.imgur.com/7bFJes3.png)
 
 
-Done!
+### Done!
+
+## Demo video for different scenario
+
+youtube channel: [https://www.youtube.com/playlist?list=PLuIs3VbIw0SmLry-_GpOQhUIGmaYZIKfI](https://www.youtube.com/playlist?list=PLuIs3VbIw0SmLry-_GpOQhUIGmaYZIKfI)
+
+visitor scenario: [https://youtu.be/_eldVc57jGM](https://youtu.be/_eldVc57jGM)
+
+customer scenario: [https://youtu.be/QkzACw5h_xQ](https://youtu.be/QkzACw5h_xQ)
+
+staff scenario: [https://youtu.be/pY14iRMhgj4](https://youtu.be/pY14iRMhgj4)
+
+admin scenario: [https://youtu.be/El9QJEijaSo](https://youtu.be/El9QJEijaSo)
